@@ -17,6 +17,7 @@ updated: 2026-11-23
 
 - BM25 擅長罕見關鍵字，DPR 擅長同義改寫，兩者可以互補。[S2-c5](../sources/s2-karpukhin-2020-dpr.md#s2-c5)
 - 向量檢索可能漏掉精確代碼，加上 BM25 可以補上。[S6-c2](../sources/s6-anthropic-2024-contextual-retrieval.md#s6-c2)
+- 混合檢索的做法：BM25 與向量檢索各找一批，合併並去掉重複。[S6-c8](../sources/s6-anthropic-2024-contextual-retrieval.md#s6-c8)
 - 重排的做法：先取 150 塊，再打分留下 20 塊。[S6-c6](../sources/s6-anthropic-2024-contextual-retrieval.md#s6-c6)
 - 情境化向量＋情境化 BM25＋重排，讓找不到資料的比例下降 67%。[S6-c5](../sources/s6-anthropic-2024-contextual-retrieval.md#s6-c5)
 - 把相關文件重排到前面，是改善位置效應的建議方向。[S4-c5](../sources/s4-liu-2023-lost-in-the-middle.md#s4-c5)

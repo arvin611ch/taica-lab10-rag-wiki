@@ -19,13 +19,13 @@ updated: 2026-11-23
 
 白話說明：關鍵字檢索看的是問題裡的詞有沒有出現在文件裡。見 [關鍵字檢索 BM25](../concepts/bm25.md)。
 
-### S2-c2｜用向量表示意思，換句話說也找得到：「bad guy」可以對到「villain」 {#s2-c2}
+### S2-c2｜用向量表示意思，換句話說也比較容易找到：「bad guy」比較能對到「villain」 {#s2-c2}
 
 > 證據（§1 Introduction）：「synonyms or paraphrases that consist of completely different tokens may still be mapped to vectors close to each other」
 
 > 證據（§1 Introduction）：「a dense retrieval system would be able to better match “bad guy” with “villain” and fetch the correct context」
 
-白話說明：問「魔戒裡的壞人是誰？」，答案段落寫的是「反派索倫」。兩句沒有共同的關鍵字，關鍵字檢索很難找到；向量檢索看的是意思，所以找得到。見 [向量嵌入](../concepts/embedding.md)。
+白話說明：問「魔戒裡的壞人是誰？」，答案段落寫的是「反派索倫」。兩句沒有共同的關鍵字，關鍵字檢索很難找到；向量檢索看的是意思，比較有機會找到。見 [向量嵌入](../concepts/embedding.md)。
 
 ### S2-c3｜DPR 用兩個編碼器，分別把問題和段落轉成向量，再用內積找最接近的段落 {#s2-c3}
 
@@ -43,7 +43,11 @@ updated: 2026-11-23
 
 > 證據（§5.3 Qualitative Analysis）：「Term-matching methods like BM25 are sensitive to highly selective keywords and phrases, while DPR captures lexical variations or semantic relationships better.」
 
-白話說明：遇到專有名詞、編號、少見人名，字面比對反而準；遇到換句話說，向量比對比較好。論文也發現把兩者分數合併，有些情況下結果更好。這是 [混合檢索](../concepts/hybrid-search.md) 的理由。
+白話說明：遇到專有名詞、編號、少見人名，字面比對反而準；遇到換句話說，向量比對比較好。論文也發現把兩者分數合併，有些情況下結果更好。
+
+> 證據（§5.1）：「Results can be improved further in some cases by combining DPR with BM25 in both single- and multi-dataset settings.」
+
+這是 [混合檢索](../concepts/hybrid-search.md) 的理由。
 
 ## 這篇沒有強調的部分
 

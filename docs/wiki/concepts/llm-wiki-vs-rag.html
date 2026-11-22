@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LLM Wiki 與 RAG 的差別｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">概念頁</span>更新：2026-11-23</p><h1>LLM Wiki 與 RAG 的差別</h1>
+<p><strong>一句話定義：</strong> RAG 在每次提問時才去原始文件找片段；LLM Wiki 則讓 LLM 事先把原始文件整理成互相連結的 Wiki 頁面，之後提問時先查 Wiki。</p>
+<h2>白話解釋</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>一般 RAG</th>
+<th>LLM Wiki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>什麼時候整理知識</td>
+<td>每次提問時臨時找</td>
+<td>加入資料時就整理好</td>
+</tr>
+<tr>
+<td>知識會不會累積</td>
+<td>不會，每次從頭找</td>
+<td>會，頁面持續更新</td>
+</tr>
+<tr>
+<td>矛盾與交叉引用</td>
+<td>每次重新發現</td>
+<td>整理時就標記</td>
+</tr>
+<tr>
+<td>需要的工具</td>
+<td>切塊、向量資料庫</td>
+<td>Markdown 檔案、目錄頁、規則檔</td>
+</tr>
+</tbody>
+</table>
+<p>比喻：RAG 像每次考試前才翻原文書；LLM Wiki 像平常就把讀過的書整理成筆記，考試時翻筆記，筆記上還標了出處。</p>
+<p>兩者不衝突：Wiki 變大以後，也可以對 Wiki 頁面做 RAG。本專案的資料量不大，用目錄頁就夠了。</p>
+<h2>來源怎麼說</h2>
+<ul>
+<li>一般 RAG 每次都從頭找，知識沒有累積。<a href="../sources/s7-karpathy-2026-llm-wiki.html#s7-c1">S7-c1</a></li>
+<li>LLM Wiki 讓 LLM 逐步建立並維護 Wiki。<a href="../sources/s7-karpathy-2026-llm-wiki.html#s7-c2">S7-c2</a></li>
+<li>三層結構與三種操作。<a href="../sources/s7-karpathy-2026-llm-wiki.html#s7-c3">S7-c3</a>、<a href="../sources/s7-karpathy-2026-llm-wiki.html#s7-c4">S7-c4</a></li>
+<li>查詢結果（例如簡報）可以存回 Wiki。<a href="../sources/s7-karpathy-2026-llm-wiki.html#s7-c5">S7-c5</a></li>
+</ul>
+<h2>相關頁面</h2>
+<p><a href="rag.html">檢索增強生成</a>、<a href="../overview.html">總覽</a></p><div class="backlinks"><b>連到這頁的頁面（5）</b><a href="../glossary.html">名詞表</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>、<a href="../sources/s7-karpathy-2026-llm-wiki.html">S7｜Karpathy 2026：LLM Wiki</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

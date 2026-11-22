@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S3｜Gao et al. 2023：大型語言模型的 RAG 綜述｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">來源頁</span>更新：2026-11-23｜原文：<a href="https://arxiv.org/abs/2312.10997">https://arxiv.org/abs/2312.10997</a></p><h1>S3｜Gao et al. 2023：大型語言模型的 RAG 綜述</h1>
+<p><strong>原文：</strong> Yunfan Gao et al., <em>Retrieval-Augmented Generation for Large Language Models: A Survey</em>, arXiv 2312.10997（v5, 2024）. <a href="https://arxiv.org/abs/2312.10997">https://arxiv.org/abs/2312.10997</a></p>
+<p><strong>一句話摘要：</strong> 整理 ChatGPT 之後的 RAG 研究：基本流程分成建索引、檢索、生成三步，方法演進分成 Naive、Advanced、Modular 三個階段，並整理評估 RAG 的面向。</p>
+<h2>重點</h2>
+<h3 id="s3-c1">S3-c1｜大型語言模型會幻覺、知識會過時、推理過程無法追溯；RAG 用外部資料庫來補</h3>
+<blockquote>
+<p>證據（Abstract）：「Large Language Models (LLMs) showcase impressive capabilities but encounter challenges like hallucination, outdated knowledge, and non-transparent, untraceable reasoning processes.」</p>
+</blockquote>
+<p>白話說明：跟 <a href="s1-lewis-2020-rag.html#s1-c1">S1-c1</a> 說的是同一組問題，只是對象換成 ChatGPT 這類大型語言模型。見 <a href="../concepts/parametric-memory.html">參數記憶與幻覺</a>。</p>
+<h3 id="s3-c2">S3-c2｜基本 RAG 有三步：建索引、檢索、生成</h3>
+<blockquote>
+<p>證據（Fig. 2 說明）：「It mainly consists of 3 steps. 1) Indexing. Documents are split into chunks, encoded into vectors, and stored in a vector database.」</p>
+<p>證據（Fig. 2 說明）：「2) Retrieval. Retrieve the Top k chunks most relevant to the question based on semantic similarity. 3) Generation. Input the original question and the retrieved chunks together into LLM to generate the final answer.」</p>
+</blockquote>
+<p>白話說明：建索引是事前準備（切塊、轉向量、存起來）；使用者發問時才做檢索與生成。見 <a href="../concepts/rag.html">檢索增強生成</a>。</p>
+<h3 id="s3-c3">S3-c3｜檢索時，問題要用跟建索引時同一個模型轉成向量</h3>
+<blockquote>
+<p>證據（§II-A Naive RAG）：「the RAG system employs the same encoding model utilized during the indexing phase to transform the query into a vector representation」</p>
+</blockquote>
+<p>白話說明：問題和文件要放在同一個「向量空間」裡才能比遠近，所以必須用同一個嵌入模型。見 <a href="../concepts/embedding.html">向量嵌入</a>。</p>
+<h3 id="s3-c4">S3-c4｜基本 RAG 常見的毛病：找錯或漏找資料，以及寫出資料裡沒有的內容</h3>
+<blockquote>
+<p>證據（§II-A Naive RAG）：「The retrieval phase often struggles with precision and recall, leading to the selection of misaligned or irrelevant chunks, and the missing of crucial information.」</p>
+<p>證據（§II-A Naive RAG）：「the model may face the issue of hallucination, where it produces content not supported by the retrieved context」</p>
+</blockquote>
+<p>白話說明：RAG 不會讓幻覺消失。檢索可能找錯，模型也可能沒照著資料寫。見 <a href="../concepts/rag-failures.html">RAG 的常見失敗</a>。</p>
+<h3 id="s3-c5">S3-c5｜RAG 的演進分成 Naive、Advanced、Modular 三個階段</h3>
+<blockquote>
+<p>證據（§II）：「we categorize it into three stages: Naive RAG, Advanced RAG, and Modular RAG」</p>
+<p>證據（§II-B Advanced RAG）：「Focusing on enhancing retrieval quality, it employs pre-retrieval and post-retrieval strategies.」</p>
+<p>證據（§II-C Modular RAG）：「Modular RAG offers remarkable adaptability by allowing module substitution or reconfiguration to address specific challenges.」</p>
+</blockquote>
+<p>白話說明：Advanced RAG 在檢索前改寫問題、檢索後重排與精簡資料；Modular RAG 把流程拆成可以替換、重組的模組，例如多次檢索、視情況決定要不要檢索。見 <a href="../concepts/rag-paradigms.html">RAG 的三個階段</a>。</p>
+<h3 id="s3-c6">S3-c6｜切塊大小是取捨：大塊上下文多但雜訊多，小塊雜訊少但可能資訊不完整</h3>
+<blockquote>
+<p>證據（§III-B Indexing Optimization）：「Larger chunks can capture more context, but they also generate more noise, requiring longer processing time and higher costs. While smaller chunks may not fully convey the necessary context, they do have less noise.」</p>
+</blockquote>
+<p>白話說明：見 <a href="../concepts/chunking.html">切塊</a>。</p>
+<h3 id="s3-c7">S3-c7｜RAG 像給模型一本專用課本；微調像學生把知識內化，適合學格式與風格</h3>
+<blockquote>
+<p>證據（§II-D RAG vs Fine-tuning）：「RAG can be likened to providing a model with a tailored textbook for information retrieval, ideal for precise information retrieval tasks. In contrast, FT is comparable to a student internalizing knowledge over time, suitable for scenarios requiring replication of specific structures, styles, or formats.」</p>
+<p>證據（§II-D RAG vs Fine-tuning）：「RAG and FT are not mutually exclusive and can complement each other」</p>
+</blockquote>
+<p>白話說明：「微調」（fine-tuning）是拿新資料再訓練模型、改變模型參數。RAG 不改模型，只在回答時給資料。兩者可以並用。見 <a href="../concepts/rag-vs-finetuning.html">RAG 與微調</a>。</p>
+<h3 id="s3-c8">S3-c8｜評估 RAG 有三個品質分數：資料相關性、答案忠實度、答案切題度</h3>
+<blockquote>
+<p>證據（§VI-C Evaluation Aspects）：「Quality scores include context relevance, answer faithfulness, and answer relevance.」</p>
+</blockquote>
+<p>白話說明：見 <a href="../concepts/rag-evaluation.html">怎麼評估 RAG</a>。</p>
+<h2>這篇沒有強調的部分</h2>
+<p>各種進階技術（查詢改寫、HyDE、迭代檢索、知識圖譜檢索等）與評估資料集清單，對入門讀者太細，Wiki 只在 <a href="../concepts/rag-paradigms.html">RAG 的三個階段</a> 提到名稱。</p>
+<h2>用到這篇的頁面</h2>
+<p><a href="../concepts/rag.html">檢索增強生成</a>、<a href="../concepts/parametric-memory.html">參數記憶與幻覺</a>、<a href="../concepts/embedding.html">向量嵌入</a>、<a href="../concepts/chunking.html">切塊</a>、<a href="../concepts/rag-paradigms.html">RAG 的三個階段</a>、<a href="../concepts/rag-vs-finetuning.html">RAG 與微調</a>、<a href="../concepts/rag-failures.html">RAG 的常見失敗</a>、<a href="../concepts/rag-evaluation.html">怎麼評估 RAG</a></p><div class="backlinks"><b>連到這頁的頁面（11）</b><a href="../concepts/chunking.html">切塊</a>、<a href="../concepts/embedding.html">向量嵌入</a>、<a href="../concepts/parametric-memory.html">參數記憶與幻覺</a>、<a href="../concepts/rag-evaluation.html">怎麼評估 RAG</a>、<a href="../concepts/rag-failures.html">RAG 的常見失敗</a>、<a href="../concepts/rag-paradigms.html">RAG 的三個階段</a>、<a href="../concepts/rag-vs-finetuning.html">RAG 與微調</a>、<a href="../concepts/rag.html">檢索增強生成（RAG）</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

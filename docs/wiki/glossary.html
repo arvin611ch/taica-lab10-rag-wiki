@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>名詞表｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../index.html">首頁</a><a href="../wiki/index.html">Wiki 目錄</a><a href="../wiki/overview.html">總覽</a><a href="../wiki/glossary.html">名詞表</a><a href="../slides/index.html">教學簡報</a><a href="../workflow.html">流程與反思</a><a href="../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">Wiki</span>更新：2026-11-23</p><h1>名詞表</h1>
+<p>簡報檢查程式會讀這張表：簡報裡出現的名詞（含別名），必須在當頁或更早的投影片先定義過。</p>
+<table>
+<thead>
+<tr>
+<th>名詞</th>
+<th>別名</th>
+<th>一句話定義</th>
+<th>頁面</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>檢索增強生成</td>
+<td>RAG、Retrieval-Augmented Generation</td>
+<td>回答前先找資料，連同問題一起交給模型再作答</td>
+<td><a href="concepts/rag.html">檢索增強生成</a></td>
+</tr>
+<tr>
+<td>大型語言模型</td>
+<td>LLM、語言模型</td>
+<td>讀過大量文字、能接著寫出文字的 AI 模型，例如 ChatGPT 背後的模型</td>
+<td><a href="concepts/parametric-memory.html">參數記憶與幻覺</a></td>
+</tr>
+<tr>
+<td>參數記憶</td>
+<td>parametric memory</td>
+<td>模型在訓練時存進參數裡的知識</td>
+<td><a href="concepts/parametric-memory.html">參數記憶與幻覺</a></td>
+</tr>
+<tr>
+<td>幻覺</td>
+<td>hallucination</td>
+<td>模型寫出聽起來合理、但沒有根據或錯誤的內容</td>
+<td><a href="concepts/parametric-memory.html">參數記憶與幻覺</a></td>
+</tr>
+<tr>
+<td>檢索器</td>
+<td>retriever</td>
+<td>負責找資料的元件，回傳最相關的前 K 段</td>
+<td><a href="concepts/retriever.html">檢索器</a></td>
+</tr>
+<tr>
+<td>向量嵌入</td>
+<td>embedding、嵌入、向量</td>
+<td>用一串數字表示文字的意思，意思越近、向量越近</td>
+<td><a href="concepts/embedding.html">向量嵌入</a></td>
+</tr>
+<tr>
+<td>切塊</td>
+<td>chunk、chunking、小塊</td>
+<td>把長文件切成短段落，方便逐段比對</td>
+<td><a href="concepts/chunking.html">切塊</a></td>
+</tr>
+<tr>
+<td>BM25</td>
+<td>關鍵字檢索</td>
+<td>比對關鍵字、看詞有多罕見的傳統檢索方法</td>
+<td><a href="concepts/bm25.html">關鍵字檢索 BM25</a></td>
+</tr>
+<tr>
+<td>混合檢索</td>
+<td>hybrid search</td>
+<td>同時用關鍵字與向量檢索再合併結果</td>
+<td><a href="concepts/hybrid-search.html">混合檢索與重排</a></td>
+</tr>
+<tr>
+<td>重排</td>
+<td>reranking、rerank</td>
+<td>先粗找一大批，再逐段打分只留最相關的</td>
+<td><a href="concepts/hybrid-search.html">混合檢索與重排</a></td>
+</tr>
+<tr>
+<td>上下文</td>
+<td>context</td>
+<td>模型一次讀進去的全部文字，包括問題與資料</td>
+<td><a href="concepts/lost-in-the-middle.html">長上下文的位置效應</a></td>
+</tr>
+<tr>
+<td>提示詞</td>
+<td>prompt</td>
+<td>交給模型的輸入文字</td>
+<td><a href="concepts/rag.html">檢索增強生成</a></td>
+</tr>
+<tr>
+<td>token</td>
+<td></td>
+<td>模型讀文字的基本單位，大約一兩個中文字</td>
+<td><a href="concepts/chunking.html">切塊</a></td>
+</tr>
+<tr>
+<td>忠實度</td>
+<td>faithfulness</td>
+<td>答案的每一句是否都能在資料裡找到依據</td>
+<td><a href="concepts/rag-evaluation.html">怎麼評估 RAG</a></td>
+</tr>
+<tr>
+<td>微調</td>
+<td>fine-tuning</td>
+<td>用新資料再訓練模型、改變模型參數</td>
+<td><a href="concepts/rag-vs-finetuning.html">RAG 與微調</a></td>
+</tr>
+<tr>
+<td>LLM Wiki</td>
+<td></td>
+<td>讓 LLM 事先把資料整理成持續維護的 Wiki</td>
+<td><a href="concepts/llm-wiki-vs-rag.html">LLM Wiki 與 RAG 的差別</a></td>
+</tr>
+</tbody>
+</table><div class="backlinks"><b>連到這頁的頁面（2）</b><a href="index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

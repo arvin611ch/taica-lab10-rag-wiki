@@ -6,6 +6,7 @@ W7 孤兒頁                  W8 目錄完整                W9 log 格式
 W10 每篇來源都被概念頁用到
 
 用法：.venv/bin/python -I pipeline/lint_wiki.py [--out runs/<run>/]
+      .venv/bin/python -I pipeline/lint_wiki.py --page wiki/sources/<slug>.md   # v2：寫完一頁立刻檢查
 """
 
 from __future__ import annotations
@@ -22,12 +23,14 @@ from common import (  # noqa: E402
     RAW_TEXT,
     WIKI,
     Check,
+    ILLUSTRATION,
     all_claims,
     fmt_num,
     load_pages,
     normalize,
     numbers,
     parse_claims,
+    source_years,
     write_report,
 )
 
@@ -49,11 +52,14 @@ def resolve(page, target: str) -> tuple[Path, str]:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path)
+    ap.add_argument("--page", action="append", type=Path, help="v2：只檢查剛寫好的頁面（W1–W6），寫完一頁就跑")
     args = ap.parse_args()
+    only = {p.resolve() for p in args.page} if args.page else None
 
     pages = load_pages()
     by_path = {p.path.resolve(): p for p in pages}
     claims = all_claims(pages)
+    years = source_years()
     raw_cache: dict[str, str] = {}
 
     w1 = Check("W1", "frontmatter 欄位")
@@ -71,6 +77,8 @@ def main() -> int:
     cited_sources: set[str] = set()
 
     for page in pages:
+        if only and page.path.resolve() not in only:
+            continue
         # W1
         w1.checked += 1
         need = ["title", "type", "updated"] + (["id", "url"] if page.meta.get("type") == "source" else [])
@@ -101,6 +109,8 @@ def main() -> int:
                 seen.add(claim.cid)
                 if not claim.evidence:
                     w3.problems.append(f"{claim.cid}：沒有證據")
+                for bad in claim.malformed:
+                    w3.problems.append(f"{claim.cid}：證據行格式不對（應以「」結尾、獨立一行），沒有被檢查：{bad}")
                 for quote in claim.evidence:
                     w2.checked += 1
                     q = normalize(quote)
@@ -113,7 +123,8 @@ def main() -> int:
                             k += 1
                         w2.problems.append(f"{claim.cid}：證據不在原文中，前 {k} 字對得上，之後是「{q[k:k + 40]}…」")
                 w4.checked += 1
-                extra = numbers(claim.title + " " + " ".join(claim.explanation)) - numbers(" ".join(claim.evidence))
+                stated = " ".join([claim.title] + [x for x in claim.explanation if not ILLUSTRATION.match(x)])
+                extra = numbers(stated) - numbers(" ".join(claim.evidence)) - {years.get(sid)}
                 if extra:
                     w4.problems.append(f"{claim.cid}：說明裡的數字 {', '.join(fmt_num(x) for x in sorted(extra))} 不在證據中")
 
@@ -126,6 +137,8 @@ def main() -> int:
                 if in_code or line.startswith("#") or not line.strip():
                     continue
                 text = LIST_MARK.sub("", line)
+                if ILLUSTRATION.match(text):
+                    continue  # 已標明是比喻或例子，不是來源裡的事實
                 cited = [m.group(1) for m in MD_LINK.finditer(text) if CLAIM_ID.fullmatch(m.group(1))]
                 nums = numbers(text)
                 if not nums:
@@ -134,7 +147,7 @@ def main() -> int:
                 support = set()
                 for cid in cited:
                     if cid in claims:
-                        support |= numbers(claims[cid].evidence_text())
+                        support |= numbers(claims[cid].evidence_text()) | {years.get(cid.split("-")[0])}
                 extra = nums - support
                 if extra:
                     where = "沒有引用任何主張" if not cited else f"引用 {', '.join(cited)} 的證據裡沒有"
@@ -163,6 +176,9 @@ def main() -> int:
                     w5.problems.append(f"{page.rel}：{label} 應連到 {claim.page}#{claim.anchor}，實際是 {target}")
                 elif page.meta.get("type") == "concept":
                     cited_sources.add(label.split("-")[0])
+
+    if only:  # 單頁模式只回報這幾頁的問題；整體結構（W7–W10）留給完整 lint
+        return 0 if write_report([w1, w2, w3, w4, w5, w6], "lint_page（單頁檢查）", args.out) else 1
 
     # W7 孤兒頁
     for page in pages:

@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>切塊｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">概念頁</span>更新：2026-11-23</p><h1>切塊</h1>
+<p><strong>一句話定義：</strong> 切塊（chunking）是在建索引時，把長文件切成一段段較短的文字（chunk），讓檢索可以只取出最相關的那幾段。</p>
+<h2>白話解釋</h2>
+<p>整本手冊太長，不可能每次都全部交給模型，也很難整本拿去跟問題比對。所以先把它切成小段，每段單獨轉成向量。</p>
+<p>切多大是一個取捨：</p>
+<table>
+<thead>
+<tr>
+<th>切得大</th>
+<th>切得小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>每段的上下文完整</td>
+<td>每段的主題單純、雜訊少</td>
+</tr>
+<tr>
+<td>雜訊多、處理慢、成本高</td>
+<td>可能少了理解這段所需的前後文</td>
+</tr>
+</tbody>
+</table>
+<p>切塊還有一個副作用：被切出來的一段，可能失去原本靠前文才看得懂的資訊。例如「這家公司營收成長 3%」，單看這一段不知道是哪家公司。<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c3">S6-c3</a>補救方法之一是在每段前面加上一小段說明（情境化檢索）。</p>
+<h2>來源怎麼說</h2>
+<ul>
+<li>2020 年的 RAG 論文把維基百科切成 100 字一段，共 2,100 萬段。<a href="../sources/s1-lewis-2020-rag.html#s1-c4">S1-c4</a></li>
+<li>實務上通常切成不超過數百 token 的小塊。<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c1">S6-c1</a></li>
+<li>大塊上下文多但雜訊多，小塊雜訊少但可能資訊不完整。<a href="../sources/s3-gao-2023-rag-survey.html#s3-c6">S3-c6</a></li>
+<li>切塊會丟掉上下文。<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c3">S6-c3</a></li>
+<li>情境化檢索在每塊前補 50 到 100 token 的說明。<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c4">S6-c4</a></li>
+</ul>
+<h2>相關頁面</h2>
+<p><a href="embedding.html">向量嵌入</a>、<a href="rag-failures.html">RAG 的常見失敗</a>、<a href="hybrid-search.html">混合檢索與重排</a></p><div class="backlinks"><b>連到這頁的頁面（10）</b><a href="../concepts/embedding.html">向量嵌入</a>、<a href="../concepts/rag-failures.html">RAG 的常見失敗</a>、<a href="../concepts/rag.html">檢索增強生成（RAG）</a>、<a href="../glossary.html">名詞表</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>、<a href="../sources/s1-lewis-2020-rag.html">S1｜Lewis et al. 2020：RAG 原始論文</a>、<a href="../sources/s3-gao-2023-rag-survey.html">S3｜Gao et al. 2023：大型語言模型的 RAG 綜述</a>、<a href="../sources/s6-anthropic-2024-contextual-retrieval.html">S6｜Anthropic 2024：Contextual Retrieval</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

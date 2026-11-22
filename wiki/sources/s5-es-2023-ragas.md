@@ -33,7 +33,11 @@ updated: 2026-11-23
 
 > 證據（§3 Faithfulness）：「the LLM determines if si can be inferred from c(q) using a verification function」
 
-白話說明：例如答案拆成 4 句，其中 3 句能在資料裡找到依據，忠實度就是 3/4。本專案檢查簡報的方式也借用這個想法：每個重點都要對到 Wiki 裡的一條主張。
+> 證據（§3 Faithfulness）：「is the number of statements that were supported according to the LLM and |S| is the total number of statements」
+
+例子：答案拆成 4 句，其中 3 句能在資料裡找到依據，忠實度就是 3/4。
+
+白話說明：本專案檢查簡報的方式也借用這個想法：每個重點都要對到 Wiki 裡的一條主張。
 
 ### S5-c4｜這些指標不需要人工標的標準答案 {#s5-c4}
 

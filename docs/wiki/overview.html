@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>總覽：RAG 是什麼、為什麼需要、會在哪裡出錯｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../index.html">首頁</a><a href="../wiki/index.html">Wiki 目錄</a><a href="../wiki/overview.html">總覽</a><a href="../wiki/glossary.html">名詞表</a><a href="../slides/index.html">教學簡報</a><a href="../workflow.html">流程與反思</a><a href="../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">總覽</span>更新：2026-11-23</p><h1>總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</h1>
+<p>這頁把所有來源串成一條故事線，也是教學簡報的骨架。名詞的定義見 <a href="glossary.html">名詞表</a>；動筆前怎麼決定重點，見 <a href="discussions/2026-11-23-ingest-discussion.html">討論紀錄</a>。</p>
+<h2>1. 問題：模型只靠記憶</h2>
+<p>大型語言模型的知識存在參數裡，難更新、說不出依據、會幻覺。<a href="sources/s1-lewis-2020-rag.html#s1-c1">S1-c1</a>、<a href="sources/s3-gao-2023-rag-survey.html#s3-c1">S3-c1</a> → <a href="concepts/parametric-memory.html">參數記憶與幻覺</a></p>
+<h2>2. 做法：先找資料再回答</h2>
+<p>RAG 分三步：建索引、檢索、生成。<a href="sources/s3-gao-2023-rag-survey.html#s3-c2">S3-c2</a> 2020 年的原始論文用維基百科當文件庫。<a href="sources/s1-lewis-2020-rag.html#s1-c3">S1-c3</a>、<a href="sources/s1-lewis-2020-rag.html#s1-c4">S1-c4</a> → <a href="concepts/rag.html">檢索增強生成</a></p>
+<ul>
+<li>建索引要先 <a href="concepts/chunking.html">切塊</a>，再轉成 <a href="concepts/embedding.html">向量嵌入</a>。</li>
+<li>找資料靠 <a href="concepts/retriever.html">檢索器</a>：關鍵字檢索 <a href="concepts/bm25.html">BM25</a> 看字面，向量檢索看意思，兩者互補。<a href="sources/s2-karpukhin-2020-dpr.html#s2-c5">S2-c5</a></li>
+</ul>
+<h2>3. 好處：知識可以換、答案可以查</h2>
+<p>換掉文件庫就能更新知識，不用重新訓練。<a href="sources/s1-lewis-2020-rag.html#s1-c5">S1-c5</a> 回答也比純生成模型更符合事實。<a href="sources/s1-lewis-2020-rag.html#s1-c6">S1-c6</a> RAG 不改模型，跟 <a href="concepts/rag-vs-finetuning.html">微調</a> 解決的問題不同。<a href="sources/s3-gao-2023-rag-survey.html#s3-c7">S3-c7</a></p>
+<h2>4. 會出錯的地方</h2>
+<ul>
+<li><strong>找不到：</strong> 切塊丟了上下文。<a href="sources/s6-anthropic-2024-contextual-retrieval.html#s6-c3">S6-c3</a> 情境化、混合檢索、重排可以讓失敗率下降 35%–67%。<a href="sources/s6-anthropic-2024-contextual-retrieval.html#s6-c5">S6-c5</a> → <a href="concepts/hybrid-search.html">混合檢索與重排</a></li>
+<li><strong>找到了沒用好：</strong> 資料放中間容易被忽略。<a href="sources/s4-liu-2023-lost-in-the-middle.html#s4-c1">S4-c1</a> → <a href="concepts/lost-in-the-middle.html">長上下文的位置效應</a></li>
+<li><strong>沒照資料寫：</strong> 生成時仍可能幻覺。<a href="sources/s3-gao-2023-rag-survey.html#s3-c4">S3-c4</a> → <a href="concepts/rag-failures.html">RAG 的常見失敗</a></li>
+</ul>
+<h2>5. 怎麼知道答得好不好</h2>
+<p>看資料相關性、忠實度、答案切題度。<a href="sources/s5-es-2023-ragas.html#s5-c1">S5-c1</a>、<a href="sources/s5-es-2023-ragas.html#s5-c3">S5-c3</a> → <a href="concepts/rag-evaluation.html">怎麼評估 RAG</a></p>
+<h2>6. 延伸：RAG 的演進與 LLM Wiki</h2>
+<p>RAG 從基本型發展到進階型與模組型。<a href="sources/s3-gao-2023-rag-survey.html#s3-c5">S3-c5</a> → <a href="concepts/rag-paradigms.html">RAG 的三個階段</a>
+LLM Wiki 把「每次臨時找」改成「事先整理、持續累積」。<a href="sources/s7-karpathy-2026-llm-wiki.html#s7-c1">S7-c1</a> → <a href="concepts/llm-wiki-vs-rag.html">LLM Wiki 與 RAG 的差別</a></p>
+<h2>來源之間的關係</h2>
+<ul>
+<li>S1 用的檢索器就是 S2 的 DPR。</li>
+<li>S2 與 S6 都說關鍵字與向量檢索各有所長，S6 給出實務做法（混合檢索＋重排）。</li>
+<li>S4 說資料位置會影響答案，S6 的重排與 S3 的 Advanced RAG 都把相關資料排到前面。</li>
+<li>S3 的三個評估分數，S5 給出可自動計算的版本。</li>
+<li>目前收錄的來源之間沒有發現互相矛盾的主張。</li>
+</ul><div class="backlinks"><b>連到這頁的頁面（4）</b><a href="concepts/llm-wiki-vs-rag.html">LLM Wiki 與 RAG 的差別</a>、<a href="concepts/rag.html">檢索增強生成（RAG）</a>、<a href="index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="queries/deck-outline.html">查詢紀錄：教學簡報大綱</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

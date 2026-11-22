@@ -23,7 +23,18 @@ def normalize(text: str) -> str:
     text = unicodedata.normalize("NFKC", text)
     for a, b in {"‘": "'", "’": "'", "“": '"', "”": '"', "–": "-", "—": "-", "−": "-", "∼": "~"}.items():
         text = text.replace(a, b)
-    return " ".join(text.split())
+    text = " ".join(text.split())
+    # PDF 換行斷字（multi-␤document）與正常連字號（multi-document）視為相同
+    return re.sub(r"(?<=[A-Za-z])-\s*(?=[A-Za-z])", "", text)
+
+
+def source_years() -> dict[str, float]:
+    """來源的發表年份屬於書目資料，引用該來源時可以直接寫。"""
+    manifest = json.loads((ROOT / "raw" / "manifest.json").read_text(encoding="utf-8"))
+    return {s["id"]: float(s["year"]) for s in manifest["sources"]}
+
+
+ILLUSTRATION = re.compile(r"^(?:比喻|例子)：")
 
 
 def parse_frontmatter(text: str) -> tuple[dict, str]:
@@ -67,6 +78,7 @@ class Claim:
     page: str
     evidence: list[str] = field(default_factory=list)
     explanation: list[str] = field(default_factory=list)
+    malformed: list[str] = field(default_factory=list)
 
     def evidence_text(self) -> str:
         return self.title + " " + " ".join(self.evidence)
@@ -89,6 +101,8 @@ def parse_claims(page: Page) -> list[Claim]:
         e = EVIDENCE.match(line)
         if e:
             current.evidence.append(e.group(1))
+        elif line.startswith("> 證據"):
+            current.malformed.append(line[:60])
         elif line.strip():
             current.explanation.append(line)
     return claims
@@ -113,6 +127,7 @@ def numbers(text: str) -> set[float]:
     """抽出文字裡的數值；『2,100 萬』與『21M』都算成 21000000。"""
     text = CLAIM_ID.sub(" ", text)
     text = re.sub(r"§[\d.]+", " ", text)
+    text = re.sub(r"(?:圖|表|Figure|Fig\.|Table)\s*\d+", " ", text)  # 圖號、表號不是數據
     text = MD_LINK.sub(lambda m: m.group(1) if not CLAIM_ID.fullmatch(m.group(1)) else " ", text)
     text = re.sub(r"https?://\S+", " ", text)
     text = re.sub(r"`[^`]*`", " ", text)

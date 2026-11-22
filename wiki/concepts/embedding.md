@@ -14,11 +14,11 @@ updated: 2026-11-23
 實際上的「地圖」有數百到上千個維度，由一個嵌入模型負責把文字轉成點。有兩個要注意的地方：
 
 1. 問題和文件必須用**同一個**嵌入模型轉換，才能放在同一張地圖上比較。
-2. 嵌入看的是整體意思，對「TS-999」這種精確代碼不一定敏感。
+2. 嵌入看的是整體意思，對「TS-999」這種精確代碼不一定敏感。[S6-c2](../sources/s6-anthropic-2024-contextual-retrieval.md#s6-c2)
 
 ## 來源怎麼說
 
-- 同義詞或換句話說，即使用字完全不同，也可能被轉成相近的向量；例如「bad guy」能對到「villain」。[S2-c2](../sources/s2-karpukhin-2020-dpr.md#s2-c2)
+- 同義詞或換句話說，即使用字完全不同，也可能被轉成相近的向量；例如「bad guy」比較能對到「villain」。[S2-c2](../sources/s2-karpukhin-2020-dpr.md#s2-c2)
 - 實務流程是先切塊，再用嵌入模型把每塊轉成向量。[S6-c1](../sources/s6-anthropic-2024-contextual-retrieval.md#s6-c1)
 - 檢索時，問題要用跟建索引時相同的模型轉成向量。[S3-c3](../sources/s3-gao-2023-rag-survey.md#s3-c3)
 - 嵌入可能漏掉精確比對。[S6-c2](../sources/s6-anthropic-2024-contextual-retrieval.md#s6-c2)

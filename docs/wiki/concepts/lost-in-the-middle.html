@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>長上下文的位置效應｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">概念頁</span>更新：2026-11-23</p><h1>長上下文的位置效應</h1>
+<p><strong>一句話定義：</strong> 把很多份資料一起放進提示詞時，模型比較會用放在開頭和結尾的資料，放在中間的容易被忽略。研究稱為「Lost in the Middle」。</p>
+<h2>白話解釋</h2>
+<p>上下文（context）是模型一次能讀進去的全部文字，包括問題和找回來的資料。RAG 找回的資料越多，上下文越長。</p>
+<p>比喻：像一次讀 20 份講義，第一份和最後一份印象最深，中間那幾份最容易漏看。</p>
+<p>這代表「找到資料」還不夠，資料<strong>放在哪裡、放多少</strong>也會影響答案。</p>
+<h2>來源怎麼說</h2>
+<ul>
+<li>正確率常呈 U 型：相關資料在開頭或結尾通常最好，在長篇內容的中間明顯變差。<a href="../sources/s4-liu-2023-lost-in-the-middle.html#s4-c1">S4-c1</a></li>
+<li>答案在中間時，GPT-3.5-Turbo 甚至比不給文件時（56.1%）還差。<a href="../sources/s4-liu-2023-lost-in-the-middle.html#s4-c2">S4-c2</a></li>
+<li>能讀更長內容的模型，不一定比較會用這些內容。<a href="../sources/s4-liu-2023-lost-in-the-middle.html#s4-c3">S4-c3</a></li>
+<li>從 20 篇加到 50 篇只多約 1% 到 1.5%，提示詞卻長很多。<a href="../sources/s4-liu-2023-lost-in-the-middle.html#s4-c4">S4-c4</a></li>
+<li>建議重排或少放幾篇。<a href="../sources/s4-liu-2023-lost-in-the-middle.html#s4-c5">S4-c5</a></li>
+</ul>
+<h2>相關頁面</h2>
+<p><a href="rag-failures.html">RAG 的常見失敗</a>、<a href="hybrid-search.html">混合檢索與重排</a></p><div class="backlinks"><b>連到這頁的頁面（7）</b><a href="../concepts/hybrid-search.html">混合檢索與重排</a>、<a href="../concepts/rag-failures.html">RAG 的常見失敗</a>、<a href="../glossary.html">名詞表</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>、<a href="../sources/s4-liu-2023-lost-in-the-middle.html">S4｜Liu et al. 2023：Lost in the Middle</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

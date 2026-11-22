@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>檢索器｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">概念頁</span>更新：2026-11-23</p><h1>檢索器</h1>
+<p><strong>一句話定義：</strong> 檢索器（retriever）是 RAG 裡負責「找資料」的元件：輸入一個問題，回傳資料庫中最相關的前 K 段文字。</p>
+<h2>白話解釋</h2>
+<p>檢索器有兩大類：</p>
+<table>
+<thead>
+<tr>
+<th>類型</th>
+<th>怎麼比</th>
+<th>擅長</th>
+<th>代表</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>關鍵字檢索（稀疏檢索）</td>
+<td>問題的詞有沒有出現在文件裡</td>
+<td>專有名詞、編號、罕見詞</td>
+<td><a href="bm25.html">BM25</a></td>
+</tr>
+<tr>
+<td>語意檢索（稠密檢索）</td>
+<td>問題和文件的「意思」近不近</td>
+<td>換句話說、同義詞</td>
+<td>DPR（見 <a href="embedding.html">向量嵌入</a>）</td>
+</tr>
+</tbody>
+</table>
+<p>「前 K 段」的 K 是自己設定的數字，例如 Anthropic 的實驗最後取前 20 段。<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c6">S6-c6</a>K 越大越不容易漏掉答案，但交給模型的內容也越多。</p>
+<h2>來源怎麼說</h2>
+<ul>
+<li>RAG 由檢索器與生成器組成，檢索器回傳前 K 段。<a href="../sources/s1-lewis-2020-rag.html#s1-c3">S1-c3</a></li>
+<li>傳統檢索用 TF-IDF 或 BM25 比對關鍵字。<a href="../sources/s2-karpukhin-2020-dpr.html#s2-c1">S2-c1</a></li>
+<li>DPR 用兩個編碼器把問題和段落轉成向量，比較向量的接近程度。<a href="../sources/s2-karpukhin-2020-dpr.html#s2-c3">S2-c3</a></li>
+<li>在前 20 筆的檢索準確率上，DPR 比 BM25 高 9 到 19 個百分點。<a href="../sources/s2-karpukhin-2020-dpr.html#s2-c4">S2-c4</a></li>
+<li>但兩者各有所長，可以合併使用。<a href="../sources/s2-karpukhin-2020-dpr.html#s2-c5">S2-c5</a></li>
+</ul>
+<h2>相關頁面</h2>
+<p><a href="rag.html">檢索增強生成</a>、<a href="embedding.html">向量嵌入</a>、<a href="bm25.html">關鍵字檢索 BM25</a>、<a href="hybrid-search.html">混合檢索與重排</a></p><div class="backlinks"><b>連到這頁的頁面（10）</b><a href="../concepts/bm25.html">關鍵字檢索 BM25</a>、<a href="../concepts/embedding.html">向量嵌入</a>、<a href="../concepts/hybrid-search.html">混合檢索與重排</a>、<a href="../concepts/rag.html">檢索增強生成（RAG）</a>、<a href="../glossary.html">名詞表</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>、<a href="../sources/s1-lewis-2020-rag.html">S1｜Lewis et al. 2020：RAG 原始論文</a>、<a href="../sources/s2-karpukhin-2020-dpr.html">S2｜Karpukhin et al. 2020：DPR 稠密段落檢索</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

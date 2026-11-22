@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>關鍵字檢索 BM25｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">概念頁</span>更新：2026-11-23</p><h1>關鍵字檢索 BM25</h1>
+<p><strong>一句話定義：</strong> BM25 是一種傳統的關鍵字檢索方法：看問題裡的詞在文件中出現多少、這些詞有多罕見，算出相關分數。</p>
+<h2>白話解釋</h2>
+<p>比喻：BM25 像書末的索引頁。你查「TS-999」，它就翻到所有寫著「TS-999」的頁面。它不懂意思，但不會把「TS-999」和「TS-998」搞混。</p>
+<p>BM25 的基礎是 TF-IDF：一個詞在這份文件出現越多次（TF）、在其他文件越少見（IDF），就越能代表這份文件。</p>
+<h2>來源怎麼說</h2>
+<ul>
+<li>傳統檢索用 TF-IDF 或 BM25 比對關鍵字。<a href="../sources/s2-karpukhin-2020-dpr.html#s2-c1">S2-c1</a></li>
+<li>BM25 擅長罕見的關鍵字與片語。<a href="../sources/s2-karpukhin-2020-dpr.html#s2-c5">S2-c5</a></li>
+<li>向量檢索可能漏掉「TS-999」這種精確比對，BM25 能補上。<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c2">S6-c2</a></li>
+</ul>
+<h2>相關頁面</h2>
+<p><a href="retriever.html">檢索器</a>、<a href="embedding.html">向量嵌入</a>、<a href="hybrid-search.html">混合檢索與重排</a></p><div class="backlinks"><b>連到這頁的頁面（9）</b><a href="../concepts/embedding.html">向量嵌入</a>、<a href="../concepts/hybrid-search.html">混合檢索與重排</a>、<a href="../concepts/retriever.html">檢索器</a>、<a href="../glossary.html">名詞表</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>、<a href="../sources/s2-karpukhin-2020-dpr.html">S2｜Karpukhin et al. 2020：DPR 稠密段落檢索</a>、<a href="../sources/s6-anthropic-2024-contextual-retrieval.html">S6｜Anthropic 2024：Contextual Retrieval</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 審查 B：事實查核（r5 簡報）｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><h1>AI 審查 B：事實查核（r5 簡報）</h1>
+<ul>
+<li>審查者：獨立的 Claude 子代理（Opus），沒有看過製作過程</li>
+<li>輸入：只有 <a href="packet_B_claims.html">packet_B_claims.md</a>（每個簡報重點與它引用的主張、英文證據）</li>
+<li>指示：逐條判斷支持／部分支持／不支持，並檢查主張的中文標題是否比英文證據說得更強</li>
+<li>以下為審查者回覆原文</li>
+</ul>
+<hr />
+<h2>統計</h2>
+<p>共查核 46 條重點：支持 27、部分支持 17、不支持 2。</p>
+<p>17 條部分支持中，有 8 條只是用詞稍強（表中標「輕微」）。另有 9 條主張的中文標題比英文證據說得更強，或寫了證據沒有的內容（見表格最後幾列）。</p>
+<h2>需要修改的地方</h2>
+<table>
+<thead>
+<tr>
+<th>頁碼</th>
+<th>簡報重點（原文）</th>
+<th>引用主張</th>
+<th>判定</th>
+<th>問題</th>
+<th>建議改法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>大型語言模型（LLM）把訓練時讀到的知識存在參數裡，稱為參數記憶</td>
+<td>S1-c1</td>
+<td>不支持</td>
+<td>證據只說模型的 memory 不容易擴充或修改、難以解釋、可能產生幻覺。它完全沒提到「知識存在參數裡」或「訓練時讀到」，也沒有定義「參數記憶」</td>
+<td>另立一條主張，證據改用 S1 原文說預訓練模型把知識存在參數裡的那句（例如摘要中的 "store factual knowledge in their parameters"，要對照原文確認逐字相同）。補上之前，先把這句當名詞解釋，不掛主張</td>
+</tr>
+<tr>
+<td>4</td>
+<td>缺點二：說不出答案的依據</td>
+<td>S1-c1</td>
+<td>部分支持</td>
+<td>（輕微）證據是 "can't straightforwardly provide insight into their predictions"，意思是「不容易看出模型為什麼這樣預測」。簡報的「說不出」把「不容易」變成了「做不到」</td>
+<td>改成「缺點二：很難說清楚答案是怎麼來的」，並加引 S3-c1（untraceable reasoning processes）</td>
+</tr>
+<tr>
+<td>7</td>
+<td>原始論文把維基百科切成 100 字一段，共 2,100 萬段</td>
+<td>S1-c4</td>
+<td>部分支持</td>
+<td>原文是 100-word，也就是 100 個英文詞。中文讀者看到「100 字」會以為是 100 個中文字，實際長度差了好幾倍</td>
+<td>改成「切成每段 100 個英文詞（word）」，S1-c4 標題一起改</td>
+</tr>
+<tr>
+<td>8</td>
+<td>「bad guy」和「villain」用字不同，向量卻很接近</td>
+<td>S2-c2</td>
+<td>部分支持</td>
+<td>（輕微）證據寫的是 "may still be mapped to vectors close"，例子也只說 dense retrieval "would be able to better match"。原文是「可能」和「比較能」，簡報寫成了確定的事</td>
+<td>改成「用字不同，轉成向量後卻可能很接近，所以比較容易配對」</td>
+</tr>
+<tr>
+<td>9</td>
+<td>語意檢索：比較向量的遠近，換句話說也找得到</td>
+<td>S2-c2</td>
+<td>部分支持</td>
+<td>證據只說換句話說「可能」對到相近的向量、配對得「比較好」。「也找得到」是保證的語氣</td>
+<td>改成「換句話說也比較有機會找到」</td>
+</tr>
+<tr>
+<td>9</td>
+<td>向量可能漏掉「TS-999」這種精確代碼，BM25 抓得到</td>
+<td>S6-c2</td>
+<td>部分支持</td>
+<td>前半句有證據。後半句「BM25 抓得到」在引用的兩句證據裡完全沒有</td>
+<td>在 S6-c2 補上原文講 BM25 能找出這串文字的那句當證據。或者改引 S2-c5（BM25 對 highly selective keywords 敏感），寫成「BM25 比對字面，擅長這類精確關鍵字」</td>
+</tr>
+<tr>
+<td>9</td>
+<td>混合檢索：兩種都用，再合併結果</td>
+<td>S2-c5、S6-c2</td>
+<td>不支持</td>
+<td>兩條證據都只講兩種方法各自的強弱，沒有一句提到「兩種都用」或「合併結果」</td>
+<td>新增一條主張，證據用 S6 原文裡把 BM25 和向量檢索結果合併的那一步（rank fusion，要核對逐字）。補上之前，先改成「兩種方法各有所長」</td>
+</tr>
+<tr>
+<td>11</td>
+<td>模型本身完全沒有重新訓練</td>
+<td>S1-c5</td>
+<td>部分支持</td>
+<td>證據只有 82 位領袖和四個答對率。從實驗設計看得出模型沒有重新訓練，但沒有一句明白寫出來，「完全」也沒有依據</td>
+<td>在 S1-c5 補上原文說「只要換掉非參數記憶就能更新知識」的句子（例如 "by simply replacing its non-parametric memory"，要核對逐字）。簡報改成「只換資料庫，模型沒有重新訓練」</td>
+</tr>
+<tr>
+<td>11</td>
+<td>人工評比：RAG 較符合事實占 42.7%，對照模型只占 7.1%</td>
+<td>S1-c6</td>
+<td>部分支持</td>
+<td>（輕微）數字都對，但少了限定條件。這是出題任務中，452 組 BART 與 RAG-Token 產出的兩兩比較，不是一般問答的正確率</td>
+<td>改成「人工評比（出題任務，452 組兩兩比較）：評審認為 RAG 較符合事實的占 42.7%，BART 只占 7.1%」</td>
+</tr>
+<tr>
+<td>13</td>
+<td>重排：先粗找 150 塊，再逐塊打分，只留 20 塊</td>
+<td>S6-c6</td>
+<td>部分支持</td>
+<td>（輕微）150 和 20 是原文寫明 "we used" 的實驗設定，簡報寫得像固定做法</td>
+<td>改成「先粗找一大批（原文用 150 塊），再用重排模型逐塊打分，只留最好的（原文留 20 塊）」</td>
+</tr>
+<tr>
+<td>13</td>
+<td>找不到資料的比例從 5.7% 降到 1.9%（少了 67%）</td>
+<td>S6-c5</td>
+<td>部分支持</td>
+<td>67% 是情境化向量、情境化 BM25、重排三種做法一起用時的結果，而且算的是前 20 塊。這句放在「重排」後面，容易被讀成光靠重排就有這個效果，也漏了「前 20 塊」</td>
+<td>改成「三種做法一起用（情境化向量、情境化 BM25、重排）後，前 20 塊找不到資料的比例從 5.7% 降到 1.9%（少了 67%）」</td>
+</tr>
+<tr>
+<td>14</td>
+<td>答案在開頭或結尾，模型答得最好；放在中間最差</td>
+<td>S4-c1</td>
+<td>部分支持</td>
+<td>（輕微）原文是 "often highest"，而且限定 "in the middle of long contexts"。簡報拿掉了「通常」和「長文」</td>
+<td>改成「答案在開頭或結尾，模型通常答得最好；放在長文中間時明顯變差」</td>
+</tr>
+<tr>
+<td>14</td>
+<td>放中間時，甚至比完全不給資料（56.1%）還差</td>
+<td>S4-c2</td>
+<td>部分支持</td>
+<td>證據只講 GPT-3.5-Turbo，而且是在 20、30 篇文件的設定下。簡報的主詞是泛指的「模型」，把單一模型的結果寫成了普遍現象</td>
+<td>改成「以 GPT-3.5-Turbo 為例：給 20、30 篇文件時，答案放中間甚至比完全不給資料（56.1%）還差」</td>
+</tr>
+<tr>
+<td>15</td>
+<td>忠實度：答案的每一句，都要能在資料裡找到依據</td>
+<td>S5-c1</td>
+<td>部分支持</td>
+<td>（輕微）S5-c1 的證據只說答案 "should be grounded in the given context"，沒有「每一句」。逐句檢查的說法在 S5-c3</td>
+<td>加引 S5-c3，或改成「忠實度：答案要建立在找回來的資料上」</td>
+</tr>
+<tr>
+<td>15</td>
+<td>算法：把答案拆成短句，逐句檢查，算有依據的比例</td>
+<td>S5-c3</td>
+<td>部分支持</td>
+<td>證據只有兩步：用 LLM 抽出 statements，再判斷每句能不能從資料推出。「算比例」不在證據裡。簡報也沒說拆句和檢查都是 LLM 做的</td>
+<td>在 S5-c3 補上原文定義分數算法（有依據的句數除以總句數）的那句。簡報改成「用 LLM 把答案拆成短句，逐句判斷能不能從資料推出，再算有依據的比例」</td>
+</tr>
+<tr>
+<td>16</td>
+<td>RAG 持續演進：檢索前後加處理，再把流程拆成可替換的模組</td>
+<td>S3-c5</td>
+<td>部分支持</td>
+<td>（輕微）證據只有 Modular RAG 這個名稱，以及 Advanced RAG 在檢索前後加的處理。「可替換」不在證據裡</td>
+<td>補一句原文描述 Modular RAG 模組可以替換或重組的句子。或者刪掉「可替換」，寫成「再把流程拆成模組（Modular RAG）」</td>
+</tr>
+<tr>
+<td>16</td>
+<td>這份簡報就是查詢 Wiki 的結果，每頁底部都有出處</td>
+<td>S7-c5</td>
+<td>部分支持</td>
+<td>S7-c5 只支持「查詢結果可以做成簡報等形式，也可以存回 Wiki」。「這份簡報就是」和「每頁底部都有出處」是本專案在描述自己，來源沒辦法替它作證</td>
+<td>拆成兩句。「Karpathy 提到查詢結果可以做成簡報」引 S7-c5；「這份簡報就是這樣做的，每頁底部列出處」標成本專案說明，不掛來源</td>
+</tr>
+<tr>
+<td>19</td>
+<td>只靠參數記憶：難更新、說不出依據、會幻覺</td>
+<td>S1-c1</td>
+<td>部分支持</td>
+<td>（輕微）和第 4 頁缺點二一樣，「說不出依據」比 "can't straightforwardly provide insight" 強。"may produce hallucinations" 寫成「會幻覺」也稍微強了一點</td>
+<td>改成「只靠參數記憶：不易更新、難說清依據、可能產生幻覺」</td>
+</tr>
+<tr>
+<td>19</td>
+<td>可能找不到、沒用好、沒照資料寫；用忠實度檢查答案</td>
+<td>S3-c4、S5-c1</td>
+<td>部分支持</td>
+<td>「找不到」和「沒照資料寫」有 S3-c4 支持。「沒用好」（資料找到了，模型卻沒用上）這兩條證據都沒講，它對應的是第 14 頁的 S4</td>
+<td>加引 S4-c1（或 S4-c2）來支持「沒用好」</td>
+</tr>
+<tr>
+<td>主張標題</td>
+<td>只靠參數記憶的語言模型有三個缺點：難更新、說不出依據、會幻覺</td>
+<td>S1-c1</td>
+<td>標題誇大</td>
+<td>（輕微）"can't straightforwardly provide insight" 譯成「說不出依據」、"may produce" 譯成「會」，兩個限定詞都不見了</td>
+<td>改成「……：不易更新、難說明預測依據、可能產生幻覺」</td>
+</tr>
+<tr>
+<td>主張標題</td>
+<td>RAG 由兩個元件組成：檢索器找文件，生成器根據文件與問題產生答案</td>
+<td>S1-c3</td>
+<td>標題超出證據</td>
+<td>證據只描述檢索器（retriever），生成器那半句沒有證據</td>
+<td>補一句原文描述 generator 的句子，或標題只寫檢索器</td>
+</tr>
+<tr>
+<td>主張標題</td>
+<td>論文的外部資料庫是切成 100 字一段的維基百科，共 2,100 萬段</td>
+<td>S1-c4</td>
+<td>譯詞不精確（不是誇大）</td>
+<td>"100-word" 譯成「100 字」，會被讀成 100 個中文字</td>
+<td>改成「切成每段 100 個英文詞的維基百科」</td>
+</tr>
+<tr>
+<td>主張標題</td>
+<td>只要換掉文件庫就能更新知識，不必重新訓練模型</td>
+<td>S1-c5</td>
+<td>標題誇大</td>
+<td>證據只是一次實驗（82 位領袖，答對 70%、68%），標題「只要…就能」寫成了普遍的保證。「不必重新訓練」證據沒提</td>
+<td>改成「換掉文件庫，答案就跟著新資料變（2016、2018 年版實驗）」，並補上「不必重新訓練」的原文證據</td>
+</tr>
+<tr>
+<td>主張標題</td>
+<td>用向量表示意思，換句話說也找得到：「bad guy」可以對到「villain」</td>
+<td>S2-c2</td>
+<td>標題誇大</td>
+<td>證據是 "may still be mapped" 和 "would be able to better match"，只是「可能」和「比較好」，標題寫成保證找得到</td>
+<td>改成「用向量表示意思，換句話說也比較容易找到：「bad guy」比較能對到「villain」」</td>
+</tr>
+<tr>
+<td>主張標題</td>
+<td>模型的表現呈 U 型：相關資料在開頭或結尾時最好，在中間時明顯變差</td>
+<td>S4-c1</td>
+<td>標題誇大</td>
+<td>（輕微）拿掉了 "often" 和 "long contexts"</td>
+<td>改成「……開頭或結尾時通常最好，在長文中間時明顯變差」</td>
+</tr>
+<tr>
+<td>主張標題</td>
+<td>忠實度的算法：把答案拆成短句，逐條檢查能否從資料推出，算出支持的比例</td>
+<td>S5-c3</td>
+<td>標題超出證據</td>
+<td>「算出支持的比例」不在證據裡</td>
+<td>補上原文的分數公式那句，或從標題刪掉「算出支持的比例」</td>
+</tr>
+<tr>
+<td>主張標題</td>
+<td>RAG 的前處理：把文件切成數百 token 的小塊、轉成向量、存進向量資料庫</td>
+<td>S6-c1</td>
+<td>標題超出證據</td>
+<td>（輕微）引用的兩句證據沒有「存進向量資料庫」。「切成數百 token」也把「通常不超過數百」改成了固定大小</td>
+<td>改成「把文件切成通常不超過數百 token 的小塊，再轉成向量」，或補上原文「存進向量資料庫」那一步</td>
+</tr>
+<tr>
+<td>主張標題</td>
+<td>向量檢索可能漏掉精確比對，例如錯誤代碼「TS-999」；BM25 能補上</td>
+<td>S6-c2</td>
+<td>標題超出證據</td>
+<td>證據完全沒有「BM25 能補上」</td>
+<td>補上原文講 BM25 的那句，或刪掉後半句</td>
+</tr>
+</tbody>
+</table></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

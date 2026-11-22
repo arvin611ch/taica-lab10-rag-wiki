@@ -1,0 +1,212 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>流程設計與反思｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="index.html">首頁</a><a href="wiki/index.html">Wiki 目錄</a><a href="wiki/overview.html">總覽</a><a href="wiki/glossary.html">名詞表</a><a href="slides/index.html">教學簡報</a><a href="workflow.html">流程與反思</a><a href="runs/index.html">執行紀錄</a></div></header>
+<main><h1>流程設計與反思</h1>
+<p>這頁回答作業的步驟三與步驟四：資訊怎麼被取得、整理、檢查，再變成簡報；哪些步驟會重複、哪裡會重新生成；以及實際跑過一次之後，哪個節點最常出錯、我把檢查往前移到哪裡、流程因此改了什麼。所有數字都來自 <a href="runs/index.html">執行紀錄</a>。</p>
+<h2>1. 流程圖（v2，目前使用）</h2>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img" aria-label="LLM Wiki 到教學簡報的流程圖（v2）" font-family="Noto Sans TC, PingFang TC, Microsoft JhengHei, sans-serif">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3b4252"/></marker>
+    <marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b91c1c"/></marker>
+    <style>
+      .lane{fill:#f6f3ec;stroke:#e2dccf}
+      .lt{font-size:15px;font-weight:700;fill:#5b6475}
+      .ai{fill:#e3f1ef;stroke:#0f6e6e;stroke-width:2}
+      .prog{fill:#eef0f4;stroke:#5b6475;stroke-width:2}
+      .hum{fill:#fcebe2;stroke:#c2410c;stroke-width:2}
+      .chk{fill:#fff;stroke:#b91c1c;stroke-width:2.5}
+      .t{font-size:15px;font-weight:700;fill:#1d2433}
+      .s{font-size:12px;fill:#5b6475}
+      .e{stroke:#3b4252;stroke-width:2;fill:none}
+      .back{stroke:#b91c1c;stroke-width:1.8;fill:none;stroke-dasharray:6 4}
+      .bl{font-size:12px;fill:#b91c1c}
+      .new{fill:#f59e0b}
+      .newt{font-size:11px;font-weight:700;fill:#fff}
+    </style>
+  </defs>
+
+  <!-- 泳道 -->
+  <rect x="10" y="10" width="980" height="250" rx="12" class="lane"/>
+  <text x="26" y="34" class="lt">階段一　建立 LLM Wiki（每篇資料跑一次，共 7 次）</text>
+  <rect x="10" y="280" width="980" height="270" rx="12" class="lane"/>
+  <text x="26" y="304" class="lt">階段二　用 Wiki 產生教學簡報</text>
+
+  <!-- 階段一 節點 -->
+  <rect x="30" y="70" width="130" height="62" rx="10" class="prog"/>
+  <text x="95" y="97" text-anchor="middle" class="t">① 取得資料</text>
+  <text x="95" y="117" text-anchor="middle" class="s">下載、轉文字、SHA-256</text>
+
+  <rect x="195" y="70" width="140" height="62" rx="10" class="hum"/>
+  <text x="265" y="97" text-anchor="middle" class="t">② 討論重點</text>
+  <text x="265" y="117" text-anchor="middle" class="s">AI 列候選、使用者選</text>
+
+  <rect x="370" y="70" width="140" height="62" rx="10" class="ai"/>
+  <text x="440" y="97" text-anchor="middle" class="t">③ 寫入一頁</text>
+  <text x="440" y="117" text-anchor="middle" class="s">來源頁／概念頁</text>
+
+  <rect x="545" y="66" width="140" height="70" rx="35" class="chk"/>
+  <text x="615" y="96" text-anchor="middle" class="t">④ 單頁檢查</text>
+  <text x="615" y="116" text-anchor="middle" class="s">證據逐字、數字、連結</text>
+  <rect x="575" y="48" width="80" height="18" rx="9" class="new"/><text x="615" y="61" text-anchor="middle" class="newt">v2 前移</text>
+
+  <rect x="720" y="66" width="140" height="70" rx="35" class="chk"/>
+  <text x="790" y="96" text-anchor="middle" class="t">⑤ Wiki 檢查</text>
+  <text x="790" y="116" text-anchor="middle" class="s">孤兒頁、目錄、覆蓋</text>
+
+  <rect x="885" y="76" width="90" height="50" rx="10" class="prog"/>
+  <text x="930" y="106" text-anchor="middle" class="t">Wiki</text>
+
+  <path d="M160 101H195" class="e" marker-end="url(#ah)"/>
+  <path d="M335 101H370" class="e" marker-end="url(#ah)"/>
+  <path d="M510 101H545" class="e" marker-end="url(#ah)"/>
+  <path d="M685 101H720" class="e" marker-end="url(#ah)"/>
+  <path d="M860 101H885" class="e" marker-end="url(#ah)"/>
+
+  <!-- 階段一 回頭箭頭 -->
+  <path d="M615 136 V170 H440 V132" class="back" marker-end="url(#ahr)"/>
+  <text x="455" y="164" class="bl">不通過 → 改這一頁</text>
+  <path d="M600 136 V200 H440" class="back" stroke-opacity="0"/>
+  <path d="M640 136 V205 H95 V132" class="back" marker-end="url(#ahr)"/>
+  <text x="110" y="198" class="bl">通過 → 下一篇資料（重複 7 次）</text>
+  <path d="M790 136 V235 H440 V205" class="back" marker-end="url(#ahr)"/>
+  <text x="600" y="229" class="bl">結構問題 → 補連結、補目錄</text>
+
+  <!-- 階段二 節點 -->
+  <rect x="30" y="340" width="120" height="62" rx="10" class="ai"/>
+  <text x="90" y="367" text-anchor="middle" class="t">⑥ 查詢 Wiki</text>
+  <text x="90" y="387" text-anchor="middle" class="s">目錄→總覽→概念頁</text>
+
+  <rect x="175" y="340" width="120" height="62" rx="10" class="ai"/>
+  <text x="235" y="367" text-anchor="middle" class="t">⑦ 整理大綱</text>
+  <text x="235" y="387" text-anchor="middle" class="s">每點附主張編號</text>
+
+  <rect x="320" y="336" width="130" height="70" rx="35" class="chk"/>
+  <text x="385" y="366" text-anchor="middle" class="t">⑧ 大綱檢查</text>
+  <text x="385" y="386" text-anchor="middle" class="s">出處、數字、名詞、份量</text>
+  <rect x="345" y="318" width="80" height="18" rx="9" class="new"/><text x="385" y="331" text-anchor="middle" class="newt">v2 前移</text>
+
+  <rect x="475" y="340" width="120" height="62" rx="10" class="prog"/>
+  <text x="535" y="367" text-anchor="middle" class="t">⑨ 產生簡報</text>
+  <text x="535" y="387" text-anchor="middle" class="s">HTML＋存回 Wiki</text>
+
+  <rect x="620" y="336" width="120" height="70" rx="35" class="chk"/>
+  <text x="680" y="366" text-anchor="middle" class="t">⑩ 畫面檢查</text>
+  <text x="680" y="386" text-anchor="middle" class="s">溢出、連結、換頁</text>
+
+  <rect x="765" y="336" width="120" height="70" rx="35" class="chk"/>
+  <text x="825" y="366" text-anchor="middle" class="t">⑪ AI 審查</text>
+  <text x="825" y="386" text-anchor="middle" class="s">事實查核＋新手</text>
+
+  <rect x="905" y="346" width="70" height="50" rx="10" class="prog"/>
+  <text x="940" y="376" text-anchor="middle" class="t">發布</text>
+
+  <path d="M150 371H175" class="e" marker-end="url(#ah)"/>
+  <path d="M295 371H320" class="e" marker-end="url(#ah)"/>
+  <path d="M450 371H475" class="e" marker-end="url(#ah)"/>
+  <path d="M595 371H620" class="e" marker-end="url(#ah)"/>
+  <path d="M740 371H765" class="e" marker-end="url(#ah)"/>
+  <path d="M885 371H905" class="e" marker-end="url(#ah)"/>
+  <path d="M930 126 V300 H90 V340" class="e" marker-end="url(#ah)"/>
+
+  <!-- 階段二 回頭箭頭 -->
+  <path d="M385 406 V440 H235 V402" class="back" marker-end="url(#ahr)"/>
+  <text x="250" y="434" class="bl">改大綱</text>
+  <path d="M680 406 V470 H535 V402" class="back" marker-end="url(#ahr)"/>
+  <text x="550" y="464" class="bl">版面問題 → 改版型</text>
+  <path d="M825 406 V500 H220 V402" class="back" marker-end="url(#ahr)"/>
+  <text x="420" y="494" class="bl">事實或教學問題 → 改大綱</text>
+  <path d="M845 406 V530 H25 V250 H420 V205" class="back" marker-end="url(#ahr)"/>
+  <text x="440" y="524" class="bl">Wiki 本身有錯 → 回到 ③ 改 Wiki，再重跑檢查</text>
+
+  <!-- 圖例 -->
+  <rect x="660" y="292" width="14" height="14" rx="3" class="ai"/><text x="680" y="304" class="s">AI 做</text>
+  <rect x="725" y="292" width="14" height="14" rx="3" class="prog"/><text x="745" y="304" class="s">程式做</text>
+  <rect x="800" y="292" width="14" height="14" rx="3" class="hum"/><text x="820" y="304" class="s">人＋AI</text>
+  <rect x="875" y="292" width="14" height="14" rx="7" class="chk"/><text x="895" y="304" class="s">檢查關卡</text>
+</svg>
+
+<figcaption>綠色是 AI（Claude Code）做的節點，灰色是程式，橘色是人與 AI 一起，紅框是檢查關卡；紅色虛線是「不通過就回頭」。標「v2 前移」的兩個關卡，是第一次執行後才加上或往前搬的。</figcaption>
+</figure>
+
+<table>
+<thead>
+<tr>
+<th>節點</th>
+<th>誰做</th>
+<th>輸入 → 輸出</th>
+<th>檢查什麼／不通過回到哪</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>① 取得資料</td>
+<td>程式 <code>fetch_sources.py</code></td>
+<td>網址 → 純文字＋SHA-256</td>
+<td>原始資料只讀不改</td>
+</tr>
+<tr>
+<td>② 討論重點</td>
+<td>AI 提案、使用者選</td>
+<td>原文 → 每篇要強調的重點</td>
+<td>討論內容照實寫進 <a href="wiki/discussions/2026-11-23-ingest-discussion.html">討論紀錄</a></td>
+</tr>
+<tr>
+<td>③ 寫入一頁</td>
+<td>AI</td>
+<td>原文＋重點 → 來源頁（主張＋逐字證據）或概念頁</td>
+<td>—</td>
+</tr>
+<tr>
+<td>④ 單頁檢查</td>
+<td>程式 <code>lint_wiki.py --page</code>＋AI 主張審查</td>
+<td>剛寫好的那一頁</td>
+<td>證據是否逐字出自原文、數字是否都在證據裡、連結；中文是否比英文證據說得更強 → 回 ③</td>
+</tr>
+<tr>
+<td>⑤ Wiki 檢查</td>
+<td>程式 <code>lint_wiki.py</code></td>
+<td>整個 Wiki</td>
+<td>孤兒頁、目錄、log 格式、每篇來源都被用到 → 回 ③</td>
+</tr>
+<tr>
+<td>⑥ 查詢 Wiki</td>
+<td>AI</td>
+<td>學習目標 → 讀目錄、總覽、概念頁</td>
+<td>找不到支撐的內容 → 回 ① 補資料</td>
+</tr>
+<tr>
+<td>⑦ 整理大綱</td>
+<td>AI</td>
+<td>→ <code>deck/outline.json</code>，每點附主張編號或標成比喻／例子／本專案說明</td>
+<td>—</td>
+</tr>
+<tr>
+<td>⑧ 大綱檢查</td>
+<td>程式 <code>check_deck.py --content-only</code></td>
+<td>大綱</td>
+<td>出處、數字、名詞先定義後使用、目標覆蓋、每頁 ≤4 點每點 ≤40 字 → 回 ⑦</td>
+</tr>
+<tr>
+<td>⑨ 產生簡報</td>
+<td>程式 <code>render_deck.py</code></td>
+<td>大綱 → HTML 簡報＋存回 Wiki 的對應表</td>
+<td>—</td>
+</tr>
+<tr>
+<td>⑩ 畫面檢查</td>
+<td>程式 <code>check_deck.py</code>（無頭瀏覽器）＋AI 看截圖</td>
+<td>HTML</td>
+<td>溢出（含 SVG 文字）、連結與錨點、換頁 → 回 ⑨ 或 ⑦</td>
+</tr>
+<tr>
+<td>⑪ AI 審查</td>
+<td>兩個沒看過製作過程的 AI</td>
+<td>新手只拿簡報文字；查核員只拿「重點↔主張」</td>
+<td>新手卡住、答錯 → 回 ⑦；說得比證據強 → 回 ⑦ 或 ③</td>
+</tr>
+</tbody>
+</table>
+<p>@@BODY@@</p></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

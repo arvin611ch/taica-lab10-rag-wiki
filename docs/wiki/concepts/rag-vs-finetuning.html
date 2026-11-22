@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RAG 與微調｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">概念頁</span>更新：2026-11-23</p><h1>RAG 與微調</h1>
+<p><strong>一句話定義：</strong> 微調（fine-tuning）是用新資料再訓練模型、改變模型參數；RAG 不改模型，只在回答時提供資料。兩者解決的問題不同，也可以並用。</p>
+<h2>白話解釋</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>RAG</th>
+<th>微調</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>改了什麼</td>
+<td>外部文件庫</td>
+<td>模型參數</td>
+</tr>
+<tr>
+<td>更新知識</td>
+<td>換文件就好</td>
+<td>要重新訓練</td>
+</tr>
+<tr>
+<td>能不能指出依據</td>
+<td>可以列出用了哪些資料</td>
+<td>不行</td>
+</tr>
+<tr>
+<td>適合</td>
+<td>查最新、查特定資料</td>
+<td>學固定的格式、語氣、風格</td>
+</tr>
+</tbody>
+</table>
+<p>比喻：綜述論文自己用的比喻是，RAG 像給模型一本專用課本，微調像學生把知識內化。</p>
+<h2>來源怎麼說</h2>
+<ul>
+<li>RAG 像專用課本，微調像學生內化知識；兩者不互斥。<a href="../sources/s3-gao-2023-rag-survey.html#s3-c7">S3-c7</a></li>
+<li>換文件庫就能更新 RAG 的知識，模型不用重新訓練。<a href="../sources/s1-lewis-2020-rag.html#s1-c5">S1-c5</a></li>
+<li>外部記憶可以直接修改、也能拿出來檢查。<a href="../sources/s1-lewis-2020-rag.html#s1-c2">S1-c2</a></li>
+</ul>
+<h2>相關頁面</h2>
+<p><a href="rag.html">檢索增強生成</a>、<a href="parametric-memory.html">參數記憶與幻覺</a></p><div class="backlinks"><b>連到這頁的頁面（7）</b><a href="../concepts/parametric-memory.html">參數記憶與幻覺</a>、<a href="../concepts/rag.html">檢索增強生成（RAG）</a>、<a href="../glossary.html">名詞表</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>、<a href="../sources/s3-gao-2023-rag-survey.html">S3｜Gao et al. 2023：大型語言模型的 RAG 綜述</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>檢索增強生成（RAG）｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">概念頁</span>更新：2026-11-23</p><h1>檢索增強生成（RAG）</h1>
+<p><strong>一句話定義：</strong> 讓語言模型回答之前，先從外部資料庫找出相關資料，連同問題一起交給模型，再根據這些資料產生答案。英文是 Retrieval-Augmented Generation。</p>
+<h2>白話解釋</h2>
+<p>一般的聊天機器人只能靠訓練時記住的內容回答，像閉卷考試。RAG 把它變成開卷考試：先翻書（檢索），把找到的幾頁夾進題目裡（增強），再作答（生成）。</p>
+<p>比喻：閉卷考試靠記憶，記錯了自己也不知道；開卷考試可以翻書，但翻錯頁一樣會答錯。</p>
+<p>RAG 分成「事前準備」與「每次提問」兩段：</p>
+<ol>
+<li><strong>建索引（事前）：</strong> 把文件切成小塊，每塊轉成向量，存進資料庫。</li>
+<li><strong>檢索（提問時）：</strong> 把問題也轉成向量，找出最接近的前 K 塊。</li>
+<li><strong>生成（提問時）：</strong> 把問題和找到的資料一起放進提示詞，讓模型寫答案。</li>
+</ol>
+<h2>來源怎麼說</h2>
+<ul>
+<li>這個名稱來自 2020 年的論文：檢索器負責找文件，生成器根據文件與問題寫答案。<a href="../sources/s1-lewis-2020-rag.html#s1-c3">S1-c3</a></li>
+<li>綜述論文把基本流程整理成建索引、檢索、生成三步。<a href="../sources/s3-gao-2023-rag-survey.html#s3-c2">S3-c2</a></li>
+<li>它要解決的是模型只靠參數記憶的問題：難更新、說不出依據、會幻覺。<a href="../sources/s1-lewis-2020-rag.html#s1-c1">S1-c1</a>、<a href="../sources/s3-gao-2023-rag-survey.html#s3-c1">S3-c1</a></li>
+<li>好處之一是換掉文件庫就能更新知識，不必重新訓練模型。<a href="../sources/s1-lewis-2020-rag.html#s1-c5">S1-c5</a></li>
+<li>資料量小到能整份放進提示詞時，不一定需要 RAG。<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c7">S6-c7</a></li>
+</ul>
+<h2>常見誤解</h2>
+<ul>
+<li><strong>「用了 RAG 就不會幻覺」</strong>：不對。檢索可能找錯，模型也可能寫出資料裡沒有的內容。見 <a href="rag-failures.html">RAG 的常見失敗</a>。</li>
+<li><strong>「RAG 會讓模型學會新知識」</strong>：不對。模型參數沒有改變，只是回答時多看了資料。要改變模型本身是 <a href="rag-vs-finetuning.html">微調</a>。</li>
+</ul>
+<h2>相關頁面</h2>
+<p><a href="parametric-memory.html">參數記憶與幻覺</a>、<a href="retriever.html">檢索器</a>、<a href="chunking.html">切塊</a>、<a href="embedding.html">向量嵌入</a>、<a href="rag-paradigms.html">RAG 的三個階段</a>、<a href="rag-vs-finetuning.html">RAG 與微調</a>、<a href="../overview.html">總覽</a></p><div class="backlinks"><b>連到這頁的頁面（13）</b><a href="../concepts/llm-wiki-vs-rag.html">LLM Wiki 與 RAG 的差別</a>、<a href="../concepts/parametric-memory.html">參數記憶與幻覺</a>、<a href="../concepts/rag-evaluation.html">怎麼評估 RAG</a>、<a href="../concepts/rag-paradigms.html">RAG 的三個階段</a>、<a href="../concepts/rag-vs-finetuning.html">RAG 與微調</a>、<a href="../concepts/retriever.html">檢索器</a>、<a href="../glossary.html">名詞表</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>、<a href="../sources/s1-lewis-2020-rag.html">S1｜Lewis et al. 2020：RAG 原始論文</a>、<a href="../sources/s3-gao-2023-rag-survey.html">S3｜Gao et al. 2023：大型語言模型的 RAG 綜述</a>、<a href="../sources/s6-anthropic-2024-contextual-retrieval.html">S6｜Anthropic 2024：Contextual Retrieval</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

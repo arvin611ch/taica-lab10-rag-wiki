@@ -1,0 +1,20 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>時間紀錄｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../index.html">首頁</a><a href="../wiki/index.html">Wiki 目錄</a><a href="../wiki/overview.html">總覽</a><a href="../wiki/glossary.html">名詞表</a><a href="../slides/index.html">教學簡報</a><a href="../workflow.html">流程與反思</a><a href="../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">Wiki</span>更新：2026-11-23</p><h1>時間紀錄</h1>
+<p>只往後加。每筆以 <code>## [日期] 操作 | 標題</code> 開頭，可以用 <code>grep "^## \[" wiki/log.md</code> 列出。</p>
+<h2>[2026-11-23] setup | 建立資料夾、虛擬環境與規則檔 AGENTS.md（流程 v1）</h2>
+<h2>[2026-11-23] discuss | 第 0 輪：主題 RAG、讀者為沒學過機器學習的大學生、公開發布、用選項參與討論</h2>
+<h2>[2026-11-23] fetch | 下載 S1–S7，轉成文字並記錄 SHA-256（raw/manifest.json）</h2>
+<h2>[2026-11-23] discuss | 第 1 輪：S1–S4 候選重點；使用者在 S2 選「關鍵字 vs 語意比對」，其餘授權 AI 決定</h2>
+<h2>[2026-11-23] ingest | S1–S7 一次寫入：7 個來源頁、41 條主張、13 個概念頁、名詞表、總覽、目錄</h2>
+<h2>[2026-11-23] lint | r1 未通過：26 個問題（數字 21、壞連結 2、孤兒頁 2、證據 1）</h2>
+<h2>[2026-11-23] fix | 補 6 處數字的證據、比喻與例子改為「比喻：／例子：」開頭、移除還沒建的大綱連結；檢查程式改為接受 PDF 斷字與來源年份</h2>
+<h2>[2026-11-23] lint | r2 通過（10 項檢查、0 個問題）</h2>
+<h2>[2026-11-23] query | 依 4 個學習目標查 Wiki：讀 index、overview 與 13 個概念頁，寫出簡報大綱 deck/outline.json</h2>
+<h2>[2026-11-23] render | 依大綱產生 19 頁簡報，並把每頁引用的主張存回 queries/deck-outline.md</h2>
+<h2>[2026-11-23] check | r3 簡報檢查：測驗頁 class 撞名，兩頁測驗疊在所有投影片上；修好後仍有 4 個問題（超字數 2、圖號誤判 1、首頁未建 1）</h2>
+<h2>[2026-11-23] fix | 縮短 2 個重點、調整 2 張圖的位置、檢查程式略過圖號並加上 SVG 文字出框檢查、建立網站首頁</h2>
+<h2>[2026-11-23] check | r4 未通過 1 項（第 14 頁軸標籤超出圖框）；r5 通過，送兩個獨立 AI 審查</h2><div class="backlinks"><b>連到這頁的頁面（1）</b><a href="index.html">RAG 入門 LLM Wiki：目錄</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

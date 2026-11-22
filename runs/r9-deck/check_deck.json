@@ -1,0 +1,60 @@
+{
+  "node": "check_deck（簡報檢查）",
+  "ok": true,
+  "checks": [
+    {
+      "code": "D1",
+      "name": "每個重點都有出處或標明比喻／例子",
+      "checked": 55,
+      "problems": []
+    },
+    {
+      "code": "D2",
+      "name": "引用的主張與 Wiki 頁存在",
+      "checked": 85,
+      "problems": []
+    },
+    {
+      "code": "D3",
+      "name": "數字對得上引用的主張",
+      "checked": 18,
+      "problems": []
+    },
+    {
+      "code": "D4",
+      "name": "名詞先定義後使用",
+      "checked": 44,
+      "problems": []
+    },
+    {
+      "code": "D5",
+      "name": "學習目標都有內容、測驗與回顧",
+      "checked": 4,
+      "problems": []
+    },
+    {
+      "code": "D6",
+      "name": "份量（每頁 ≤4 點、每點 ≤40 字）",
+      "checked": 55,
+      "problems": []
+    },
+    {
+      "code": "D7",
+      "name": "版面不溢出（1280×720）",
+      "checked": 19,
+      "problems": []
+    },
+    {
+      "code": "D8",
+      "name": "簡報裡的連結都連得到",
+      "checked": 51,
+      "problems": []
+    },
+    {
+      "code": "D9",
+      "name": "鍵盤換頁可用",
+      "checked": 2,
+      "problems": []
+    }
+  ]
+}

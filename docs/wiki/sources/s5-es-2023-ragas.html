@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S5｜Es et al. 2023：RAGAS 自動評估｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">來源頁</span>更新：2026-11-23｜原文：<a href="https://arxiv.org/abs/2309.15217">https://arxiv.org/abs/2309.15217</a></p><h1>S5｜Es et al. 2023：RAGAS 自動評估</h1>
+<p><strong>原文：</strong> Shahul Es et al., <em>RAGAS: Automated Evaluation of Retrieval Augmented Generation</em>, EACL 2024 demo. <a href="https://arxiv.org/abs/2309.15217">https://arxiv.org/abs/2309.15217</a></p>
+<p><strong>一句話摘要：</strong> 提出三個不需要標準答案、由 LLM 自動打分的 RAG 評估指標：忠實度、答案切題度、資料相關性。</p>
+<h2>重點</h2>
+<h3 id="s5-c1">S5-c1｜忠實度：答案應該建立在找回來的資料上</h3>
+<blockquote>
+<p>證據（§3）：「Faithfulness refers to the idea that the answer should be grounded in the given context.」</p>
+</blockquote>
+<p>白話說明：答案裡的每一句話，都應該能從找回來的資料推得出來。見 <a href="../concepts/rag-evaluation.html">怎麼評估 RAG</a>。</p>
+<h3 id="s5-c2">S5-c2｜答案切題度與資料相關性：答案要回應問題，找回的資料要精簡</h3>
+<blockquote>
+<p>證據（§3）：「Answer Relevance refers to the idea that the generated answer should address the actual question that was provided.」</p>
+<p>證據（§3）：「Context Relevance refers to the idea that the retrieved context should be focused, containing as little irrelevant information as possible.」</p>
+</blockquote>
+<p>白話說明：答案可能句句屬實卻答非所問（切題度低）；找回來的資料也可能一大堆、真正有用的只有一句（相關性低）。</p>
+<h3 id="s5-c3">S5-c3｜忠實度的算法：把答案拆成短句，逐條檢查能否從資料推出，算出支持的比例</h3>
+<blockquote>
+<p>證據（§3 Faithfulness）：「we first use an LLM to extract a set of statements」</p>
+<p>證據（§3 Faithfulness）：「the LLM determines if si can be inferred from c(q) using a verification function」</p>
+<p>證據（§3 Faithfulness）：「is the number of statements that were supported according to the LLM and |S| is the total number of statements」</p>
+</blockquote>
+<p>例子：答案拆成 4 句，其中 3 句能在資料裡找到依據，忠實度就是 3/4。</p>
+<p>白話說明：本專案檢查簡報的方式也借用這個想法：每個重點都要對到 Wiki 裡的一條主張。</p>
+<h3 id="s5-c4">S5-c4｜這些指標不需要人工標的標準答案</h3>
+<blockquote>
+<p>證據（Abstract）：「we put forward a suite of metrics which can be used to evaluate these different dimensions without having to rely on ground truth human annotations」</p>
+</blockquote>
+<p>白話說明：不用先請人寫好「正確答案」，就能大致評估 RAG 系統，適合開發時快速反覆測試。</p>
+<h3 id="s5-c5">S5-c5｜跟人類判斷比，忠實度最準，資料相關性最難評</h3>
+<blockquote>
+<p>證據（§5 Experiments）：「For faithfulness, the Ragas prediction are in general highly accurate.」</p>
+<p>證據（§5 Experiments）：「We found context relevance to be the hardest quality dimension to evaluate.」</p>
+</blockquote>
+<p>白話說明：自動評估也會錯，尤其是判斷「哪些資料是必要的」這一項。</p>
+<h2>這篇沒有強調的部分</h2>
+<p>WikiEval 資料集的建法與兩種比較基準的細節，入門簡報不使用。</p>
+<h2>用到這篇的頁面</h2>
+<p><a href="../concepts/rag-evaluation.html">怎麼評估 RAG</a></p><div class="backlinks"><b>連到這頁的頁面（4）</b><a href="../concepts/rag-evaluation.html">怎麼評估 RAG</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

@@ -47,6 +47,8 @@ updated: 2026-11-23
 
 > 證據（§II-B Advanced RAG）：「Focusing on enhancing retrieval quality, it employs pre-retrieval and post-retrieval strategies.」
 
+> 證據（§II-C Modular RAG）：「Modular RAG offers remarkable adaptability by allowing module substitution or reconfiguration to address specific challenges.」
+
 白話說明：Advanced RAG 在檢索前改寫問題、檢索後重排與精簡資料；Modular RAG 把流程拆成可以替換、重組的模組，例如多次檢索、視情況決定要不要檢索。見 [RAG 的三個階段](../concepts/rag-paradigms.md)。
 
 ### S3-c6｜切塊大小是取捨：大塊上下文多但雜訊多，小塊雜訊少但可能資訊不完整 {#s3-c6}

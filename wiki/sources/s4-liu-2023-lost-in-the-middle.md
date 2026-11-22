@@ -13,17 +13,21 @@ updated: 2026-11-23
 
 ## 重點
 
-### S4-c1｜模型的表現呈 U 型：相關資料在開頭或結尾時最好，在中間時明顯變差 {#s4-c1}
+### S4-c1｜模型的表現常呈 U 型：相關資料在開頭或結尾時通常最好，在長篇內容的中間時明顯變差 {#s4-c1}
 
 > 證據（Abstract）：「performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts」
 
-白話說明：實驗給模型 20 篇文件，只有一篇含有答案，再移動那篇的位置。正確率畫出來像字母 U。見 [長上下文的位置效應](../concepts/lost-in-the-middle.md)。
+> 證據（§2.1）：「k documents (e.g., passages from Wikipedia), where exactly one of the documents contains the answer」
+
+白話說明：實驗一次給模型好幾篇文件，其中只有一篇含有答案，再移動那篇的位置。正確率畫出來像字母 U。見 [長上下文的位置效應](../concepts/lost-in-the-middle.md)。
 
 ### S4-c2｜答案放在中間時，GPT-3.5-Turbo 甚至比完全不給文件時還差 {#s4-c2}
 
 > 證據（§1 Introduction）：「when relevant information is placed in the middle of its input context, GPT-3.5-Turbo’s performance on the multi-document question task is lower than its performance when predicting without any documents (i.e., the closed-book setting; 56.1%)」
 
-白話說明：不給文件、只靠模型自己記得的內容（閉卷）時正確率是 56.1%。給了 20 篇文件、但答案剛好在中間時，正確率反而更低。
+> 證據（§2.3）：「in 20- and 30-document settings is lower than performance without any input documents (i.e., closedbook performance; 56.1%)」
+
+白話說明：不給文件、只靠模型自己記得的內容（閉卷）時正確率是 56.1%。給了 20 或 30 篇文件、但答案剛好在中間時，正確率反而更低。
 
 ### S4-c3｜號稱能讀更長內容的模型，不一定比較會用這些內容 {#s4-c3}
 
@@ -32,6 +36,8 @@ updated: 2026-11-23
 白話說明：模型「放得下」很多文件，不代表它「用得好」。
 
 ### S4-c4｜多給文件的效益很快飽和：從 20 篇加到 50 篇只多約 1% 到 1.5% {#s4-c4}
+
+> 證據（§1 Introduction）：「using 50 documents instead of 20 retrieved documents only marginally improves performance」
 
 > 證據（§5 Open-domain QA case study）：「Using more than 20 retrieved documents only marginally improves reader performance (∼1.5% for GPT-3.5Turbo and ∼1% for Claude-1.3), while significantly increasing the input context length (and thus latency and cost).」
 

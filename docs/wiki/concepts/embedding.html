@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>向量嵌入｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">概念頁</span>更新：2026-11-23</p><h1>向量嵌入</h1>
+<p><strong>一句話定義：</strong> 向量嵌入（embedding）是用一串數字（向量）表示一段文字的意思；意思越接近的兩段文字，向量越接近。</p>
+<h2>白話解釋</h2>
+<p>比喻：把每段文字想成地圖上的一個點。「魔戒裡的壞人」和「反派索倫」雖然用字完全不同，但意思相近，所以兩個點離得很近；「今天天氣很好」就離得很遠。檢索時，只要找離問題最近的幾個點就好。</p>
+<p>實際上的「地圖」有數百到上千個維度，由一個嵌入模型負責把文字轉成點。有兩個要注意的地方：</p>
+<ol>
+<li>問題和文件必須用<strong>同一個</strong>嵌入模型轉換，才能放在同一張地圖上比較。</li>
+<li>嵌入看的是整體意思，對「TS-999」這種精確代碼不一定敏感。<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c2">S6-c2</a></li>
+</ol>
+<h2>來源怎麼說</h2>
+<ul>
+<li>同義詞或換句話說，即使用字完全不同，也可能被轉成相近的向量；例如「bad guy」比較能對到「villain」。<a href="../sources/s2-karpukhin-2020-dpr.html#s2-c2">S2-c2</a></li>
+<li>實務流程是先切塊，再用嵌入模型把每塊轉成向量。<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c1">S6-c1</a></li>
+<li>檢索時，問題要用跟建索引時相同的模型轉成向量。<a href="../sources/s3-gao-2023-rag-survey.html#s3-c3">S3-c3</a></li>
+<li>嵌入可能漏掉精確比對。<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c2">S6-c2</a></li>
+</ul>
+<h2>相關頁面</h2>
+<p><a href="retriever.html">檢索器</a>、<a href="chunking.html">切塊</a>、<a href="bm25.html">關鍵字檢索 BM25</a></p><div class="backlinks"><b>連到這頁的頁面（12）</b><a href="../concepts/bm25.html">關鍵字檢索 BM25</a>、<a href="../concepts/chunking.html">切塊</a>、<a href="../concepts/hybrid-search.html">混合檢索與重排</a>、<a href="../concepts/rag.html">檢索增強生成（RAG）</a>、<a href="../concepts/retriever.html">檢索器</a>、<a href="../glossary.html">名詞表</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>、<a href="../sources/s2-karpukhin-2020-dpr.html">S2｜Karpukhin et al. 2020：DPR 稠密段落檢索</a>、<a href="../sources/s3-gao-2023-rag-survey.html">S3｜Gao et al. 2023：大型語言模型的 RAG 綜述</a>、<a href="../sources/s6-anthropic-2024-contextual-retrieval.html">S6｜Anthropic 2024：Contextual Retrieval</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

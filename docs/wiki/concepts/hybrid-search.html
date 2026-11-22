@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>混合檢索與重排｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">概念頁</span>更新：2026-11-23</p><h1>混合檢索與重排</h1>
+<p><strong>一句話定義：</strong> 混合檢索（hybrid search）同時用關鍵字檢索和向量檢索找資料再合併結果；重排（reranking）是先粗找一大批，再用另一個模型逐段打分，只留下最相關的幾段。</p>
+<h2>白話解釋</h2>
+<p>比喻：混合檢索像同時請兩位圖書館員找書，一位只看書名關鍵字、一位看內容意思，最後把兩人的書單合併。重排像再請一位專家把合併後的書單逐本翻過，挑出最該讀的幾本。</p>
+<p>重排還有一個好處：把最相關的資料排在前面。模型比較容易用到放在開頭的資料（見 <a href="lost-in-the-middle.html">長上下文的位置效應</a>）。</p>
+<h2>來源怎麼說</h2>
+<ul>
+<li>BM25 擅長罕見關鍵字，DPR 擅長同義改寫，兩者可以互補。<a href="../sources/s2-karpukhin-2020-dpr.html#s2-c5">S2-c5</a></li>
+<li>向量檢索可能漏掉精確代碼，加上 BM25 可以補上。<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c2">S6-c2</a></li>
+<li>混合檢索的做法：BM25 與向量檢索各找一批，合併並去掉重複。<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c8">S6-c8</a></li>
+<li>重排的做法：先取 150 塊，再打分留下 20 塊。<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c6">S6-c6</a></li>
+<li>情境化向量＋情境化 BM25＋重排，讓找不到資料的比例下降 67%。<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c5">S6-c5</a></li>
+<li>把相關文件重排到前面，是改善位置效應的建議方向。<a href="../sources/s4-liu-2023-lost-in-the-middle.html#s4-c5">S4-c5</a></li>
+</ul>
+<h2>相關頁面</h2>
+<p><a href="retriever.html">檢索器</a>、<a href="bm25.html">關鍵字檢索 BM25</a>、<a href="embedding.html">向量嵌入</a>、<a href="rag-paradigms.html">RAG 的三個階段</a></p><div class="backlinks"><b>連到這頁的頁面（13）</b><a href="../concepts/bm25.html">關鍵字檢索 BM25</a>、<a href="../concepts/chunking.html">切塊</a>、<a href="../concepts/lost-in-the-middle.html">長上下文的位置效應</a>、<a href="../concepts/rag-failures.html">RAG 的常見失敗</a>、<a href="../concepts/rag-paradigms.html">RAG 的三個階段</a>、<a href="../concepts/retriever.html">檢索器</a>、<a href="../glossary.html">名詞表</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>、<a href="../sources/s2-karpukhin-2020-dpr.html">S2｜Karpukhin et al. 2020：DPR 稠密段落檢索</a>、<a href="../sources/s4-liu-2023-lost-in-the-middle.html">S4｜Liu et al. 2023：Lost in the Middle</a>、<a href="../sources/s6-anthropic-2024-contextual-retrieval.html">S6｜Anthropic 2024：Contextual Retrieval</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

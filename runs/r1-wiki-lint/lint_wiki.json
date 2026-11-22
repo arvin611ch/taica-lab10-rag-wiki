@@ -1,0 +1,96 @@
+{
+  "node": "lint_wiki（Wiki 檢查）",
+  "ok": false,
+  "checks": [
+    {
+      "code": "W1",
+      "name": "frontmatter 欄位",
+      "checked": 25,
+      "problems": []
+    },
+    {
+      "code": "W2",
+      "name": "證據逐字出自原文",
+      "checked": 57,
+      "problems": [
+        "S4-c2：證據不在原文中，前 113 字對得上，之後是「document question task is lower than its…」"
+      ]
+    },
+    {
+      "code": "W3",
+      "name": "主張格式",
+      "checked": 41,
+      "problems": []
+    },
+    {
+      "code": "W4",
+      "name": "數字有證據支撐",
+      "checked": 64,
+      "problems": [
+        "concepts/bm25.md：數字 25（沒有引用任何主張）｜**一句話定義：** BM25（Best Matching 25）是一種傳統的關鍵字檢索方法：看問題",
+        "concepts/bm25.md：數字 998, 999（沒有引用任何主張）｜比喻：BM25 像書末的索引頁。你查「TS-999」，它就翻到所有寫著「TS-999」的頁面。它不懂",
+        "concepts/chunking.md：數字 3（沒有引用任何主張）｜切塊還有一個副作用：被切出來的一段，可能失去原本靠前文才看得懂的資訊。例如「這家公司營收成長 3%」",
+        "concepts/chunking.md：數字 2020（引用 S1-c4 的證據裡沒有）｜2020 年的 RAG 論文把維基百科切成 100 字一段，共 2,100 萬段。[S1-c4](.",
+        "concepts/embedding.md：數字 999（沒有引用任何主張）｜嵌入看的是整體意思，對「TS-999」這種精確代碼不一定敏感。",
+        "concepts/llm-wiki-vs-rag.md：數字 7（沒有引用任何主張）｜兩者不衝突：Wiki 變大以後，也可以對 Wiki 頁面做 RAG。本專案只有 7 篇資料，用目錄頁",
+        "concepts/lost-in-the-middle.md：數字 20（沒有引用任何主張）｜比喻：像一次讀 20 份講義，第一份和最後一份印象最深，中間那幾份最容易漏看。",
+        "concepts/parametric-memory.md：數字 2020（引用 S1-c1 的證據裡沒有）｜2020 年的 RAG 論文列出這三個缺點。[S1-c1](../sources/s1-lewis-",
+        "concepts/rag-failures.md：數字 10（沒有引用任何主張）｜| 放進提示詞：沒用好 | 答案在第 10 篇，模型沒注意到 | 把相關資料排到前面、少放幾篇 |",
+        "concepts/rag.md：數字 2020（引用 S1-c3 的證據裡沒有）｜這個名稱來自 2020 年的論文：檢索器負責找文件，生成器根據文件與問題寫答案。[S1-c3](..",
+        "concepts/retriever.md：數字 5, 20（沒有引用任何主張）｜「前 K 段」的 K 是自己設定的數字，例如 5、20。K 越大越不容易漏掉答案，但交給模型的內容也",
+        "overview.md：數字 7（沒有引用任何主張）｜這頁把 7 篇來源串成一條故事線，也是教學簡報的骨架。",
+        "overview.md：數字 2020（引用 S3-c2, S1-c3, S1-c4 的證據裡沒有）｜RAG 分三步：建索引、檢索、生成。[S3-c2](sources/s3-gao-2023-rag-",
+        "overview.md：數字 7（沒有引用任何主張）｜目前 7 篇來源之間沒有發現互相矛盾的主張。",
+        "S1-c5：說明裡的數字 82 不在證據中",
+        "S1-c6：說明裡的數字 452 不在證據中",
+        "S4-c1：說明裡的數字 20 不在證據中",
+        "S4-c2：說明裡的數字 20 不在證據中",
+        "S4-c4：說明裡的數字 50 不在證據中",
+        "S5-c3：說明裡的數字 3, 4 不在證據中",
+        "S6-c4：說明裡的數字 2023 不在證據中"
+      ]
+    },
+    {
+      "code": "W5",
+      "name": "引用的主張存在且連對",
+      "checked": 76,
+      "problems": []
+    },
+    {
+      "code": "W6",
+      "name": "站內連結與錨點",
+      "checked": 233,
+      "problems": [
+        "index.md：連結到不存在的檔案 queries/deck-outline.md",
+        "sources/s7-karpathy-2026-llm-wiki.md：連結到不存在的檔案 ../queries/deck-outline.md"
+      ]
+    },
+    {
+      "code": "W7",
+      "name": "孤兒頁",
+      "checked": 23,
+      "problems": [
+        "discussions/2026-11-23-ingest-discussion.md：除了目錄以外，沒有任何頁面連到這頁",
+        "glossary.md：除了目錄以外，沒有任何頁面連到這頁"
+      ]
+    },
+    {
+      "code": "W8",
+      "name": "目錄完整",
+      "checked": 24,
+      "problems": []
+    },
+    {
+      "code": "W9",
+      "name": "log 格式",
+      "checked": 5,
+      "problems": []
+    },
+    {
+      "code": "W10",
+      "name": "每篇來源都被概念頁用到",
+      "checked": 7,
+      "problems": []
+    }
+  ]
+}

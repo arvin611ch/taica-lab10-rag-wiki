@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S4｜Liu et al. 2023：Lost in the Middle｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">來源頁</span>更新：2026-11-23｜原文：<a href="https://arxiv.org/abs/2307.03172">https://arxiv.org/abs/2307.03172</a></p><h1>S4｜Liu et al. 2023：Lost in the Middle</h1>
+<p><strong>原文：</strong> Nelson F. Liu et al., <em>Lost in the Middle: How Language Models Use Long Contexts</em>, TACL 2024. <a href="https://arxiv.org/abs/2307.03172">https://arxiv.org/abs/2307.03172</a></p>
+<p><strong>一句話摘要：</strong> 把找回來的文件放進提示詞時，「答案在第幾篇」會大幅影響模型表現：放開頭或結尾最好，放中間最差。</p>
+<h2>重點</h2>
+<h3 id="s4-c1">S4-c1｜模型的表現常呈 U 型：相關資料在開頭或結尾時通常最好，在長篇內容的中間時明顯變差</h3>
+<blockquote>
+<p>證據（Abstract）：「performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts」</p>
+<p>證據（§2.1）：「k documents (e.g., passages from Wikipedia), where exactly one of the documents contains the answer」</p>
+</blockquote>
+<p>白話說明：實驗一次給模型好幾篇文件，其中只有一篇含有答案，再移動那篇的位置。正確率畫出來像字母 U。見 <a href="../concepts/lost-in-the-middle.html">長上下文的位置效應</a>。</p>
+<h3 id="s4-c2">S4-c2｜答案放在中間時，GPT-3.5-Turbo 甚至比完全不給文件時還差</h3>
+<blockquote>
+<p>證據（§1 Introduction）：「when relevant information is placed in the middle of its input context, GPT-3.5-Turbo’s performance on the multi-document question task is lower than its performance when predicting without any documents (i.e., the closed-book setting; 56.1%)」</p>
+<p>證據（§2.3）：「in 20- and 30-document settings is lower than performance without any input documents (i.e., closedbook performance; 56.1%)」</p>
+</blockquote>
+<p>白話說明：不給文件、只靠模型自己記得的內容（閉卷）時正確率是 56.1%。給了 20 或 30 篇文件、但答案剛好在中間時，正確率反而更低。</p>
+<h3 id="s4-c3">S4-c3｜號稱能讀更長內容的模型，不一定比較會用這些內容</h3>
+<blockquote>
+<p>證據（§1 Introduction）：「extended-context models are not necessarily better at using their input context」</p>
+</blockquote>
+<p>白話說明：模型「放得下」很多文件，不代表它「用得好」。</p>
+<h3 id="s4-c4">S4-c4｜多給文件的效益很快飽和：從 20 篇加到 50 篇只多約 1% 到 1.5%</h3>
+<blockquote>
+<p>證據（§1 Introduction）：「using 50 documents instead of 20 retrieved documents only marginally improves performance」</p>
+<p>證據（§5 Open-domain QA case study）：「Using more than 20 retrieved documents only marginally improves reader performance (∼1.5% for GPT-3.5Turbo and ∼1% for Claude-1.3), while significantly increasing the input context length (and thus latency and cost).」</p>
+</blockquote>
+<p>白話說明：文件越多，提示詞越長、越慢、越貴，正確率卻幾乎沒變。</p>
+<h3 id="s4-c5">S4-c5｜建議的對策：重排，把相關資料移到前面；或在適當時候少放幾篇</h3>
+<blockquote>
+<p>證據（§5 Open-domain QA case study）：「effective reranking of retrieved documents (pushing relevant information closer to the start of the input context) or ranked list truncation (retrieving fewer documents when appropriate; Arampatzis et al., 2009) may be promising directions」</p>
+</blockquote>
+<p>白話說明：這是作者提出的方向，不是已驗證的保證。見 <a href="../concepts/hybrid-search.html">混合檢索與重排</a>。</p>
+<h2>這篇沒有強調的部分</h2>
+<p>合成的「鍵值查找」實驗、模型架構（encoder-decoder 與 decoder-only）的比較，入門簡報不使用。</p>
+<h2>用到這篇的頁面</h2>
+<p><a href="../concepts/lost-in-the-middle.html">長上下文的位置效應</a>、<a href="../concepts/rag-failures.html">RAG 的常見失敗</a>、<a href="../concepts/hybrid-search.html">混合檢索與重排</a></p><div class="backlinks"><b>連到這頁的頁面（6）</b><a href="../concepts/hybrid-search.html">混合檢索與重排</a>、<a href="../concepts/lost-in-the-middle.html">長上下文的位置效應</a>、<a href="../concepts/rag-failures.html">RAG 的常見失敗</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

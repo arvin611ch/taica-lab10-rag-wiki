@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S7｜Karpathy 2026：LLM Wiki｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">來源頁</span>更新：2026-11-23｜原文：<a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f">https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f</a></p><h1>S7｜Karpathy 2026：LLM Wiki</h1>
+<p><strong>原文：</strong> Andrej Karpathy, <em>LLM Wiki</em>（GitHub Gist 構想文件）. <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f">https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f</a></p>
+<p><strong>一句話摘要：</strong> 與其每次提問都讓 RAG 重新從原始文件找片段，不如讓 LLM 事先把資料整理成一個互相連結、持續維護的 Wiki。本專案就是照這個構想做的。</p>
+<h2>重點</h2>
+<h3 id="s7-c1">S7-c1｜一般 RAG 每次提問都從頭找資料，知識沒有累積</h3>
+<blockquote>
+<p>證據（The core idea）：「the LLM is rediscovering knowledge from scratch on every question. There's no accumulation.」</p>
+</blockquote>
+<p>白話說明：見 <a href="../concepts/llm-wiki-vs-rag.html">LLM Wiki 與 RAG 的差別</a>。</p>
+<h3 id="s7-c2">S7-c2｜LLM Wiki 讓 LLM 逐步建立並維護一個持續存在的 Wiki</h3>
+<blockquote>
+<p>證據（The core idea）：「the LLM <strong>incrementally builds and maintains a persistent wiki</strong>」</p>
+</blockquote>
+<p>白話說明：新增一篇資料時，LLM 不只是存起來等人查，而是讀完、整理、更新相關頁面，並標出新舊資料的矛盾。</p>
+<h3 id="s7-c3">S7-c3｜三層結構：原始資料（不修改）、Wiki（LLM 寫）、規則檔（規定格式與流程）</h3>
+<blockquote>
+<p>證據（Architecture）：「There are three layers:」</p>
+<p>證據（Architecture）：「These are immutable — the LLM reads from them but never modifies them.」</p>
+</blockquote>
+<p>白話說明：本專案的對應是 <code>raw/</code>、<code>wiki/</code> 與 <code>AGENTS.md</code>。</p>
+<h3 id="s7-c4">S7-c4｜三種操作：Ingest（加入資料）、Query（提問）、Lint（健康檢查）</h3>
+<blockquote>
+<p>證據（Operations）：「Look for: contradictions between pages, stale claims that newer sources have superseded, orphan pages with no inbound links, important concepts mentioned but lacking their own page, missing cross-references, data gaps that could be filled with a web search.」</p>
+</blockquote>
+<p>白話說明：上面這段是 Lint 要找的問題清單。本專案的 <code>pipeline/lint_wiki.py</code> 實作了其中可以用程式判斷的部分（孤兒頁、壞連結、缺頁），並加上「證據必須逐字出自原文」的檢查。</p>
+<h3 id="s7-c5">S7-c5｜好的查詢結果可以存回 Wiki，簡報也是查詢結果的一種</h3>
+<blockquote>
+<p>證據（Operations）：「<strong>good answers can be filed back into the wiki as new pages.</strong>」</p>
+<p>證據（Operations）：「Answers can take different forms depending on the question — a markdown page, a comparison table, a slide deck (Marp), a chart (matplotlib), a canvas.」</p>
+</blockquote>
+<p>白話說明：本專案的簡報大綱存在 <a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>。</p>
+<h2>這篇沒有強調的部分</h2>
+<p>Obsidian、qmd 等工具建議，本專案沒有使用。</p>
+<h2>用到這篇的頁面</h2>
+<p><a href="../concepts/llm-wiki-vs-rag.html">LLM Wiki 與 RAG 的差別</a></p><div class="backlinks"><b>連到這頁的頁面（4）</b><a href="../concepts/llm-wiki-vs-rag.html">LLM Wiki 與 RAG 的差別</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RAG 的三個階段｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">概念頁</span>更新：2026-11-23</p><h1>RAG 的三個階段</h1>
+<p><strong>一句話定義：</strong> 綜述論文把 RAG 的發展分成 Naive RAG（基本型）、Advanced RAG（進階型）、Modular RAG（模組型）三個階段。</p>
+<h2>白話解釋</h2>
+<table>
+<thead>
+<tr>
+<th>階段</th>
+<th>做法</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Naive RAG</td>
+<td>固定的三步：建索引 → 檢索 → 生成</td>
+<td>本 Wiki 的 <a href="rag.html">檢索增強生成</a> 頁描述的流程</td>
+</tr>
+<tr>
+<td>Advanced RAG</td>
+<td>在檢索前後各加一道處理</td>
+<td>檢索前改寫問題；檢索後<a href="hybrid-search.html">重排</a>、精簡資料</td>
+</tr>
+<tr>
+<td>Modular RAG</td>
+<td>流程拆成可替換、可重組的模組</td>
+<td>多次檢索、讓模型決定要不要檢索、混合多種資料來源</td>
+</tr>
+</tbody>
+</table>
+<p>入門只要先懂 Naive RAG；後兩個階段都是為了修補 <a href="rag-failures.html">RAG 的常見失敗</a>。</p>
+<h2>來源怎麼說</h2>
+<ul>
+<li>三個階段的分法與 Advanced RAG 的檢索前後處理。<a href="../sources/s3-gao-2023-rag-survey.html#s3-c5">S3-c5</a></li>
+<li>Naive RAG 的三步。<a href="../sources/s3-gao-2023-rag-survey.html#s3-c2">S3-c2</a></li>
+<li>Naive RAG 的毛病是後兩個階段要解決的問題。<a href="../sources/s3-gao-2023-rag-survey.html#s3-c4">S3-c4</a></li>
+</ul>
+<h2>相關頁面</h2>
+<p><a href="rag.html">檢索增強生成</a>、<a href="hybrid-search.html">混合檢索與重排</a>、<a href="rag-failures.html">RAG 的常見失敗</a></p><div class="backlinks"><b>連到這頁的頁面（6）</b><a href="../concepts/hybrid-search.html">混合檢索與重排</a>、<a href="../concepts/rag.html">檢索增強生成（RAG）</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>、<a href="../sources/s3-gao-2023-rag-survey.html">S3｜Gao et al. 2023：大型語言模型的 RAG 綜述</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

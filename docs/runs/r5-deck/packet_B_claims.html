@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>B. 每個重點與它引用的 Wiki 主張｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><h1>B. 每個重點與它引用的 Wiki 主張</h1>
+<ul>
+<li>第 4 頁「大型語言模型（LLM）把訓練時讀到的知識存在參數裡，稱為參數記憶」</li>
+<li>S1-c1｜只靠參數記憶的語言模型有三個缺點：難更新、說不出依據、會幻覺｜證據：They cannot easily expand or revise their memory, can’t straightforwardly provide insight into their predictions, and may produce “hallucinations”</li>
+<li>第 4 頁「缺點一：難更新，世界變了，模型不會知道」</li>
+<li>S1-c1｜只靠參數記憶的語言模型有三個缺點：難更新、說不出依據、會幻覺｜證據：They cannot easily expand or revise their memory, can’t straightforwardly provide insight into their predictions, and may produce “hallucinations”</li>
+<li>S3-c1｜大型語言模型會幻覺、知識會過時、推理過程無法追溯；RAG 用外部資料庫來補｜證據：Large Language Models (LLMs) showcase impressive capabilities but encounter challenges like hallucination, outdated knowledge, and non-transparent, untraceable reasoning processes.</li>
+<li>第 4 頁「缺點二：說不出答案的依據」</li>
+<li>S1-c1｜只靠參數記憶的語言模型有三個缺點：難更新、說不出依據、會幻覺｜證據：They cannot easily expand or revise their memory, can’t straightforwardly provide insight into their predictions, and may produce “hallucinations”</li>
+<li>第 4 頁「缺點三：會幻覺，寫出聽起來合理、其實錯誤的內容」</li>
+<li>S1-c1｜只靠參數記憶的語言模型有三個缺點：難更新、說不出依據、會幻覺｜證據：They cannot easily expand or revise their memory, can’t straightforwardly provide insight into their predictions, and may produce “hallucinations”</li>
+<li>S3-c1｜大型語言模型會幻覺、知識會過時、推理過程無法追溯；RAG 用外部資料庫來補｜證據：Large Language Models (LLMs) showcase impressive capabilities but encounter challenges like hallucination, outdated knowledge, and non-transparent, untraceable reasoning processes.</li>
+<li>第 5 頁「RAG（檢索增強生成）：回答前，先從外部資料庫找相關資料」</li>
+<li>S1-c3｜RAG 由兩個元件組成：檢索器找文件，生成器根據文件與問題產生答案｜證據：a retriever pη (z|x) with parameters η that returns (top-K truncated) distributions over text passages given a query x</li>
+<li>S3-c2｜基本 RAG 有三步：建索引、檢索、生成｜證據：It mainly consists of 3 steps. 1) Indexing. Documents are split into chunks, encoded into vectors, and stored in a vector database. / 2) Retrieval. Retrieve the Top k chunks most relevant to the question based on semantic similarity. 3) Generation. Input the original question and the retrieved chunks together into LLM to generate the final answer.</li>
+<li>第 5 頁「再把資料和問題一起交給模型，根據資料寫答案」</li>
+<li>S3-c2｜基本 RAG 有三步：建索引、檢索、生成｜證據：It mainly consists of 3 steps. 1) Indexing. Documents are split into chunks, encoded into vectors, and stored in a vector database. / 2) Retrieval. Retrieve the Top k chunks most relevant to the question based on semantic similarity. 3) Generation. Input the original question and the retrieved chunks together into LLM to generate the final answer.</li>
+<li>第 5 頁「資料庫可以直接修改，用了哪些資料也能攤開檢查」</li>
+<li>S1-c2｜加上可檢索的外部記憶後，知識可以直接修改，也能拿出來檢查｜證據：knowledge can be directly revised and expanded, and accessed knowledge can be inspected and interpreted</li>
+<li>第 6 頁「建索引：事前把文件整理成可以搜尋的資料庫」</li>
+<li>S3-c2｜基本 RAG 有三步：建索引、檢索、生成｜證據：It mainly consists of 3 steps. 1) Indexing. Documents are split into chunks, encoded into vectors, and stored in a vector database. / 2) Retrieval. Retrieve the Top k chunks most relevant to the question based on semantic similarity. 3) Generation. Input the original question and the retrieved chunks together into LLM to generate the final answer.</li>
+<li>第 6 頁「檢索：由檢索器找出跟問題最相關的前 K 段」</li>
+<li>S3-c2｜基本 RAG 有三步：建索引、檢索、生成｜證據：It mainly consists of 3 steps. 1) Indexing. Documents are split into chunks, encoded into vectors, and stored in a vector database. / 2) Retrieval. Retrieve the Top k chunks most relevant to the question based on semantic similarity. 3) Generation. Input the original question and the retrieved chunks together into LLM to generate the final answer.</li>
+<li>S1-c3｜RAG 由兩個元件組成：檢索器找文件，生成器根據文件與問題產生答案｜證據：a retriever pη (z|x) with parameters η that returns (top-K truncated) distributions over text passages given a query x</li>
+<li>第 6 頁「生成：把問題和找到的資料放進提示詞，交給模型回答」</li>
+<li>S3-c2｜基本 RAG 有三步：建索引、檢索、生成｜證據：It mainly consists of 3 steps. 1) Indexing. Documents are split into chunks, encoded into vectors, and stored in a vector database. / 2) Retrieval. Retrieve the Top k chunks most relevant to the question based on semantic similarity. 3) Generation. Input the original question and the retrieved chunks together into LLM to generate the final answer.</li>
+<li>第 7 頁「切塊：把長文件切成一段段短文字，方便逐段比對」</li>
+<li>S3-c2｜基本 RAG 有三步：建索引、檢索、生成｜證據：It mainly consists of 3 steps. 1) Indexing. Documents are split into chunks, encoded into vectors, and stored in a vector database. / 2) Retrieval. Retrieve the Top k chunks most relevant to the question based on semantic similarity. 3) Generation. Input the original question and the retrieved chunks together into LLM to generate the final answer.</li>
+<li>S6-c1｜RAG 的前處理：把文件切成數百 token 的小塊、轉成向量、存進向量資料庫｜證據：Break down the knowledge base (the “corpus” of documents) into smaller chunks of text, usually no more than a few hundred tokens; / Use an embedding model to convert these chunks into vector embeddings that encode meaning;</li>
+<li>第 7 頁「原始論文把維基百科切成 100 字一段，共 2,100 萬段」</li>
+<li>S1-c4｜論文的外部資料庫是切成 100 字一段的維基百科，共 2,100 萬段｜證據：Each Wikipedia article is split into disjoint 100-word chunks, to make a total of 21M documents.</li>
+<li>第 7 頁「實務上每塊通常不超過數百個 token（模型讀文字的單位）」</li>
+<li>S6-c1｜RAG 的前處理：把文件切成數百 token 的小塊、轉成向量、存進向量資料庫｜證據：Break down the knowledge base (the “corpus” of documents) into smaller chunks of text, usually no more than a few hundred tokens; / Use an embedding model to convert these chunks into vector embeddings that encode meaning;</li>
+<li>第 7 頁「切太大雜訊多；切太小可能看不懂前後文」</li>
+<li>S3-c6｜切塊大小是取捨：大塊上下文多但雜訊多，小塊雜訊少但可能資訊不完整｜證據：Larger chunks can capture more context, but they also generate more noise, requiring longer processing time and higher costs. While smaller chunks may not fully convey the necessary context, they do have less noise.</li>
+<li>第 8 頁「「bad guy」和「villain」用字不同，向量卻很接近」</li>
+<li>S2-c2｜用向量表示意思，換句話說也找得到：「bad guy」可以對到「villain」｜證據：synonyms or paraphrases that consist of completely different tokens may still be mapped to vectors close to each other / a dense retrieval system would be able to better match “bad guy” with “villain” and fetch the correct context</li>
+<li>第 8 頁「問題也要用同一個模型轉成向量，才能比遠近」</li>
+<li>S3-c3｜檢索時，問題要用跟建索引時同一個模型轉成向量｜證據：the RAG system employs the same encoding model utilized during the indexing phase to transform the query into a vector representation</li>
+<li>第 9 頁「BM25：傳統的關鍵字檢索，看字面有沒有出現」</li>
+<li>S2-c1｜傳統的關鍵字檢索（TF-IDF、BM25）是比對字詞，像查索引｜證據：Retrieval in open-domain QA is usually implemented using TF-IDF or BM25 (Robertson and Zaragoza, 2009), which matches keywords efficiently with an inverted index</li>
+<li>第 9 頁「語意檢索：比較向量的遠近，換句話說也找得到」</li>
+<li>S2-c2｜用向量表示意思，換句話說也找得到：「bad guy」可以對到「villain」｜證據：synonyms or paraphrases that consist of completely different tokens may still be mapped to vectors close to each other / a dense retrieval system would be able to better match “bad guy” with “villain” and fetch the correct context</li>
+<li>第 9 頁「向量可能漏掉「TS-999」這種精確代碼，BM25 抓得到」</li>
+<li>S6-c2｜向量檢索可能漏掉精確比對，例如錯誤代碼「TS-999」；BM25 能補上｜證據：While embedding models excel at capturing semantic relationships, they can miss crucial exact matches. / An embedding model might find content about error codes in general, but could miss the exact "TS-999" match.</li>
+<li>第 9 頁「混合檢索：兩種都用，再合併結果」</li>
+<li>S2-c5｜兩種方法各有所長：BM25 擅長罕見關鍵字，DPR 擅長同義改寫｜證據：Term-matching methods like BM25 are sensitive to highly selective keywords and phrases, while DPR captures lexical variations or semantic relationships better.</li>
+<li>S6-c2｜向量檢索可能漏掉精確比對，例如錯誤代碼「TS-999」；BM25 能補上｜證據：While embedding models excel at capturing semantic relationships, they can miss crucial exact matches. / An embedding model might find content about error codes in general, but could miss the exact "TS-999" match.</li>
+<li>第 11 頁「換用 2016 或 2018 年的維基百科當資料庫，問 82 位各國領袖是誰」</li>
+<li>S1-c5｜只要換掉文件庫就能更新知識，不必重新訓練模型｜證據：We prepare a list of 82 world leaders who had changed / RAG answers 70% correctly using the 2016 index for 2016 world leaders and 68% using the 2018 index for 2018 world leaders. / Accuracy with mismatched indices is low (12% with the 2018 index and 2016 leaders, 4% with the 2016 index and 2018 leaders).</li>
+<li>第 11 頁「年份對得上：答對 70%、68%；對不上：只剩 12%、4%」</li>
+<li>S1-c5｜只要換掉文件庫就能更新知識，不必重新訓練模型｜證據：We prepare a list of 82 world leaders who had changed / RAG answers 70% correctly using the 2016 index for 2016 world leaders and 68% using the 2018 index for 2018 world leaders. / Accuracy with mismatched indices is low (12% with the 2018 index and 2016 leaders, 4% with the 2016 index and 2018 leaders).</li>
+<li>第 11 頁「模型本身完全沒有重新訓練」</li>
+<li>S1-c5｜只要換掉文件庫就能更新知識，不必重新訓練模型｜證據：We prepare a list of 82 world leaders who had changed / RAG answers 70% correctly using the 2016 index for 2016 world leaders and 68% using the 2018 index for 2018 world leaders. / Accuracy with mismatched indices is low (12% with the 2018 index and 2016 leaders, 4% with the 2016 index and 2018 leaders).</li>
+<li>第 11 頁「人工評比：RAG 較符合事實占 42.7%，對照模型只占 7.1%」</li>
+<li>S1-c6｜人工評比時，RAG 產生的題目比純生成模型更符合事實｜證據：human evaluation results, over 452 pairs of generations from BART and RAG-Token / Evaluators indicated that BART was more factual than RAG in only 7.1% of cases, while RAG was more factual in 42.7% of cases</li>
+<li>第 12 頁「綜述論文的比喻：RAG 像給模型一本專用課本，微調像學生把知識內化」</li>
+<li>S3-c7｜RAG 像給模型一本專用課本；微調像學生把知識內化，適合學格式與風格｜證據：RAG can be likened to providing a model with a tailored textbook for information retrieval, ideal for precise information retrieval tasks. In contrast, FT is comparable to a student internalizing knowledge over time, suitable for scenarios requiring replication of specific structures, styles, or formats. / RAG and FT are not mutually exclusive and can complement each other</li>
+<li>第 12 頁「RAG 換資料就能更新；微調適合學固定的格式與風格」</li>
+<li>S3-c7｜RAG 像給模型一本專用課本；微調像學生把知識內化，適合學格式與風格｜證據：RAG can be likened to providing a model with a tailored textbook for information retrieval, ideal for precise information retrieval tasks. In contrast, FT is comparable to a student internalizing knowledge over time, suitable for scenarios requiring replication of specific structures, styles, or formats. / RAG and FT are not mutually exclusive and can complement each other</li>
+<li>S1-c5｜只要換掉文件庫就能更新知識，不必重新訓練模型｜證據：We prepare a list of 82 world leaders who had changed / RAG answers 70% correctly using the 2016 index for 2016 world leaders and 68% using the 2018 index for 2018 world leaders. / Accuracy with mismatched indices is low (12% with the 2018 index and 2016 leaders, 4% with the 2016 index and 2018 leaders).</li>
+<li>第 12 頁「兩者不互斥，可以一起用」</li>
+<li>S3-c7｜RAG 像給模型一本專用課本；微調像學生把知識內化，適合學格式與風格｜證據：RAG can be likened to providing a model with a tailored textbook for information retrieval, ideal for precise information retrieval tasks. In contrast, FT is comparable to a student internalizing knowledge over time, suitable for scenarios requiring replication of specific structures, styles, or formats. / RAG and FT are not mutually exclusive and can complement each other</li>
+<li>第 13 頁「切塊會丟掉前後文：「營收成長 3%」單看不知道是哪家公司」</li>
+<li>S6-c3｜切塊會丟掉上下文：「營收成長 3%」這一塊本身沒寫是哪家公司、哪一季｜證據：A relevant chunk might contain the text: "The company's revenue grew by 3% over the previous quarter." However, this chunk on its own doesn't specify which company it's referring to or the relevant time period</li>
+<li>第 13 頁「改法：每塊前面補一段 50–100 token 的說明」</li>
+<li>S6-c4｜情境化檢索：在每塊前面補一段 50 到 100 token 的說明，再建向量與 BM25 索引｜證據：The resulting contextual text, usually 50-100 tokens, is prepended to the chunk before embedding it and before creating the BM25 index. / This chunk is from an SEC filing on ACME corp's performance in Q2 2023</li>
+<li>第 13 頁「重排：先粗找 150 塊，再逐塊打分，只留 20 塊」</li>
+<li>S6-c6｜重排：先粗找一大批（文中 150 塊），再用重排模型逐塊打分，只留最好的（文中 20 塊）｜證據：Perform initial retrieval to get the top potentially relevant chunks (we used the top 150); / Using a reranking model, give each chunk a score based on its relevance and importance to the prompt, then select the top-K chunks (we used the top 20);</li>
+<li>第 13 頁「找不到資料的比例從 5.7% 降到 1.9%（少了 67%）」</li>
+<li>S6-c5｜效果：找不到資料的比例下降 35%、49%，加上重排後下降 67%｜證據：Contextual Embeddings reduced the top-20-chunk retrieval failure rate by 35% (5.7% → 3.7%). / Combining Contextual Embeddings and Contextual BM25 reduced the top-20-chunk retrieval failure rate by 49% (5.7% → 2.9%). / Reranked Contextual Embedding and Contextual BM25 reduced the top-20-chunk retrieval failure rate by 67% (5.7% → 1.9%).</li>
+<li>第 14 頁「答案在開頭或結尾，模型答得最好；放在中間最差」</li>
+<li>S4-c1｜模型的表現呈 U 型：相關資料在開頭或結尾時最好，在中間時明顯變差｜證據：performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts / k documents (e.g., passages from Wikipedia), where exactly one of the documents contains the answer</li>
+<li>第 14 頁「放中間時，甚至比完全不給資料（56.1%）還差」</li>
+<li>S4-c2｜答案放在中間時，GPT-3.5-Turbo 甚至比完全不給文件時還差｜證據：when relevant information is placed in the middle of its input context, GPT-3.5-Turbo’s performance on the multi-document question task is lower than its performance when predicting without any documents (i.e., the closed-book setting; 56.1%) / in 20- and 30-document settings is lower than performance without any input documents (i.e., closedbook performance; 56.1%)</li>
+<li>第 14 頁「資料從 20 篇加到 50 篇，正確率只多約 1–1.5%」</li>
+<li>S4-c4｜多給文件的效益很快飽和：從 20 篇加到 50 篇只多約 1% 到 1.5%｜證據：using 50 documents instead of 20 retrieved documents only marginally improves performance / Using more than 20 retrieved documents only marginally improves reader performance (∼1.5% for GPT-3.5Turbo and ∼1% for Claude-1.3), while significantly increasing the input context length (and thus latency and cost).</li>
+<li>第 15 頁「RAG 不保證不幻覺：模型仍可能寫出資料裡沒有的內容」</li>
+<li>S3-c4｜基本 RAG 常見的毛病：找錯或漏找資料，以及寫出資料裡沒有的內容｜證據：The retrieval phase often struggles with precision and recall, leading to the selection of misaligned or irrelevant chunks, and the missing of crucial information. / the model may face the issue of hallucination, where it produces content not supported by the retrieved context</li>
+<li>第 15 頁「忠實度：答案的每一句，都要能在資料裡找到依據」</li>
+<li>S5-c1｜忠實度：答案應該建立在找回來的資料上｜證據：Faithfulness refers to the idea that the answer should be grounded in the given context.</li>
+<li>第 15 頁「算法：把答案拆成短句，逐句檢查，算有依據的比例」</li>
+<li>S5-c3｜忠實度的算法：把答案拆成短句，逐條檢查能否從資料推出，算出支持的比例｜證據：we first use an LLM to extract a set of statements / the LLM determines if si can be inferred from c(q) using a verification function</li>
+<li>第 15 頁「另外兩個分數：找回的資料相不相關、答案有沒有切題」</li>
+<li>S5-c2｜答案切題度與資料相關性：答案要回應問題，找回的資料要精簡｜證據：Answer Relevance refers to the idea that the generated answer should address the actual question that was provided. / Context Relevance refers to the idea that the retrieved context should be focused, containing as little irrelevant information as possible.</li>
+<li>S3-c8｜評估 RAG 有三個品質分數：資料相關性、答案忠實度、答案切題度｜證據：Quality scores include context relevance, answer faithfulness, and answer relevance.</li>
+<li>第 16 頁「RAG 持續演進：檢索前後加處理，再把流程拆成可替換的模組」</li>
+<li>S3-c5｜RAG 的演進分成 Naive、Advanced、Modular 三個階段｜證據：we categorize it into three stages: Naive RAG, Advanced RAG, and Modular RAG / Focusing on enhancing retrieval quality, it employs pre-retrieval and post-retrieval strategies.</li>
+<li>第 16 頁「一般 RAG 每次提問都從頭找，知識不會累積」</li>
+<li>S7-c1｜一般 RAG 每次提問都從頭找資料，知識沒有累積｜證據：the LLM is rediscovering knowledge from scratch on every question. There's no accumulation.</li>
+<li>第 16 頁「LLM Wiki：讓 LLM 事先把資料整理成持續更新的 Wiki」</li>
+<li>S7-c2｜LLM Wiki 讓 LLM 逐步建立並維護一個持續存在的 Wiki｜證據：the LLM <strong>incrementally builds and maintains a persistent wiki</strong></li>
+<li>第 16 頁「這份簡報就是查詢 Wiki 的結果，每頁底部都有出處」</li>
+<li>S7-c5｜好的查詢結果可以存回 Wiki，簡報也是查詢結果的一種｜證據：<strong>good answers can be filed back into the wiki as new pages.</strong> / Answers can take different forms depending on the question — a markdown page, a comparison table, a slide deck (Marp), a chart (matplotlib), a canvas.</li>
+<li>第 19 頁「只靠參數記憶：難更新、說不出依據、會幻覺」</li>
+<li>S1-c1｜只靠參數記憶的語言模型有三個缺點：難更新、說不出依據、會幻覺｜證據：They cannot easily expand or revise their memory, can’t straightforwardly provide insight into their predictions, and may produce “hallucinations”</li>
+<li>第 19 頁「RAG＝建索引 → 檢索 → 生成，回答前先查資料」</li>
+<li>S3-c2｜基本 RAG 有三步：建索引、檢索、生成｜證據：It mainly consists of 3 steps. 1) Indexing. Documents are split into chunks, encoded into vectors, and stored in a vector database. / 2) Retrieval. Retrieve the Top k chunks most relevant to the question based on semantic similarity. 3) Generation. Input the original question and the retrieved chunks together into LLM to generate the final answer.</li>
+<li>第 19 頁「關鍵字檢索看字面、語意檢索看意思，兩者互補」</li>
+<li>S2-c5｜兩種方法各有所長：BM25 擅長罕見關鍵字，DPR 擅長同義改寫｜證據：Term-matching methods like BM25 are sensitive to highly selective keywords and phrases, while DPR captures lexical variations or semantic relationships better.</li>
+<li>第 19 頁「可能找不到、沒用好、沒照資料寫；用忠實度檢查答案」</li>
+<li>S3-c4｜基本 RAG 常見的毛病：找錯或漏找資料，以及寫出資料裡沒有的內容｜證據：The retrieval phase often struggles with precision and recall, leading to the selection of misaligned or irrelevant chunks, and the missing of crucial information. / the model may face the issue of hallucination, where it produces content not supported by the retrieved context</li>
+<li>S5-c1｜忠實度：答案應該建立在找回來的資料上｜證據：Faithfulness refers to the idea that the answer should be grounded in the given context.</li>
+</ul></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>怎麼評估 RAG｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">概念頁</span>更新：2026-11-23</p><h1>怎麼評估 RAG</h1>
+<p><strong>一句話定義：</strong> 評估 RAG 要分開看「找回的資料好不好」和「答案好不好」，常用三個分數：資料相關性、答案忠實度、答案切題度。</p>
+<h2>白話解釋</h2>
+<table>
+<thead>
+<tr>
+<th>分數</th>
+<th>問的問題</th>
+<th>評的是</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>資料相關性（context relevance）</td>
+<td>找回來的資料精不精簡、有沒有一堆無關內容？</td>
+<td>檢索</td>
+</tr>
+<tr>
+<td>忠實度（faithfulness）</td>
+<td>答案的每一句，資料裡都找得到依據嗎？</td>
+<td>生成</td>
+</tr>
+<tr>
+<td>答案切題度（answer relevance）</td>
+<td>答案有沒有回應問題本身？</td>
+<td>生成</td>
+</tr>
+</tbody>
+</table>
+<p>忠實度的算法很直觀：把答案拆成幾句短的敘述，逐句問「這句能從資料推出來嗎？」，能推出的句數除以總句數就是忠實度。</p>
+<p>RAGAS 用 LLM 自動做這些判斷，所以不需要先請人寫好標準答案。但自動評估也會錯，尤其是資料相關性最難評。</p>
+<h2>來源怎麼說</h2>
+<ul>
+<li>綜述論文列出三個品質分數。<a href="../sources/s3-gao-2023-rag-survey.html#s3-c8">S3-c8</a></li>
+<li>忠實度：答案應該建立在找回來的資料上。<a href="../sources/s5-es-2023-ragas.html#s5-c1">S5-c1</a></li>
+<li>切題度與資料相關性的定義。<a href="../sources/s5-es-2023-ragas.html#s5-c2">S5-c2</a></li>
+<li>忠實度的算法是拆句後逐條驗證。<a href="../sources/s5-es-2023-ragas.html#s5-c3">S5-c3</a></li>
+<li>不需要人工標的標準答案。<a href="../sources/s5-es-2023-ragas.html#s5-c4">S5-c4</a></li>
+<li>跟人類判斷比，忠實度最準，資料相關性最難。<a href="../sources/s5-es-2023-ragas.html#s5-c5">S5-c5</a></li>
+</ul>
+<h2>相關頁面</h2>
+<p><a href="rag-failures.html">RAG 的常見失敗</a>、<a href="rag.html">檢索增強生成</a></p><div class="backlinks"><b>連到這頁的頁面（7）</b><a href="../concepts/rag-failures.html">RAG 的常見失敗</a>、<a href="../glossary.html">名詞表</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>、<a href="../sources/s3-gao-2023-rag-survey.html">S3｜Gao et al. 2023：大型語言模型的 RAG 綜述</a>、<a href="../sources/s5-es-2023-ragas.html">S5｜Es et al. 2023：RAGAS 自動評估</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

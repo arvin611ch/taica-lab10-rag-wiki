@@ -58,7 +58,9 @@
 
 1. `pipeline/fetch_sources.py` 下載資料、轉成文字、記錄 SHA-256。
 2. AI 讀資料，列出 3–4 個候選重點，先跟使用者討論要強調哪些，再動筆。
-3. 寫來源頁，更新相關概念頁、`glossary.md`、`index.md`，在 `log.md` 加一筆。
+3. 寫來源頁，**寫完立刻跑單頁檢查**：`lint_wiki.py --page wiki/sources/<slug>.md`。通過了才去更新概念頁。
+4. 更新相關概念頁、`glossary.md`、`index.md`；每改一頁也跑一次單頁檢查。最後在 `log.md` 加一筆。
+5. 一篇做完再做下一篇；全部做完跑一次完整的 `lint_wiki.py`，檢查孤兒頁、目錄與覆蓋這類整體結構。
 
 ### Query（向 Wiki 提問）
 
@@ -71,11 +73,38 @@
 ### 製作簡報（Query 的一種）
 
 1. 依學習目標查 Wiki，把大綱寫成 `deck/outline.json`：每個重點都附主張編號，或標成比喻／示意例子。
-2. `pipeline/render_deck.py` 依大綱產生 `docs/slides/index.html`。
-3. `pipeline/check_deck.py` 檢查簡報；再交給兩個獨立的 AI 審查（逐條事實查核、扮演新手作答測驗）。
-4. 有錯就回到對應節點修正，再跑一次檢查。
+2. **大綱檢查（先於產生簡報）**：`check_deck.py --content-only` 檢查出處、數字、名詞順序、目標覆蓋、份量。不通過就改大綱；如果是 Wiki 缺內容，回到 Ingest 補 Wiki。
+3. `pipeline/render_deck.py` 依大綱產生 `docs/slides/index.html`，並把對應表存回 `wiki/queries/deck-outline.md`。
+4. **畫面檢查**：`check_deck.py` 用無頭瀏覽器檢查溢出（含 SVG 文字）、連結、換頁，並存每頁截圖；AI 也要看截圖。
+5. **AI 審查**：把 `review_packet.md` 分成兩份，交給兩個沒看過製作過程的 AI：新手只拿簡報文字（不含答案），事實查核只拿「重點↔主張」對照。
+6. 有錯就回到對應節點修正，再從那個節點之後的檢查重跑。
 
-## 流程圖（v1）
+## 流程圖
+
+### v2（目前使用，2026-11-23 第一次完整執行後修改）
+
+```text
+階段一（每篇資料一次）
+取得資料 → 討論重點 → 寫入一頁 → 單頁檢查 ─(不通過)→ 寫入一頁
+                                   │通過，下一頁／下一篇
+                                   ▼
+                              Wiki 檢查（整體結構）
+階段二
+查詢 Wiki → 整理大綱 → 大綱檢查 ─(不通過)→ 整理大綱（Wiki 缺內容 → 回階段一）
+                          │通過
+                          ▼
+              產生簡報 → 畫面檢查 ─(不通過)→ 改版型／改大綱
+                          │通過
+                          ▼
+                       AI 審查 ─(不通過)→ 改大綱或改 Wiki
+                          │通過
+                          ▼
+                         發布
+```
+
+v1 → v2 改了什麼、為什麼，見 `report/workflow.md`。
+
+### v1（第一次執行時使用）
 
 ```text
 取得資料 → 討論重點 → 寫入 Wiki → Wiki 檢查 ─(不通過)→ 寫入 Wiki
@@ -91,9 +120,11 @@
 
 ```bash
 .venv/bin/python -I pipeline/fetch_sources.py      # 節點 1
-.venv/bin/python -I pipeline/lint_wiki.py          # Wiki 檢查
+.venv/bin/python -I pipeline/lint_wiki.py --page wiki/sources/<slug>.md   # 單頁檢查（寫完一頁就跑）
+.venv/bin/python -I pipeline/lint_wiki.py          # Wiki 檢查（整體）
+.venv/bin/python -I pipeline/check_deck.py --content-only   # 大綱檢查（產生簡報前）
 .venv/bin/python -I pipeline/render_deck.py        # 產生簡報
-.venv/bin/python -I pipeline/check_deck.py         # 簡報檢查
+.venv/bin/python -I pipeline/check_deck.py --out runs/<run>/   # 簡報檢查（大綱＋畫面）＋審查材料
 .venv/bin/python -I pipeline/build_site.py         # 產生 docs/ 網站
 ```
 

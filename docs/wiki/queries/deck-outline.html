@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>查詢紀錄：教學簡報大綱｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">查詢紀錄</span>更新：2026-11-23</p><h1>查詢紀錄：教學簡報大綱</h1>
+<p><strong>查詢：</strong> 怎麼用這個 Wiki，教沒學過機器學習的大學生認識 RAG？</p>
+<p><strong>做法：</strong> 先讀 <a href="../index.html">目錄</a> 與 <a href="../overview.html">總覽</a>，依學習目標挑概念頁，每個重點都對到來源頁的主張。結果寫成 <code>deck/outline.json</code>，再由程式產生簡報與這一頁，所以兩者永遠一致。</p>
+<h2>學習目標</h2>
+<ul>
+<li><strong>O1</strong> 說出只靠模型記憶會有哪些問題，以及 RAG 怎麼補</li>
+<li><strong>O2</strong> 依序說明 RAG 的三個步驟各在做什麼</li>
+<li><strong>O3</strong> 分辨關鍵字檢索與語意檢索，知道為什麼要混合</li>
+<li><strong>O4</strong> 指出 RAG 會出錯的地方，以及怎麼檢查答案</li>
+</ul>
+<h2>每頁引用了 Wiki 的哪些內容</h2>
+<table>
+<thead>
+<tr>
+<th>頁</th>
+<th>標題</th>
+<th>目標</th>
+<th>主張</th>
+<th>概念頁</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>RAG 是什麼？</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2</td>
+<td>今天的目標</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>3</td>
+<td>先想一個問題（示意例子）</td>
+<td>O1</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>4</td>
+<td>為什麼會這樣：模型只靠「記憶」</td>
+<td>O1</td>
+<td><a href="../sources/s1-lewis-2020-rag.html#s1-c1">S1-c1</a>、<a href="../sources/s3-gao-2023-rag-survey.html#s3-c1">S3-c1</a></td>
+<td><a href="../concepts/parametric-memory.html">參數記憶與幻覺</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>解法：把閉卷考試變成開卷考試（含比喻）</td>
+<td>O1</td>
+<td><a href="../sources/s1-lewis-2020-rag.html#s1-c3">S1-c3</a>、<a href="../sources/s3-gao-2023-rag-survey.html#s3-c2">S3-c2</a>、<a href="../sources/s1-lewis-2020-rag.html#s1-c2">S1-c2</a></td>
+<td><a href="../concepts/rag.html">檢索增強生成（RAG）</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>RAG 的三個步驟</td>
+<td>O2</td>
+<td><a href="../sources/s3-gao-2023-rag-survey.html#s3-c2">S3-c2</a>、<a href="../sources/s1-lewis-2020-rag.html#s1-c3">S1-c3</a></td>
+<td><a href="../concepts/rag.html">檢索增強生成（RAG）</a>、<a href="../concepts/retriever.html">檢索器</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>步驟一：建索引（1）切塊</td>
+<td>O2</td>
+<td><a href="../sources/s3-gao-2023-rag-survey.html#s3-c2">S3-c2</a>、<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c1">S6-c1</a>、<a href="../sources/s1-lewis-2020-rag.html#s1-c4">S1-c4</a>、<a href="../sources/s3-gao-2023-rag-survey.html#s3-c6">S3-c6</a></td>
+<td><a href="../concepts/chunking.html">切塊</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>步驟一：建索引（2）轉成向量（含比喻）</td>
+<td>O2</td>
+<td><a href="../sources/s2-karpukhin-2020-dpr.html#s2-c2">S2-c2</a>、<a href="../sources/s3-gao-2023-rag-survey.html#s3-c3">S3-c3</a></td>
+<td><a href="../concepts/embedding.html">向量嵌入</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>步驟二：檢索有兩種找法</td>
+<td>O3</td>
+<td><a href="../sources/s2-karpukhin-2020-dpr.html#s2-c1">S2-c1</a>、<a href="../sources/s2-karpukhin-2020-dpr.html#s2-c2">S2-c2</a>、<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c2">S6-c2</a>、<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c8">S6-c8</a>、<a href="../sources/s2-karpukhin-2020-dpr.html#s2-c5">S2-c5</a></td>
+<td><a href="../concepts/retriever.html">檢索器</a>、<a href="../concepts/bm25.html">關鍵字檢索 BM25</a>、<a href="../concepts/hybrid-search.html">混合檢索與重排</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>跟著一個問題走一遍（示意例子）</td>
+<td>O2</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>11</td>
+<td>好處：換掉資料庫，就能更新知識</td>
+<td>O1</td>
+<td><a href="../sources/s1-lewis-2020-rag.html#s1-c5">S1-c5</a>、<a href="../sources/s1-lewis-2020-rag.html#s1-c6">S1-c6</a></td>
+<td><a href="../concepts/rag.html">檢索增強生成（RAG）</a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>RAG 和微調有什麼不同？</td>
+<td>O1</td>
+<td><a href="../sources/s3-gao-2023-rag-survey.html#s3-c7">S3-c7</a>、<a href="../sources/s1-lewis-2020-rag.html#s1-c5">S1-c5</a>、<a href="../sources/s1-lewis-2020-rag.html#s1-c2">S1-c2</a></td>
+<td><a href="../concepts/rag-vs-finetuning.html">RAG 與微調</a></td>
+</tr>
+<tr>
+<td>13</td>
+<td>出錯①：找不到對的資料</td>
+<td>O4</td>
+<td><a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c3">S6-c3</a>、<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c4">S6-c4</a>、<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c6">S6-c6</a>、<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c5">S6-c5</a></td>
+<td><a href="../concepts/rag-failures.html">RAG 的常見失敗</a>、<a href="../concepts/hybrid-search.html">混合檢索與重排</a>、<a href="../concepts/chunking.html">切塊</a></td>
+</tr>
+<tr>
+<td>14</td>
+<td>出錯②：找到了，卻沒用好</td>
+<td>O4</td>
+<td><a href="../sources/s4-liu-2023-lost-in-the-middle.html#s4-c1">S4-c1</a>、<a href="../sources/s4-liu-2023-lost-in-the-middle.html#s4-c2">S4-c2</a>、<a href="../sources/s4-liu-2023-lost-in-the-middle.html#s4-c4">S4-c4</a></td>
+<td><a href="../concepts/lost-in-the-middle.html">長上下文的位置效應</a></td>
+</tr>
+<tr>
+<td>15</td>
+<td>出錯③：沒照資料寫，怎麼檢查？</td>
+<td>O4</td>
+<td><a href="../sources/s3-gao-2023-rag-survey.html#s3-c4">S3-c4</a>、<a href="../sources/s5-es-2023-ragas.html#s5-c1">S5-c1</a>、<a href="../sources/s5-es-2023-ragas.html#s5-c3">S5-c3</a>、<a href="../sources/s5-es-2023-ragas.html#s5-c2">S5-c2</a>、<a href="../sources/s3-gao-2023-rag-survey.html#s3-c8">S3-c8</a></td>
+<td><a href="../concepts/rag-evaluation.html">怎麼評估 RAG</a>、<a href="../concepts/rag-failures.html">RAG 的常見失敗</a></td>
+</tr>
+<tr>
+<td>16</td>
+<td>延伸：RAG 的演進，與這份簡報的來源</td>
+<td>O2</td>
+<td><a href="../sources/s3-gao-2023-rag-survey.html#s3-c5">S3-c5</a>、<a href="../sources/s7-karpathy-2026-llm-wiki.html#s7-c1">S7-c1</a>、<a href="../sources/s7-karpathy-2026-llm-wiki.html#s7-c2">S7-c2</a>、<a href="../sources/s7-karpathy-2026-llm-wiki.html#s7-c5">S7-c5</a></td>
+<td><a href="../concepts/rag-paradigms.html">RAG 的三個階段</a>、<a href="../concepts/llm-wiki-vs-rag.html">LLM Wiki 與 RAG 的差別</a></td>
+</tr>
+<tr>
+<td>17</td>
+<td>小測驗（上）</td>
+<td>O1、O2</td>
+<td><a href="../sources/s1-lewis-2020-rag.html#s1-c1">S1-c1</a>、<a href="../sources/s3-gao-2023-rag-survey.html#s3-c2">S3-c2</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td>18</td>
+<td>小測驗（下）</td>
+<td>O3、O4</td>
+<td><a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c2">S6-c2</a>、<a href="../sources/s5-es-2023-ragas.html#s5-c3">S5-c3</a></td>
+<td>—</td>
+</tr>
+<tr>
+<td>19</td>
+<td>重點回顧</td>
+<td>—</td>
+<td><a href="../sources/s1-lewis-2020-rag.html#s1-c1">S1-c1</a>、<a href="../sources/s3-gao-2023-rag-survey.html#s3-c2">S3-c2</a>、<a href="../sources/s2-karpukhin-2020-dpr.html#s2-c5">S2-c5</a>、<a href="../sources/s3-gao-2023-rag-survey.html#s3-c4">S3-c4</a>、<a href="../sources/s4-liu-2023-lost-in-the-middle.html#s4-c1">S4-c1</a>、<a href="../sources/s5-es-2023-ragas.html#s5-c1">S5-c1</a></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>簡報網址：<a href="https://arvin611ch.github.io/taica-lab10-rag-wiki/slides/">docs/slides/index.html</a></p><div class="backlinks"><b>連到這頁的頁面（2）</b><a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../sources/s7-karpathy-2026-llm-wiki.html">S7｜Karpathy 2026：LLM Wiki</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

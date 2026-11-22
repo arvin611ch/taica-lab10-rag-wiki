@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RAG 入門 LLM Wiki：目錄｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../index.html">首頁</a><a href="../wiki/index.html">Wiki 目錄</a><a href="../wiki/overview.html">總覽</a><a href="../wiki/glossary.html">名詞表</a><a href="../slides/index.html">教學簡報</a><a href="../workflow.html">流程與反思</a><a href="../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">Wiki</span>更新：2026-11-23</p><h1>RAG 入門 LLM Wiki：目錄</h1>
+<p>主題：檢索增強生成（RAG）。讀者：沒學過機器學習的大學生。7 篇原始資料，所有事實都附主張編號，可追到原文。規則見 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a>。</p>
+<h2>總覽</h2>
+<ul>
+<li><a href="overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a> — 7 篇來源串成的故事線，也是簡報骨架</li>
+<li><a href="glossary.html">名詞表</a> — 16 個名詞的一句話定義，簡報檢查會用到</li>
+</ul>
+<h2>概念</h2>
+<ul>
+<li><a href="concepts/rag.html">檢索增強生成（RAG）</a> — 先找資料再回答；建索引、檢索、生成三步</li>
+<li><a href="concepts/parametric-memory.html">參數記憶與幻覺</a> — 為什麼只靠模型記憶不夠</li>
+<li><a href="concepts/retriever.html">檢索器</a> — 關鍵字檢索與語意檢索兩大類</li>
+<li><a href="concepts/embedding.html">向量嵌入</a> — 用數字表示意思，換句話說也找得到</li>
+<li><a href="concepts/bm25.html">關鍵字檢索 BM25</a> — 比對字面，擅長代碼與專有名詞</li>
+<li><a href="concepts/chunking.html">切塊</a> — 長文件切成小段；大小是取捨，會丟上下文</li>
+<li><a href="concepts/hybrid-search.html">混合檢索與重排</a> — 兩種檢索合併，再挑出最相關的</li>
+<li><a href="concepts/lost-in-the-middle.html">長上下文的位置效應</a> — 放中間的資料容易被忽略</li>
+<li><a href="concepts/rag-failures.html">RAG 的常見失敗</a> — 找不到、沒用好、沒照資料寫</li>
+<li><a href="concepts/rag-evaluation.html">怎麼評估 RAG</a> — 資料相關性、忠實度、答案切題度</li>
+<li><a href="concepts/rag-paradigms.html">RAG 的三個階段</a> — Naive、Advanced、Modular</li>
+<li><a href="concepts/rag-vs-finetuning.html">RAG 與微調</a> — 換資料 vs 改模型</li>
+<li><a href="concepts/llm-wiki-vs-rag.html">LLM Wiki 與 RAG 的差別</a> — 臨時找 vs 事先整理</li>
+</ul>
+<h2>來源</h2>
+<ul>
+<li><a href="sources/s1-lewis-2020-rag.html">S1｜Lewis et al. 2020：RAG 原始論文</a> — 6 條主張</li>
+<li><a href="sources/s2-karpukhin-2020-dpr.html">S2｜Karpukhin et al. 2020：DPR 稠密段落檢索</a> — 5 條主張</li>
+<li><a href="sources/s3-gao-2023-rag-survey.html">S3｜Gao et al. 2023：大型語言模型的 RAG 綜述</a> — 8 條主張</li>
+<li><a href="sources/s4-liu-2023-lost-in-the-middle.html">S4｜Liu et al. 2023：Lost in the Middle</a> — 5 條主張</li>
+<li><a href="sources/s5-es-2023-ragas.html">S5｜Es et al. 2023：RAGAS 自動評估</a> — 5 條主張</li>
+<li><a href="sources/s6-anthropic-2024-contextual-retrieval.html">S6｜Anthropic 2024：Contextual Retrieval</a> — 8 條主張</li>
+<li><a href="sources/s7-karpathy-2026-llm-wiki.html">S7｜Karpathy 2026：LLM Wiki</a> — 5 條主張</li>
+</ul>
+<h2>討論與查詢紀錄</h2>
+<ul>
+<li><a href="discussions/2026-11-23-ingest-discussion.html">討論紀錄：先討論、後生成</a> — 動筆前 AI 與使用者的兩輪討論，照實記錄</li>
+<li><a href="queries/deck-outline.html">查詢紀錄：教學簡報大綱</a> — 用 Wiki 回答「怎麼教 RAG」的結果，簡報由它產生</li>
+<li><a href="log.html">時間紀錄</a> — 每次 ingest、lint、查詢的紀錄</li>
+</ul><div class="backlinks"><b>連到這頁的頁面（1）</b><a href="queries/deck-outline.html">查詢紀錄：教學簡報大綱</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

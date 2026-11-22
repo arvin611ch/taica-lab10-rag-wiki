@@ -35,7 +35,7 @@ updated: 2026-11-23
 - [S3｜Gao et al. 2023：大型語言模型的 RAG 綜述](sources/s3-gao-2023-rag-survey.md) — 8 條主張
 - [S4｜Liu et al. 2023：Lost in the Middle](sources/s4-liu-2023-lost-in-the-middle.md) — 5 條主張
 - [S5｜Es et al. 2023：RAGAS 自動評估](sources/s5-es-2023-ragas.md) — 5 條主張
-- [S6｜Anthropic 2024：Contextual Retrieval](sources/s6-anthropic-2024-contextual-retrieval.md) — 7 條主張
+- [S6｜Anthropic 2024：Contextual Retrieval](sources/s6-anthropic-2024-contextual-retrieval.md) — 8 條主張
 - [S7｜Karpathy 2026：LLM Wiki](sources/s7-karpathy-2026-llm-wiki.md) — 5 條主張
 
 ## 討論與查詢紀錄

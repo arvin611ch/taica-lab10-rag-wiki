@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>參數記憶與幻覺｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">概念頁</span>更新：2026-11-23</p><h1>參數記憶與幻覺</h1>
+<p><strong>一句話定義：</strong> 參數記憶（parametric memory）是語言模型在訓練時存進模型參數裡的知識；幻覺（hallucination）是模型寫出聽起來合理、但沒有根據或錯誤的內容。</p>
+<h2>白話解釋</h2>
+<p>參數（parameter）是模型內部的大量數字；訓練就是讓模型讀大量文字、反覆調整這些數字。語言模型讀過大量文字後，等於把其中的知識「壓縮」進這些參數。問它問題時，它是從這些參數「回想」答案。這有三個麻煩：</p>
+<ol>
+<li><strong>難更新：</strong> 世界變了（例如換了總統），模型不會知道，除非重新訓練。</li>
+<li><strong>說不出依據：</strong> 模型無法指出答案是從哪份資料學來的。</li>
+<li><strong>會幻覺：</strong> 記不清楚時，模型仍會流暢地寫出一個答案。</li>
+</ol>
+<p>比喻：參數記憶像一個讀過很多書、但沒帶任何書的人。他能回答很多問題，卻無法翻書確認，也說不出是在哪本書看到的。</p>
+<h2>來源怎麼說</h2>
+<ul>
+<li>2020 年的 RAG 論文指出語言模型把知識存在參數裡，並列出這三個缺點（原文的語氣是「不容易」「可能」）。<a href="../sources/s1-lewis-2020-rag.html#s1-c1">S1-c1</a></li>
+<li>綜述論文對大型語言模型提出同樣的問題：幻覺、知識過時、推理無法追溯。<a href="../sources/s3-gao-2023-rag-survey.html#s3-c1">S3-c1</a></li>
+<li>外部的、可檢索的記憶可以直接修改，也能拿出來檢查。<a href="../sources/s1-lewis-2020-rag.html#s1-c2">S1-c2</a></li>
+</ul>
+<h2>相關頁面</h2>
+<p><a href="rag.html">檢索增強生成</a>、<a href="rag-vs-finetuning.html">RAG 與微調</a></p><div class="backlinks"><b>連到這頁的頁面（8）</b><a href="../concepts/rag-vs-finetuning.html">RAG 與微調</a>、<a href="../concepts/rag.html">檢索增強生成（RAG）</a>、<a href="../glossary.html">名詞表</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>、<a href="../sources/s1-lewis-2020-rag.html">S1｜Lewis et al. 2020：RAG 原始論文</a>、<a href="../sources/s3-gao-2023-rag-survey.html">S3｜Gao et al. 2023：大型語言模型的 RAG 綜述</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

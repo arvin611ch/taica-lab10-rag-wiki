@@ -1,0 +1,921 @@
+{
+  "title": "RAG 是什麼？",
+  "subtitle": "讓 AI 先查資料，再回答問題",
+  "audience": "給沒學過機器學習、但用過 ChatGPT 的大學生",
+  "objectives": [
+    {
+      "id": "O1",
+      "text": "說出只靠模型記憶會有哪些問題，以及 RAG 怎麼補"
+    },
+    {
+      "id": "O2",
+      "text": "依序說明 RAG 的三個步驟各在做什麼"
+    },
+    {
+      "id": "O3",
+      "text": "分辨關鍵字檢索與語意檢索，知道為什麼要混合"
+    },
+    {
+      "id": "O4",
+      "text": "指出 RAG 會出錯的地方，以及怎麼檢查答案"
+    }
+  ],
+  "slides": [
+    {
+      "id": "s01",
+      "kind": "title",
+      "title": "RAG 是什麼？",
+      "subtitle": "讓 AI 先查資料，再回答問題",
+      "meta": "給沒學過機器學習的大學生｜約 20 分鐘｜內容全部取自本作業的 LLM Wiki"
+    },
+    {
+      "id": "s02",
+      "kind": "agenda",
+      "title": "今天的目標",
+      "agenda": [
+        "問題：模型只靠記憶",
+        "做法：RAG 三步驟",
+        "細節：怎麼找資料",
+        "會出錯的地方與檢查",
+        "延伸：LLM Wiki"
+      ]
+    },
+    {
+      "id": "s03",
+      "kind": "content",
+      "section": "1 問題",
+      "title": "先想一個問題",
+      "objective": "O1",
+      "points": [
+        {
+          "text": "問聊天機器人：「這學期的退選截止日是哪天？」",
+          "kind": "example"
+        },
+        {
+          "text": "它可能回答得很有自信，日期卻是錯的",
+          "kind": "example"
+        },
+        {
+          "text": "它也說不出這個日期是從哪裡看來的",
+          "kind": "example"
+        }
+      ],
+      "visual": {
+        "type": "chat",
+        "q": "這學期的退選截止日是哪天？",
+        "a": "退選截止日是 11 月 30 日。",
+        "note": "示意對話，日期為虛構"
+      }
+    },
+    {
+      "id": "s04",
+      "kind": "content",
+      "section": "1 問題",
+      "title": "為什麼會這樣：模型只靠「記憶」",
+      "objective": "O1",
+      "introduces": [
+        "大型語言模型",
+        "參數記憶",
+        "幻覺"
+      ],
+      "points": [
+        {
+          "text": "大型語言模型（LLM）把訓練時讀到的知識存在參數裡，稱為參數記憶",
+          "refs": [
+            "S1-c1"
+          ]
+        },
+        {
+          "text": "缺點一：不容易更新，世界變了，模型不會知道",
+          "refs": [
+            "S1-c1",
+            "S3-c1"
+          ]
+        },
+        {
+          "text": "缺點二：很難說清楚答案是怎麼來的",
+          "refs": [
+            "S1-c1",
+            "S3-c1"
+          ]
+        },
+        {
+          "text": "缺點三：可能幻覺，寫出聽起來合理、其實錯誤的內容",
+          "refs": [
+            "S1-c1",
+            "S3-c1"
+          ]
+        }
+      ],
+      "wiki": [
+        "concepts/parametric-memory.md"
+      ],
+      "visual": {
+        "type": "table",
+        "head": [
+          "名詞",
+          "白話意思"
+        ],
+        "rows": [
+          [
+            "參數",
+            "模型內部的大量數字"
+          ],
+          [
+            "訓練",
+            "讀大量文字，反覆調整參數"
+          ],
+          [
+            "參數記憶",
+            "用參數存下來的知識"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "s05",
+      "kind": "content",
+      "section": "2 做法",
+      "title": "解法：把閉卷考試變成開卷考試",
+      "objective": "O1",
+      "introduces": [
+        "檢索增強生成"
+      ],
+      "points": [
+        {
+          "text": "閉卷考試只能靠記憶；開卷考試可以先翻書再作答",
+          "kind": "analogy"
+        },
+        {
+          "text": "RAG（檢索增強生成）：回答前，先從外部資料庫找相關資料",
+          "refs": [
+            "S1-c3",
+            "S3-c2"
+          ]
+        },
+        {
+          "text": "再把資料和問題一起交給模型，根據資料寫答案",
+          "refs": [
+            "S3-c2"
+          ]
+        },
+        {
+          "text": "資料庫可以直接修改，用了哪些資料也能攤開檢查",
+          "refs": [
+            "S1-c2"
+          ]
+        }
+      ],
+      "visual": {
+        "type": "books"
+      },
+      "wiki": [
+        "concepts/rag.md"
+      ]
+    },
+    {
+      "id": "s06",
+      "kind": "content",
+      "section": "2 做法",
+      "title": "RAG 的三個步驟",
+      "objective": "O2",
+      "introduces": [
+        "檢索器",
+        "提示詞"
+      ],
+      "points": [
+        {
+          "text": "建索引：事前把文件整理成可以搜尋的資料庫",
+          "refs": [
+            "S3-c2"
+          ]
+        },
+        {
+          "text": "檢索：由檢索器找出最相關的前 K 塊資料（K 由自己設定）",
+          "refs": [
+            "S3-c2",
+            "S1-c3"
+          ]
+        },
+        {
+          "text": "生成：把問題和找到的資料放進提示詞，交給模型回答",
+          "refs": [
+            "S3-c2"
+          ]
+        }
+      ],
+      "visual": {
+        "type": "pipeline",
+        "steps": [
+          {
+            "name": "建索引",
+            "when": "事前做一次",
+            "desc": "把文件整理成資料庫"
+          },
+          {
+            "name": "檢索",
+            "when": "每次提問",
+            "desc": "找出最相關的前 K 塊資料"
+          },
+          {
+            "name": "生成",
+            "when": "每次提問",
+            "desc": "問題＋資料 → 模型寫答案"
+          }
+        ]
+      },
+      "wiki": [
+        "concepts/rag.md",
+        "concepts/retriever.md"
+      ]
+    },
+    {
+      "id": "s07",
+      "kind": "content",
+      "section": "3 細節",
+      "title": "步驟一：建索引（1）切塊",
+      "objective": "O2",
+      "introduces": [
+        "切塊",
+        "token"
+      ],
+      "points": [
+        {
+          "text": "切塊：把長文件切成一段段短文字，方便逐段比對",
+          "refs": [
+            "S3-c2",
+            "S6-c1"
+          ]
+        },
+        {
+          "text": "提出 RAG 的論文把維基百科每 100 個英文詞切一塊，共 2,100 萬塊",
+          "refs": [
+            "S1-c4"
+          ]
+        },
+        {
+          "text": "實務上每塊通常不超過數百個 token（模型讀文字的單位）",
+          "refs": [
+            "S6-c1"
+          ]
+        },
+        {
+          "text": "切太大雜訊多；切太小可能看不懂前後文",
+          "refs": [
+            "S3-c6"
+          ]
+        }
+      ],
+      "visual": {
+        "type": "chunks"
+      },
+      "wiki": [
+        "concepts/chunking.md"
+      ]
+    },
+    {
+      "id": "s08",
+      "kind": "content",
+      "section": "3 細節",
+      "title": "步驟一：建索引（2）轉成向量",
+      "objective": "O2",
+      "introduces": [
+        "向量嵌入"
+      ],
+      "points": [
+        {
+          "text": "向量嵌入：由嵌入模型把一段文字轉成一串代表意思的數字",
+          "wiki": [
+            "concepts/embedding.md"
+          ]
+        },
+        {
+          "text": "像地圖上的點：意思越近，點離得越近",
+          "kind": "analogy"
+        },
+        {
+          "text": "「bad guy」和「villain」用字不同，轉成向量後卻可能很接近",
+          "refs": [
+            "S2-c2"
+          ]
+        },
+        {
+          "text": "問題也要用同一個嵌入模型轉成向量，才能比遠近",
+          "refs": [
+            "S3-c3"
+          ]
+        }
+      ],
+      "visual": {
+        "type": "vector-map"
+      },
+      "wiki": [
+        "concepts/embedding.md"
+      ]
+    },
+    {
+      "id": "s09",
+      "kind": "content",
+      "section": "3 細節",
+      "title": "步驟二：檢索有兩種找法",
+      "objective": "O3",
+      "introduces": [
+        "BM25",
+        "混合檢索"
+      ],
+      "points": [
+        {
+          "text": "BM25：傳統的關鍵字檢索，看字面有沒有出現",
+          "refs": [
+            "S2-c1"
+          ]
+        },
+        {
+          "text": "語意檢索：比較向量的遠近，換句話說也比較找得到",
+          "refs": [
+            "S2-c2"
+          ]
+        },
+        {
+          "text": "向量可能漏掉「TS-999」這種精確代碼，BM25 比對字面就找得到",
+          "refs": [
+            "S6-c2"
+          ]
+        },
+        {
+          "text": "混合檢索：兩種各找一批，再合併、去掉重複",
+          "refs": [
+            "S6-c8",
+            "S2-c5"
+          ]
+        }
+      ],
+      "visual": {
+        "type": "table",
+        "head": [
+          "",
+          "關鍵字檢索 BM25",
+          "語意檢索"
+        ],
+        "rows": [
+          [
+            "比什麼",
+            "字面有沒有出現",
+            "意思近不近"
+          ],
+          [
+            "擅長",
+            "代碼、專有名詞",
+            "換句話說、同義詞"
+          ],
+          [
+            "例子",
+            "「TS-999」",
+            "bad guy → villain"
+          ]
+        ],
+        "refs": [
+          "S2-c5",
+          "S6-c2",
+          "S2-c2"
+        ]
+      },
+      "wiki": [
+        "concepts/retriever.md",
+        "concepts/bm25.md",
+        "concepts/hybrid-search.md"
+      ]
+    },
+    {
+      "id": "s10",
+      "kind": "content",
+      "section": "3 細節",
+      "title": "跟著一個問題走一遍",
+      "objective": "O2",
+      "points": [
+        {
+          "text": "以「校園問答機器人」為例，從建索引一路走到回答",
+          "kind": "example"
+        }
+      ],
+      "visual": {
+        "type": "walkthrough",
+        "note": "示意例子：手冊、章節與時間都是虛構的",
+        "steps": [
+          {
+            "step": "建索引",
+            "text": "把《學生手冊》切塊，每塊轉成向量，存進資料庫"
+          },
+          {
+            "step": "提問",
+            "text": "「期末考週圖書館開到幾點？」也轉成向量"
+          },
+          {
+            "step": "檢索",
+            "text": "找出最接近的 3 塊，其中一塊寫著「考試週延長開放至 24:00」"
+          },
+          {
+            "step": "生成",
+            "text": "提示詞：「根據以下資料回答問題：〔3 塊資料〕問題：……」"
+          },
+          {
+            "step": "回答",
+            "text": "「考試週開到 24:00（出自《學生手冊》第 4 章）」"
+          }
+        ]
+      }
+    },
+    {
+      "id": "s11",
+      "kind": "content",
+      "section": "4 好處",
+      "title": "好處：換掉資料庫，就能更新知識",
+      "objective": "O1",
+      "points": [
+        {
+          "text": "換用 2016 或 2018 年的維基百科當資料庫，問 82 位各國領袖是誰",
+          "refs": [
+            "S1-c5"
+          ]
+        },
+        {
+          "text": "年份對得上：答對 70%、68%；對不上：只剩 12%、4%",
+          "refs": [
+            "S1-c5"
+          ]
+        },
+        {
+          "text": "只換資料庫，模型沒有重新訓練",
+          "refs": [
+            "S1-c5"
+          ]
+        },
+        {
+          "text": "出題任務的人工評比：42.7% 認為 RAG 較符合事實，7.1% 相反",
+          "refs": [
+            "S1-c6"
+          ]
+        }
+      ],
+      "visual": {
+        "type": "bars",
+        "unit": "%",
+        "title": "答對比例",
+        "refs": [
+          "S1-c5"
+        ],
+        "bars": [
+          {
+            "label": "2016 資料庫問 2016 年領袖",
+            "value": 70,
+            "tone": "good"
+          },
+          {
+            "label": "2018 資料庫問 2018 年領袖",
+            "value": 68,
+            "tone": "good"
+          },
+          {
+            "label": "2018 資料庫問 2016 年領袖",
+            "value": 12,
+            "tone": "bad"
+          },
+          {
+            "label": "2016 資料庫問 2018 年領袖",
+            "value": 4,
+            "tone": "bad"
+          }
+        ]
+      },
+      "wiki": [
+        "concepts/rag.md"
+      ]
+    },
+    {
+      "id": "s12",
+      "kind": "content",
+      "section": "4 好處",
+      "title": "RAG 和微調有什麼不同？",
+      "objective": "O1",
+      "introduces": [
+        "微調"
+      ],
+      "points": [
+        {
+          "text": "微調：用新資料再訓練模型，改變模型參數",
+          "wiki": [
+            "concepts/rag-vs-finetuning.md"
+          ]
+        },
+        {
+          "text": "綜述論文的比喻：RAG 像給模型一本專用課本，微調像學生把知識內化",
+          "refs": [
+            "S3-c7"
+          ]
+        },
+        {
+          "text": "RAG 換資料就能更新；微調適合學固定的格式與風格",
+          "refs": [
+            "S3-c7",
+            "S1-c5"
+          ]
+        },
+        {
+          "text": "兩者不互斥，可以一起用",
+          "refs": [
+            "S3-c7"
+          ]
+        }
+      ],
+      "visual": {
+        "type": "table",
+        "head": [
+          "",
+          "RAG",
+          "微調"
+        ],
+        "rows": [
+          [
+            "改了什麼",
+            "外部資料庫",
+            "模型參數"
+          ],
+          [
+            "更新知識",
+            "換資料就好",
+            "要重新訓練"
+          ],
+          [
+            "指出依據",
+            "可以",
+            "不行"
+          ]
+        ],
+        "refs": [
+          "S3-c7",
+          "S1-c2"
+        ]
+      },
+      "wiki": [
+        "concepts/rag-vs-finetuning.md"
+      ]
+    },
+    {
+      "id": "s13",
+      "kind": "content",
+      "section": "5 會出錯的地方",
+      "title": "出錯①：找不到對的資料",
+      "objective": "O4",
+      "introduces": [
+        "重排"
+      ],
+      "points": [
+        {
+          "text": "切塊會丟掉前後文：「營收成長 3%」單看不知道是哪家公司",
+          "refs": [
+            "S6-c3"
+          ]
+        },
+        {
+          "text": "改法：由 AI 替每塊前面補一段 50–100 token 的說明",
+          "refs": [
+            "S6-c4"
+          ]
+        },
+        {
+          "text": "重排：先粗找一大批（原文 150 塊），再由重排模型打分，留 20 塊",
+          "refs": [
+            "S6-c6"
+          ]
+        },
+        {
+          "text": "三招合用後，前 20 塊找不到資料的比例 5.7% → 1.9%",
+          "refs": [
+            "S6-c5"
+          ]
+        }
+      ],
+      "visual": {
+        "type": "bars",
+        "unit": "%",
+        "title": "找不到資料的比例（越低越好）",
+        "refs": [
+          "S6-c5"
+        ],
+        "bars": [
+          {
+            "label": "原本",
+            "value": 5.7,
+            "tone": "bad"
+          },
+          {
+            "label": "＋補說明（只用向量檢索）",
+            "value": 3.7,
+            "tone": "mid"
+          },
+          {
+            "label": "＋補說明（向量＋BM25）",
+            "value": 2.9,
+            "tone": "mid"
+          },
+          {
+            "label": "＋重排",
+            "value": 1.9,
+            "tone": "good"
+          }
+        ]
+      },
+      "wiki": [
+        "concepts/rag-failures.md",
+        "concepts/hybrid-search.md",
+        "concepts/chunking.md"
+      ]
+    },
+    {
+      "id": "s14",
+      "kind": "content",
+      "section": "5 會出錯的地方",
+      "title": "出錯②：找到了，卻沒用好",
+      "objective": "O4",
+      "introduces": [
+        "上下文"
+      ],
+      "points": [
+        {
+          "text": "上下文：模型一次讀進去的全部文字（問題＋資料）",
+          "wiki": [
+            "concepts/lost-in-the-middle.md"
+          ]
+        },
+        {
+          "text": "含答案的那塊資料放開頭或結尾，通常答得最好；放長文中間明顯變差",
+          "refs": [
+            "S4-c1"
+          ]
+        },
+        {
+          "text": "以 GPT-3.5-Turbo 為例：放中間時，正確率低於不給資料的 56.1%",
+          "refs": [
+            "S4-c2"
+          ]
+        },
+        {
+          "text": "資料從 20 塊加到 50 塊，正確率只多約 1–1.5%",
+          "refs": [
+            "S4-c4"
+          ]
+        }
+      ],
+      "visual": {
+        "type": "u-curve",
+        "baseline": 56.1,
+        "baseline_label": "不給資料（閉卷）56.1%",
+        "refs": [
+          "S4-c2"
+        ],
+        "note": "示意曲線，形狀依原論文圖 1"
+      },
+      "wiki": [
+        "concepts/lost-in-the-middle.md"
+      ]
+    },
+    {
+      "id": "s15",
+      "kind": "content",
+      "section": "5 會出錯的地方",
+      "title": "出錯③：沒照資料寫，怎麼檢查？",
+      "objective": "O4",
+      "introduces": [
+        "忠實度"
+      ],
+      "points": [
+        {
+          "text": "RAG 不保證不幻覺：模型仍可能寫出資料裡沒有的內容",
+          "refs": [
+            "S3-c4"
+          ]
+        },
+        {
+          "text": "忠實度：答案要建立在找回來的資料上，每句都要有依據",
+          "refs": [
+            "S5-c1",
+            "S5-c3"
+          ]
+        },
+        {
+          "text": "算法：讓 LLM 把答案拆成短句，逐句判斷有沒有依據，算比例",
+          "refs": [
+            "S5-c3"
+          ]
+        },
+        {
+          "text": "另外兩個分數：找回的資料相不相關、答案有沒有切題",
+          "refs": [
+            "S5-c2",
+            "S3-c8"
+          ]
+        }
+      ],
+      "visual": {
+        "type": "faithfulness",
+        "note": "示意例子",
+        "answer": "考試週圖書館開到 24:00，週末也照常開放，而且免費借筆電。",
+        "statements": [
+          {
+            "text": "考試週開到 24:00",
+            "ok": true
+          },
+          {
+            "text": "週末照常開放",
+            "ok": true
+          },
+          {
+            "text": "免費借筆電",
+            "ok": false
+          }
+        ]
+      },
+      "wiki": [
+        "concepts/rag-evaluation.md",
+        "concepts/rag-failures.md"
+      ]
+    },
+    {
+      "id": "s16",
+      "kind": "content",
+      "section": "6 延伸（選讀）",
+      "title": "延伸：RAG 的演進，與這份簡報的來源",
+      "objective": "O2",
+      "introduces": [
+        "LLM Wiki"
+      ],
+      "points": [
+        {
+          "text": "RAG 持續演進：基本型 → 進階型（檢索前後加處理）→ 模組型",
+          "refs": [
+            "S3-c5"
+          ]
+        },
+        {
+          "text": "一般 RAG 每次提問都重新從原文找片段，整理過的結果不會留下",
+          "refs": [
+            "S7-c1"
+          ]
+        },
+        {
+          "text": "LLM Wiki：AI 事先把資料整理成有出處的筆記，查詢結果也能存回去",
+          "refs": [
+            "S7-c2",
+            "S7-c5"
+          ]
+        },
+        {
+          "text": "這份簡報就是查詢這個 Wiki 的結果，每頁都附出處",
+          "kind": "project",
+          "wiki": [
+            "queries/deck-outline.md"
+          ]
+        }
+      ],
+      "visual": {
+        "type": "timeline",
+        "items": [
+          {
+            "name": "基本型（Naive）",
+            "desc": "建索引 → 檢索 → 生成"
+          },
+          {
+            "name": "進階型（Advanced）",
+            "desc": "檢索前改寫問題、檢索後重排"
+          },
+          {
+            "name": "模組型（Modular）",
+            "desc": "模組可替換、可多次檢索"
+          }
+        ],
+        "side": {
+          "name": "LLM Wiki",
+          "desc": "事先整理、持續累積的知識"
+        }
+      },
+      "wiki": [
+        "concepts/rag-paradigms.md",
+        "concepts/llm-wiki-vs-rag.md"
+      ]
+    },
+    {
+      "id": "s17",
+      "kind": "quiz",
+      "section": "測驗",
+      "title": "小測驗（上）",
+      "questions": [
+        {
+          "objective": "O1",
+          "q": "下列哪一項「不是」只靠參數記憶的缺點？",
+          "choices": [
+            "難以更新",
+            "說不出依據",
+            "可能幻覺",
+            "一定要連網才能回答"
+          ],
+          "answer": 3,
+          "explain": "前三項都是原始 RAG 論文列出的缺點；只靠參數記憶的模型不用連網也能回答。",
+          "refs": [
+            "S1-c1"
+          ]
+        },
+        {
+          "objective": "O2",
+          "q": "RAG 的三個步驟，正確順序是？",
+          "choices": [
+            "檢索 → 建索引 → 生成",
+            "建索引 → 檢索 → 生成",
+            "生成 → 檢索 → 建索引",
+            "建索引 → 生成 → 檢索"
+          ],
+          "answer": 1,
+          "explain": "建索引是事前準備；每次提問時先檢索，再生成。",
+          "refs": [
+            "S3-c2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s18",
+      "kind": "quiz",
+      "section": "測驗",
+      "title": "小測驗（下）",
+      "questions": [
+        {
+          "objective": "O3",
+          "q": "使用者搜尋錯誤代碼「TS-999」，哪一種檢索最不容易漏掉？",
+          "choices": [
+            "關鍵字檢索 BM25",
+            "只用語意檢索",
+            "兩者完全一樣",
+            "都找不到"
+          ],
+          "answer": 0,
+          "explain": "語意檢索看整體意思，可能漏掉精確代碼；BM25 直接比對字面。",
+          "refs": [
+            "S6-c2"
+          ]
+        },
+        {
+          "objective": "O4",
+          "q": "答案拆成 4 句，其中 3 句能在找回的資料裡找到依據，忠實度是多少？",
+          "choices": [
+            "1/4",
+            "3/4",
+            "4/3",
+            "無法計算"
+          ],
+          "answer": 1,
+          "explain": "忠實度＝有依據的句數 ÷ 總句數＝3/4。",
+          "refs": [
+            "S5-c3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s19",
+      "kind": "summary",
+      "section": "回顧",
+      "title": "重點回顧",
+      "points": [
+        {
+          "text": "只靠參數記憶：不易更新、難說清依據、可能幻覺",
+          "objective": "O1",
+          "refs": [
+            "S1-c1"
+          ]
+        },
+        {
+          "text": "RAG＝建索引 → 檢索 → 生成，回答前先查資料",
+          "objective": "O2",
+          "refs": [
+            "S3-c2"
+          ]
+        },
+        {
+          "text": "關鍵字檢索看字面、語意檢索看意思，兩者互補",
+          "objective": "O3",
+          "refs": [
+            "S2-c5"
+          ]
+        },
+        {
+          "text": "可能找不到、沒用好、沒照資料寫；用忠實度檢查答案",
+          "objective": "O4",
+          "refs": [
+            "S3-c4",
+            "S4-c1",
+            "S5-c1"
+          ]
+        }
+      ]
+    }
+  ]
+}

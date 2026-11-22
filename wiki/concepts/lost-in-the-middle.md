@@ -17,7 +17,7 @@ updated: 2026-11-23
 
 ## 來源怎麼說
 
-- 正確率呈 U 型：相關資料在開頭或結尾最好，在中間明顯變差。[S4-c1](../sources/s4-liu-2023-lost-in-the-middle.md#s4-c1)
+- 正確率常呈 U 型：相關資料在開頭或結尾通常最好，在長篇內容的中間明顯變差。[S4-c1](../sources/s4-liu-2023-lost-in-the-middle.md#s4-c1)
 - 答案在中間時，GPT-3.5-Turbo 甚至比不給文件時（56.1%）還差。[S4-c2](../sources/s4-liu-2023-lost-in-the-middle.md#s4-c2)
 - 能讀更長內容的模型，不一定比較會用這些內容。[S4-c3](../sources/s4-liu-2023-lost-in-the-middle.md#s4-c3)
 - 從 20 篇加到 50 篇只多約 1% 到 1.5%，提示詞卻長很多。[S4-c4](../sources/s4-liu-2023-lost-in-the-middle.md#s4-c4)

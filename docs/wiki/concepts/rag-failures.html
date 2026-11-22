@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RAG 的常見失敗｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><p class="meta"><span class="badge">概念頁</span>更新：2026-11-23</p><h1>RAG 的常見失敗</h1>
+<p><strong>一句話定義：</strong> RAG 可能在三個地方出錯：沒找到對的資料、找到了但模型沒用好、模型寫了資料裡沒有的內容。</p>
+<h2>白話解釋</h2>
+<table>
+<thead>
+<tr>
+<th>出錯的地方</th>
+<th>例子</th>
+<th>可以怎麼改</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>檢索：找錯或漏找</td>
+<td>切塊丟了上下文，「這家公司」對不上問題</td>
+<td>情境化切塊、混合檢索、重排</td>
+</tr>
+<tr>
+<td>放進提示詞：沒用好</td>
+<td>答案夾在中間幾篇，模型沒注意到</td>
+<td>把相關資料排到前面、少放幾篇</td>
+</tr>
+<tr>
+<td>生成：沒照資料寫</td>
+<td>資料沒提到的數字，模型自己補上</td>
+<td>用忠實度檢查答案</td>
+</tr>
+</tbody>
+</table>
+<h2>來源怎麼說</h2>
+<ul>
+<li>基本 RAG 的檢索常有找錯、漏找的問題；生成時也可能寫出資料不支持的內容。<a href="../sources/s3-gao-2023-rag-survey.html#s3-c4">S3-c4</a></li>
+<li>切塊會丟掉上下文，導致找不到。<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c3">S6-c3</a></li>
+<li>情境化與重排讓找不到資料的比例下降 35% 到 67%。<a href="../sources/s6-anthropic-2024-contextual-retrieval.html#s6-c5">S6-c5</a></li>
+<li>相關資料放在中間時，模型容易忽略。<a href="../sources/s4-liu-2023-lost-in-the-middle.html#s4-c1">S4-c1</a></li>
+</ul>
+<h2>相關頁面</h2>
+<p><a href="chunking.html">切塊</a>、<a href="lost-in-the-middle.html">長上下文的位置效應</a>、<a href="hybrid-search.html">混合檢索與重排</a>、<a href="rag-evaluation.html">怎麼評估 RAG</a></p><div class="backlinks"><b>連到這頁的頁面（11）</b><a href="../concepts/chunking.html">切塊</a>、<a href="../concepts/lost-in-the-middle.html">長上下文的位置效應</a>、<a href="../concepts/rag-evaluation.html">怎麼評估 RAG</a>、<a href="../concepts/rag-paradigms.html">RAG 的三個階段</a>、<a href="../concepts/rag.html">檢索增強生成（RAG）</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>、<a href="../sources/s3-gao-2023-rag-survey.html">S3｜Gao et al. 2023：大型語言模型的 RAG 綜述</a>、<a href="../sources/s4-liu-2023-lost-in-the-middle.html">S4｜Liu et al. 2023：Lost in the Middle</a>、<a href="../sources/s6-anthropic-2024-contextual-retrieval.html">S6｜Anthropic 2024：Contextual Retrieval</a></div></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

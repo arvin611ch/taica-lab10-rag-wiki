@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>首頁｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="index.html">首頁</a><a href="wiki/index.html">Wiki 目錄</a><a href="wiki/overview.html">總覽</a><a href="wiki/glossary.html">名詞表</a><a href="slides/index.html">教學簡報</a><a href="workflow.html">流程與反思</a><a href="runs/index.html">執行紀錄</a></div></header>
+<main><h1>RAG 入門：LLM Wiki × 教學 HTML 簡報</h1>
+<p>TAICA Lab 10｜陽明交大 113611097 百川 江晟維</p>
+<p>這個作業先照 Karpathy 的〈LLM Wiki〉構想，讓 AI（Claude Code）把 7 篇關於「檢索增強生成（RAG）」的資料整理成一個互相連結、每句話都能追到原文的 Wiki；再只用這個 Wiki 當知識來源，產生一份給沒學過機器學習的大學生看的教學簡報。</p>
+<h2>入口</h2>
+<table>
+<thead>
+<tr>
+<th>成果</th>
+<th>連結</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>教學 HTML 簡報</td>
+<td><a href="slides/index.html">slides/</a></td>
+<td>19 頁。方向鍵換頁，第 17–18 頁的測驗可以點選作答</td>
+</tr>
+<tr>
+<td>LLM Wiki</td>
+<td><a href="wiki/index.html">wiki/</a></td>
+<td>7 個來源頁、42 條主張、13 個概念頁、名詞表、總覽、討論紀錄</td>
+</tr>
+<tr>
+<td>流程設計與反思</td>
+<td><a href="workflow.html">workflow.html</a></td>
+<td>流程圖、哪些步驟會重複、哪裡檢查、哪個節點最常出錯、改了什麼</td>
+</tr>
+<tr>
+<td>執行與檢查紀錄</td>
+<td><a href="runs/index.html">runs/</a></td>
+<td>每次檢查的原始報告與 AI 審查結果</td>
+</tr>
+<tr>
+<td>原始碼</td>
+<td><a href="https://github.com/arvin611ch/taica-lab10-rag-wiki">GitHub</a></td>
+<td>規則檔 <code>AGENTS.md</code>、Wiki 原始 Markdown、檢查程式</td>
+</tr>
+</tbody>
+</table>
+<h2>LLM Wiki 主題與簡介</h2>
+<ul>
+<li><strong>主題：</strong> 檢索增強生成（Retrieval-Augmented Generation, RAG）——讓語言模型回答前先查資料。</li>
+<li><strong>讀者：</strong> 用過 ChatGPT、但沒學過機器學習的大學生。</li>
+<li><strong>三層結構：</strong> 原始資料（<code>raw/</code>，只讀不改）→ Wiki（<code>wiki/</code>，AI 撰寫）→ 規則檔（<code>AGENTS.md</code>，規定格式與流程）。</li>
+<li><strong>可追溯：</strong> 每條主張都附一段從原文逐字複製的英文證據，檢查程式會逐字比對原文；簡報的每個重點旁邊都有主張編號，點下去會跳到 Wiki 的那一條。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>編號</th>
+<th>資料</th>
+<th>在簡報中的角色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td><a href="wiki/sources/s1-lewis-2020-rag.html">Lewis et al. 2020，RAG 原始論文</a></td>
+<td>問題、定義、換資料庫就能更新知識</td>
+</tr>
+<tr>
+<td>S2</td>
+<td><a href="wiki/sources/s2-karpukhin-2020-dpr.html">Karpukhin et al. 2020，DPR</a></td>
+<td>關鍵字 vs 語意檢索</td>
+</tr>
+<tr>
+<td>S3</td>
+<td><a href="wiki/sources/s3-gao-2023-rag-survey.html">Gao et al. 2023，RAG 綜述</a></td>
+<td>三步驟、與微調的差別、演進</td>
+</tr>
+<tr>
+<td>S4</td>
+<td><a href="wiki/sources/s4-liu-2023-lost-in-the-middle.html">Liu et al. 2023，Lost in the Middle</a></td>
+<td>資料放中間容易被忽略</td>
+</tr>
+<tr>
+<td>S5</td>
+<td><a href="wiki/sources/s5-es-2023-ragas.html">Es et al. 2023，RAGAS</a></td>
+<td>怎麼評估答案是否忠實</td>
+</tr>
+<tr>
+<td>S6</td>
+<td><a href="wiki/sources/s6-anthropic-2024-contextual-retrieval.html">Anthropic 2024，Contextual Retrieval</a></td>
+<td>切塊、混合檢索、重排的實務數字</td>
+</tr>
+<tr>
+<td>S7</td>
+<td><a href="wiki/sources/s7-karpathy-2026-llm-wiki.html">Karpathy 2026，LLM Wiki</a></td>
+<td>RAG 與 LLM Wiki 的差別</td>
+</tr>
+</tbody>
+</table>
+<p>簡報每一頁引用了哪些主張，整理在 <a href="wiki/queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>。</p></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>
