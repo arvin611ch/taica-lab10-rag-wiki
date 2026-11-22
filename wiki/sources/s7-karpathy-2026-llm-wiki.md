@@ -15,6 +15,8 @@ updated: 2026-11-23
 
 ### S7-c1｜一般 RAG 每次提問都從頭找資料，知識沒有累積 {#s7-c1}
 
+> 證據（The core idea）：「Most people's experience with LLMs and documents looks like RAG: you upload a collection of files, the LLM retrieves relevant chunks at query time, and generates an answer.」
+
 > 證據（The core idea）：「the LLM is rediscovering knowledge from scratch on every question. There's no accumulation.」
 
 白話說明：見 [LLM Wiki 與 RAG 的差別](../concepts/llm-wiki-vs-rag.md)。
@@ -23,17 +25,31 @@ updated: 2026-11-23
 
 > 證據（The core idea）：「the LLM **incrementally builds and maintains a persistent wiki**」
 
+> 證據（The core idea）：「When you add a new source, the LLM doesn't just index it for later retrieval. It reads it, extracts the key information, and integrates it into the existing wiki」
+
 白話說明：新增一篇資料時，LLM 不只是存起來等人查，而是讀完、整理、更新相關頁面，並標出新舊資料的矛盾。
 
 ### S7-c3｜三層結構：原始資料（不修改）、Wiki（LLM 寫）、規則檔（規定格式與流程） {#s7-c3}
 
 > 證據（Architecture）：「There are three layers:」
 
+> 證據（Architecture）：「**Raw sources** — your curated collection of source documents.」
+
 > 證據（Architecture）：「These are immutable — the LLM reads from them but never modifies them.」
+
+> 證據（Architecture）：「**The wiki** — a directory of LLM-generated markdown files.」
+
+> 證據（Architecture）：「**The schema** — a document (e.g. CLAUDE.md for Claude Code or AGENTS.md for Codex) that tells the LLM how the wiki is structured, what the conventions are, and what workflows to follow」
 
 白話說明：本專案的對應是 `raw/`、`wiki/` 與 `AGENTS.md`。
 
 ### S7-c4｜三種操作：Ingest（加入資料）、Query（提問）、Lint（健康檢查） {#s7-c4}
+
+> 證據（Operations）：「**Ingest.** You drop a new source into the raw collection and tell the LLM to process it.」
+
+> 證據（Operations）：「**Query.** You ask questions against the wiki.」
+
+> 證據（Operations）：「**Lint.** Periodically, ask the LLM to health-check the wiki.」
 
 > 證據（Operations）：「Look for: contradictions between pages, stale claims that newer sources have superseded, orphan pages with no inbound links, important concepts mentioned but lacking their own page, missing cross-references, data gaps that could be filled with a web search.」
 

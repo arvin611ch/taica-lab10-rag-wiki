@@ -4,7 +4,7 @@
 <main><p class="meta"><span class="badge">總覽</span>更新：2026-11-23</p><h1>總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</h1>
 <p>這頁把所有來源串成一條故事線，也是教學簡報的骨架。名詞的定義見 <a href="glossary.html">名詞表</a>；動筆前怎麼決定重點，見 <a href="discussions/2026-11-23-ingest-discussion.html">討論紀錄</a>。</p>
 <h2>1. 問題：模型只靠記憶</h2>
-<p>大型語言模型的知識存在參數裡，難更新、說不出依據、會幻覺。<a href="sources/s1-lewis-2020-rag.html#s1-c1">S1-c1</a>、<a href="sources/s3-gao-2023-rag-survey.html#s3-c1">S3-c1</a> → <a href="concepts/parametric-memory.html">參數記憶與幻覺</a></p>
+<p>大型語言模型的知識存在參數裡，不易更新、難說明依據、可能幻覺。<a href="sources/s1-lewis-2020-rag.html#s1-c1">S1-c1</a>、<a href="sources/s3-gao-2023-rag-survey.html#s3-c1">S3-c1</a> → <a href="concepts/parametric-memory.html">參數記憶與幻覺</a></p>
 <h2>2. 做法：先找資料再回答</h2>
 <p>RAG 分三步：建索引、檢索、生成。<a href="sources/s3-gao-2023-rag-survey.html#s3-c2">S3-c2</a> 2020 年的原始論文用維基百科當文件庫。<a href="sources/s1-lewis-2020-rag.html#s1-c3">S1-c3</a>、<a href="sources/s1-lewis-2020-rag.html#s1-c4">S1-c4</a> → <a href="concepts/rag.html">檢索增強生成</a></p>
 <ul>
@@ -12,7 +12,7 @@
 <li>找資料靠 <a href="concepts/retriever.html">檢索器</a>：關鍵字檢索 <a href="concepts/bm25.html">BM25</a> 看字面，向量檢索看意思，兩者互補。<a href="sources/s2-karpukhin-2020-dpr.html#s2-c5">S2-c5</a></li>
 </ul>
 <h2>3. 好處：知識可以換、答案可以查</h2>
-<p>換掉文件庫就能更新知識，不用重新訓練。<a href="sources/s1-lewis-2020-rag.html#s1-c5">S1-c5</a> 回答也比純生成模型更符合事實。<a href="sources/s1-lewis-2020-rag.html#s1-c6">S1-c6</a> RAG 不改模型，跟 <a href="concepts/rag-vs-finetuning.html">微調</a> 解決的問題不同。<a href="sources/s3-gao-2023-rag-survey.html#s3-c7">S3-c7</a></p>
+<p>換掉文件庫就能更新知識，不用重新訓練。<a href="sources/s1-lewis-2020-rag.html#s1-c5">S1-c5</a> 在出題任務的人工評比中，評審也較常認為 RAG 比純生成模型更符合事實。<a href="sources/s1-lewis-2020-rag.html#s1-c6">S1-c6</a> RAG 不改模型，跟 <a href="concepts/rag-vs-finetuning.html">微調</a> 解決的問題不同。<a href="sources/s3-gao-2023-rag-survey.html#s3-c7">S3-c7</a></p>
 <h2>4. 會出錯的地方</h2>
 <ul>
 <li><strong>找不到：</strong> 切塊丟了上下文。<a href="sources/s6-anthropic-2024-contextual-retrieval.html#s6-c3">S6-c3</a> 情境化、混合檢索、重排可以讓失敗率下降 35%–67%。<a href="sources/s6-anthropic-2024-contextual-retrieval.html#s6-c5">S6-c5</a> → <a href="concepts/hybrid-search.html">混合檢索與重排</a></li>

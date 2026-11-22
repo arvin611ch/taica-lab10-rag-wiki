@@ -5,23 +5,24 @@
 <p><strong>原文：</strong> Yunfan Gao et al., <em>Retrieval-Augmented Generation for Large Language Models: A Survey</em>, arXiv 2312.10997（v5, 2024）. <a href="https://arxiv.org/abs/2312.10997">https://arxiv.org/abs/2312.10997</a></p>
 <p><strong>一句話摘要：</strong> 整理 ChatGPT 之後的 RAG 研究：基本流程分成建索引、檢索、生成三步，方法演進分成 Naive、Advanced、Modular 三個階段，並整理評估 RAG 的面向。</p>
 <h2>重點</h2>
-<h3 id="s3-c1">S3-c1｜大型語言模型會幻覺、知識會過時、推理過程無法追溯；RAG 用外部資料庫來補</h3>
+<h3 id="s3-c1">S3-c1｜大型語言模型有幻覺、知識過時、推理無法追溯的問題；引入外部資料庫知識的 RAG 被視為有希望的解法</h3>
 <blockquote>
 <p>證據（Abstract）：「Large Language Models (LLMs) showcase impressive capabilities but encounter challenges like hallucination, outdated knowledge, and non-transparent, untraceable reasoning processes.」</p>
+<p>證據（Abstract）：「Retrieval-Augmented Generation (RAG) has emerged as a promising solution by incorporating knowledge from external databases.」</p>
 </blockquote>
-<p>白話說明：跟 <a href="s1-lewis-2020-rag.html#s1-c1">S1-c1</a> 說的是同一組問題，只是對象換成 ChatGPT 這類大型語言模型。見 <a href="../concepts/parametric-memory.html">參數記憶與幻覺</a>。</p>
+<p>白話說明：跟 <a href="s1-lewis-2020-rag.html#s1-c1">S1-c1</a> 說的是同一組問題，只是對象換成大型語言模型。見 <a href="../concepts/parametric-memory.html">參數記憶與幻覺</a>。</p>
 <h3 id="s3-c2">S3-c2｜基本 RAG 有三步：建索引、檢索、生成</h3>
 <blockquote>
 <p>證據（Fig. 2 說明）：「It mainly consists of 3 steps. 1) Indexing. Documents are split into chunks, encoded into vectors, and stored in a vector database.」</p>
 <p>證據（Fig. 2 說明）：「2) Retrieval. Retrieve the Top k chunks most relevant to the question based on semantic similarity. 3) Generation. Input the original question and the retrieved chunks together into LLM to generate the final answer.」</p>
 </blockquote>
 <p>白話說明：建索引是事前準備（切塊、轉向量、存起來）；使用者發問時才做檢索與生成。見 <a href="../concepts/rag.html">檢索增強生成</a>。</p>
-<h3 id="s3-c3">S3-c3｜檢索時，問題要用跟建索引時同一個模型轉成向量</h3>
+<h3 id="s3-c3">S3-c3｜基本 RAG 檢索時，用建索引時的同一個編碼模型把問題轉成向量</h3>
 <blockquote>
 <p>證據（§II-A Naive RAG）：「the RAG system employs the same encoding model utilized during the indexing phase to transform the query into a vector representation」</p>
 </blockquote>
-<p>白話說明：問題和文件要放在同一個「向量空間」裡才能比遠近，所以必須用同一個嵌入模型。見 <a href="../concepts/embedding.html">向量嵌入</a>。</p>
-<h3 id="s3-c4">S3-c4｜基本 RAG 常見的毛病：找錯或漏找資料，以及寫出資料裡沒有的內容</h3>
+<p>白話說明：問題和文件的向量要能放在一起比遠近。最簡單的做法是用同一個模型；<a href="s2-karpukhin-2020-dpr.html#s2-c3">DPR</a> 則是用兩個一起訓練的編碼器。見 <a href="../concepts/embedding.html">向量嵌入</a>。</p>
+<h3 id="s3-c4">S3-c4｜基本 RAG 的毛病：檢索常找錯或漏找資料，生成時也可能寫出資料裡沒有的內容</h3>
 <blockquote>
 <p>證據（§II-A Naive RAG）：「The retrieval phase often struggles with precision and recall, leading to the selection of misaligned or irrelevant chunks, and the missing of crucial information.」</p>
 <p>證據（§II-A Naive RAG）：「the model may face the issue of hallucination, where it produces content not supported by the retrieved context」</p>
@@ -33,7 +34,8 @@
 <p>證據（§II-B Advanced RAG）：「Focusing on enhancing retrieval quality, it employs pre-retrieval and post-retrieval strategies.」</p>
 <p>證據（§II-C Modular RAG）：「Modular RAG offers remarkable adaptability by allowing module substitution or reconfiguration to address specific challenges.」</p>
 </blockquote>
-<p>白話說明：Advanced RAG 在檢索前改寫問題、檢索後重排與精簡資料；Modular RAG 把流程拆成可以替換、重組的模組，例如多次檢索、視情況決定要不要檢索。見 <a href="../concepts/rag-paradigms.html">RAG 的三個階段</a>。</p>
+<p>白話說明：Advanced RAG 在檢索前後各加一道處理；Modular RAG 把流程拆成可以替換、重組的模組。</p>
+<p>例子：綜述舉的做法包括檢索前改寫問題、檢索後重排與精簡資料、多次檢索、視情況決定要不要檢索。見 <a href="../concepts/rag-paradigms.html">RAG 的三個階段</a>。</p>
 <h3 id="s3-c6">S3-c6｜切塊大小是取捨：大塊上下文多但雜訊多，小塊雜訊少但可能資訊不完整</h3>
 <blockquote>
 <p>證據（§III-B Indexing Optimization）：「Larger chunks can capture more context, but they also generate more noise, requiring longer processing time and higher costs. While smaller chunks may not fully convey the necessary context, they do have less noise.」</p>

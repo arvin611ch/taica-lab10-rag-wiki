@@ -9,7 +9,7 @@ updated: 2026-11-23
 
 ## 1. 問題：模型只靠記憶
 
-大型語言模型的知識存在參數裡，難更新、說不出依據、會幻覺。[S1-c1](sources/s1-lewis-2020-rag.md#s1-c1)、[S3-c1](sources/s3-gao-2023-rag-survey.md#s3-c1) → [參數記憶與幻覺](concepts/parametric-memory.md)
+大型語言模型的知識存在參數裡，不易更新、難說明依據、可能幻覺。[S1-c1](sources/s1-lewis-2020-rag.md#s1-c1)、[S3-c1](sources/s3-gao-2023-rag-survey.md#s3-c1) → [參數記憶與幻覺](concepts/parametric-memory.md)
 
 ## 2. 做法：先找資料再回答
 
@@ -20,7 +20,7 @@ RAG 分三步：建索引、檢索、生成。[S3-c2](sources/s3-gao-2023-rag-su
 
 ## 3. 好處：知識可以換、答案可以查
 
-換掉文件庫就能更新知識，不用重新訓練。[S1-c5](sources/s1-lewis-2020-rag.md#s1-c5) 回答也比純生成模型更符合事實。[S1-c6](sources/s1-lewis-2020-rag.md#s1-c6) RAG 不改模型，跟 [微調](concepts/rag-vs-finetuning.md) 解決的問題不同。[S3-c7](sources/s3-gao-2023-rag-survey.md#s3-c7)
+換掉文件庫就能更新知識，不用重新訓練。[S1-c5](sources/s1-lewis-2020-rag.md#s1-c5) 在出題任務的人工評比中，評審也較常認為 RAG 比純生成模型更符合事實。[S1-c6](sources/s1-lewis-2020-rag.md#s1-c6) RAG 不改模型，跟 [微調](concepts/rag-vs-finetuning.md) 解決的問題不同。[S3-c7](sources/s3-gao-2023-rag-survey.md#s3-c7)
 
 ## 4. 會出錯的地方
 

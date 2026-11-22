@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 主張審查（r8，v2 新增：Wiki 階段的語意檢查）｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../../index.html">首頁</a><a href="../../wiki/index.html">Wiki 目錄</a><a href="../../wiki/overview.html">總覽</a><a href="../../wiki/glossary.html">名詞表</a><a href="../../slides/index.html">教學簡報</a><a href="../../workflow.html">流程與反思</a><a href="../../runs/index.html">執行紀錄</a></div></header>
+<main><h1>AI 主張審查（r8，v2 新增：Wiki 階段的語意檢查）</h1>
+<ul>
+<li>審查者：獨立的 Claude 子代理（Opus），沒有看過製作過程</li>
+<li>輸入：只有 <a href="claims_packet.html">claims_packet.md</a>（42 條主張的中文標題、白話說明、英文證據）</li>
+<li>指示：判斷中文標題與說明是否都能由自己的英文證據支持（強度、限定條件、數字）</li>
+<li>以下為審查者回覆原文</li>
+</ul>
+<hr />
+<h2>統計</h2>
+<p>共審查 42 條主張：支持 19、部分支持 23（其中輕微 14）、不支持 0。</p>
+<h2>需要修改的主張</h2>
+<table>
+<thead>
+<tr>
+<th>主張編號</th>
+<th>問題出在（標題／說明）</th>
+<th>原文片段</th>
+<th>判定</th>
+<th>問題</th>
+<th>建議改法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1-c2</td>
+<td>標題</td>
+<td>「加上可檢索的外部記憶後」</td>
+<td>部分支持（輕微）</td>
+<td>證據片段沒有主詞。它只寫 knowledge can be directly revised…，沒寫這是在講「加上檢索式記憶的混合模型」。原句前半還有 can address some of these issues，意思是只解決部分問題。</td>
+<td>把證據往前延伸到同一句開頭 Hybrid models that combine parametric memory with non-parametric (i.e., retrieval-based) memories … can address some of these issues because …，中間的引用編號也要照抄（請對照原文逐字核對）。</td>
+</tr>
+<tr>
+<td>S1-c3</td>
+<td>說明</td>
+<td>「論文中的檢索器是 DPR」</td>
+<td>部分支持（輕微）</td>
+<td>證據只說 retriever pη，沒提 DPR。這屬於論文背景。</td>
+<td>可以保留。若要嚴格，補一句原文寫明檢索器採用 DPR 的句子當證據。</td>
+</tr>
+<tr>
+<td>S1-c5</td>
+<td>標題＋說明</td>
+<td>「答案就跟著新資料改變」「82 位在 2016 到 2018 年間換人」「問『某職位現在是誰？』」</td>
+<td>部分支持（輕微）</td>
+<td>(1) 證據是 can update RAG's world knowledge，年份對得上時正確率也只有 70% 和 68%，「就跟著改變」說得太絕對。(2) 證據片段斷在 who had changed，沒有「2016 到 2018 年間」。(3) 提問句型不在證據內，「現在」是額外加的。</td>
+<td>標題改成「換掉文件庫就能更新 RAG 的知識；只靠參數的模型則需要再訓練（2016／2018 年版實驗）」。82 位那句證據延伸到句尾。提問句型刪掉或補原文句型當證據，並去掉「現在」。</td>
+</tr>
+<tr>
+<td>S1-c6</td>
+<td>標題＋說明</td>
+<td>「RAG 產生的題目」「益智題目」</td>
+<td>部分支持（輕微）</td>
+<td>證據只寫 generations，沒說是 Jeopardy 出題任務。被比較的是 RAG-Token，不是泛稱的 RAG。另外約一半的組別評審兩邊都沒選，標題寫成「比…更符合事實」偏向定論。</td>
+<td>標題改成「人工評比時，評審較常認為 RAG（RAG-Token）產生的內容比純生成模型更符合事實」。要保留「益智題目」的話，補原文說明這是 Jeopardy 出題任務的句子。</td>
+</tr>
+<tr>
+<td>S2-c2</td>
+<td>說明</td>
+<td>「問『魔戒裡的壞人是誰？』……兩句沒有共同的關鍵字」</td>
+<td>部分支持</td>
+<td>(1) 這個情境不在證據內，也沒標「例子：」。(2) 原論文的例句是 "Who is the bad guy in lord of the rings?" 對 "…the villain Sauron in the Lord of the Rings trilogy"。兩句都有 Lord of the Rings，不同的只有 bad guy 和 villain，所以「沒有共同的關鍵字」不正確（我是憑對原論文的記憶，請核對）。</td>
+<td>改成「例子：問『魔戒裡的壞人是誰？』，答案段落寫『在魔戒裡飾演反派索倫』。『壞人』和『反派』字面不同，只比對字詞容易漏掉；向量檢索看的是意思，比較有機會找到。」</td>
+</tr>
+<tr>
+<td>S2-c3</td>
+<td>標題</td>
+<td>「DPR 用兩個編碼器……再用內積找最接近的段落」</td>
+<td>部分支持</td>
+<td>證據只講訓練目標（讓問題向量和相關段落向量的內積最大）。標題的主體是「兩個編碼器」和「檢索時用內積找最近段落」，這兩點證據都沒有。</td>
+<td>補原文描述段落編碼器 E_P、問題編碼器 E_Q，以及用 dot product 算相似度的句子當證據（論文 §3.1 一帶，請逐字核對）。或把標題縮成「DPR 的訓練目標是讓問題與相關段落的向量內積最大」。</td>
+</tr>
+<tr>
+<td>S2-c4</td>
+<td>說明</td>
+<td>「至少有一段含有答案的比例」「差距隨資料集不同」</td>
+<td>部分支持（輕微）</td>
+<td>前 20 筆準確率的定義和「隨資料集不同」都不在證據內。證據也沒寫是在哪些資料集上測的。原論文是多個開放領域問答資料集的結果，並非每個都贏：依我記憶，SQuAD 上 BM25 較好，請核對。</td>
+<td>補原文對 top-k 準確率的定義句。標題加上「在多個開放領域問答資料集上」。</td>
+</tr>
+<tr>
+<td>S3-c1</td>
+<td>標題</td>
+<td>「RAG 用外部資料庫來補」</td>
+<td>部分支持</td>
+<td>證據只列出 LLM 的三個問題，完全沒提 RAG 或外部資料庫。原文接著的說法是 promising solution，語氣比「來補」保守。說明裡的「ChatGPT 這類」也不在證據內（輕微）。</td>
+<td>補摘要的下一句 Retrieval-Augmented Generation (RAG) has emerged as a promising solution by incorporating knowledge from external databases.（請逐字核對）。標題後半改成「RAG 引入外部資料庫的知識，被視為有希望的解法」。</td>
+</tr>
+<tr>
+<td>S3-c3</td>
+<td>標題＋說明</td>
+<td>「問題要用跟建索引時同一個模型」「所以必須用同一個嵌入模型」</td>
+<td>部分支持</td>
+<td>證據是在描述基本 RAG 的做法（employs the same encoding model），不是規定。說明寫成「必須」，還加了證據沒有的理由。這也和本 Wiki 的 S2-c3 矛盾：DPR 就是用兩個不同的編碼器分別轉問題和段落。</td>
+<td>標題改成「基本 RAG 檢索時，用建索引時的同一個編碼模型把問題轉成向量」。說明改成「問題和文件的向量要能放在一起比遠近；最簡單的做法是用同一個模型，DPR 則是用兩個一起訓練的編碼器」。</td>
+</tr>
+<tr>
+<td>S3-c4</td>
+<td>標題</td>
+<td>「常見的毛病：……以及寫出資料裡沒有的內容」</td>
+<td>部分支持（輕微）</td>
+<td>證據說檢索問題是 often，幻覺只說 may。標題用「常見」把兩者一起包進去，幻覺的強度被拉高了。</td>
+<td>改成「基本 RAG 的毛病：檢索常找錯或漏找資料，生成時也可能寫出資料裡沒有的內容」。</td>
+</tr>
+<tr>
+<td>S3-c5</td>
+<td>說明</td>
+<td>「檢索前改寫問題、檢索後重排與精簡資料」「例如多次檢索、視情況決定要不要檢索」</td>
+<td>部分支持（輕微）</td>
+<td>證據只說 pre-retrieval 和 post-retrieval strategies，以及模組可以替換、重組，具體技術不在證據內（屬綜述背景）。第二條證據裡的 it 也沒寫明是 Advanced RAG。</td>
+<td>補綜述列出這些技術的原句當證據，或把具體技術改成以「例子：」開頭的行。</td>
+</tr>
+<tr>
+<td>S4-c4</td>
+<td>標題＋說明</td>
+<td>「只多約 1% 到 1.5%」「文件越多……正確率卻幾乎沒變」</td>
+<td>部分支持</td>
+<td>(1) 1.5% 只是 GPT-3.5-Turbo 的數字，1% 只是 Claude-1.3 的，標題把模型拿掉了。(2) 證據只講「超過 20 篇以後」。說明寫成「文件越多正確率幾乎沒變」，拿掉了這個條件，而 20 篇以內的情況證據並沒有支持。</td>
+<td>標題改成「多給文件的效益很快飽和：從 20 篇加到 50 篇，GPT-3.5-Turbo 只多約 1.5%、Claude-1.3 只多約 1%」。說明改成「超過 20 篇之後，文件越多，提示詞越長、越慢、越貴，正確率卻只多一點點」。</td>
+</tr>
+<tr>
+<td>S5-c4</td>
+<td>說明</td>
+<td>「適合開發時快速反覆測試」</td>
+<td>部分支持（輕微）</td>
+<td>證據只說不需要人工標註的標準答案，沒提適合用在什麼情境。</td>
+<td>刪掉這句，或補原文提到 faster evaluation cycles 的句子當證據。</td>
+</tr>
+<tr>
+<td>S5-c5</td>
+<td>標題</td>
+<td>「忠實度最準」</td>
+<td>部分支持</td>
+<td>證據是 in general highly accurate，意思是大致很準，不是三項裡「最」準。標題也拿掉了 in general。「跟人類判斷比」不在證據內（輕微，屬論文背景）。</td>
+<td>改成「跟人類判斷比，忠實度的自動評分大致很準，資料相關性最難評」。要保留「最準」的話，補原文比較三項數字的表格或句子當證據。</td>
+</tr>
+<tr>
+<td>S6-c1</td>
+<td>說明</td>
+<td>「大約是一個英文單字的一部分或一兩個中文字」</td>
+<td>部分支持（輕微）</td>
+<td>token 的解釋不在證據內。而且字數換算要看模型怎麼切字：常見英文字多半就是一個 token，中文一個字可能是一個或多個 token，不能寫成固定比例。</td>
+<td>改成「token 是模型切分文字的單位，長度依模型而定；常見英文字大致是一個 token」，或標成「比喻：」。</td>
+</tr>
+<tr>
+<td>S6-c3</td>
+<td>說明</td>
+<td>「檢索時也就對不上問題」</td>
+<td>部分支持（輕微）</td>
+<td>證據只到「這塊沒寫是哪家公司、哪個時段」，沒說這會讓檢索變難。</td>
+<td>把證據延伸到同句後半 making it difficult to retrieve the right information…（請逐字核對），或刪掉這半句。</td>
+</tr>
+<tr>
+<td>S6-c4</td>
+<td>標題＋說明</td>
+<td>「50 到 100 token」「由 LLM 讀整份文件後自動寫」</td>
+<td>部分支持（輕微）</td>
+<td>標題拿掉了 usually。「讀整份文件」不在證據內，證據只寫 we turn to Claude。</td>
+<td>標題改成「通常 50 到 100 token」。說明改成「說明文字由 Claude 自動產生」，或補原文提示詞中放入整份文件的那段當證據。</td>
+</tr>
+<tr>
+<td>S6-c7</td>
+<td>說明</td>
+<td>「RAG 是為了『資料太多、放不進去』而存在」「文中指的是 Claude 當時的上限」</td>
+<td>部分支持</td>
+<td>證據只說知識庫小於 20 萬 token 時可以不用 RAG，沒說「放不進去」是 RAG 存在的唯一理由。這也和本 Wiki 的 S1-c2、S1-c5（知識可更新、可檢查）衝突。「門檻是 Claude 當時的上限」也不在證據內（輕微）。</td>
+<td>改成「資料多到放不進提示詞時，才需要靠檢索挑資料；資料少的時候，最簡單的做法就是全部給模型看」。「Claude 當時的上限」刪掉或補證據。</td>
+</tr>
+<tr>
+<td>S6-c8</td>
+<td>說明</td>
+<td>「(3) 是用 BM25 找字面相符的塊，(4) 是用向量找意思相近的塊」「取前幾名放進提示詞」</td>
+<td>部分支持（輕微）</td>
+<td>證據只出現 (3)、(4) 的編號，沒寫它們各是什麼。「取前幾名放進提示詞」也不在證據內。</td>
+<td>補原文第 3、4、6 步的句子當證據。</td>
+</tr>
+<tr>
+<td>S7-c1</td>
+<td>標題</td>
+<td>「一般 RAG」</td>
+<td>部分支持（輕微）</td>
+<td>證據片段的主詞是 the LLM，沒提到 RAG，要靠前一句才知道在講 RAG 的用法。</td>
+<td>把前一句（描述上傳檔案、提問時檢索片段再回答的那句）另列一條證據。</td>
+</tr>
+<tr>
+<td>S7-c2</td>
+<td>說明</td>
+<td>「讀完、整理、更新相關頁面，並標出新舊資料的矛盾」</td>
+<td>部分支持（輕微）</td>
+<td>這些做法不在證據內，屬原文背景。</td>
+<td>補原文描述「新增資料時 LLM 會做什麼」的句子當證據。</td>
+</tr>
+<tr>
+<td>S7-c3</td>
+<td>標題</td>
+<td>「原始資料（不修改）、Wiki（LLM 寫）、規則檔（規定格式與流程）」</td>
+<td>部分支持</td>
+<td>證據只有 There are three layers: 和 These are immutable…。三層各是什麼、Wiki 由 LLM 寫、規則檔做什麼，都不在證據內。immutable 那句的 These 也沒寫明指的是原始資料。</td>
+<td>三層各補一句原文定義（raw sources、wiki、schema 的說明句）當證據。</td>
+</tr>
+<tr>
+<td>S7-c4</td>
+<td>標題</td>
+<td>「三種操作：Ingest（加入資料）、Query（提問）、Lint（健康檢查）」</td>
+<td>部分支持</td>
+<td>證據只有 Lint 的檢查清單，而且片段本身沒寫這是 Lint。「三種操作」以及 Ingest、Query 都不在證據內。</td>
+<td>補原文 Ingest、Query、Lint 三段的開頭句（包括寫 health-check 的那句）當證據。</td>
+</tr>
+</tbody>
+</table></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

@@ -23,12 +23,12 @@
   <rect x="10" y="10" width="980" height="250" rx="12" class="lane"/>
   <text x="26" y="34" class="lt">階段一　建立 LLM Wiki（每篇資料跑一次，共 7 次）</text>
   <rect x="10" y="280" width="980" height="270" rx="12" class="lane"/>
-  <text x="26" y="304" class="lt">階段二　用 Wiki 產生教學簡報</text>
+  <text x="110" y="304" class="lt">階段二　用 Wiki 產生教學簡報</text>
 
   <!-- 階段一 節點 -->
   <rect x="30" y="70" width="130" height="62" rx="10" class="prog"/>
   <text x="95" y="97" text-anchor="middle" class="t">① 取得資料</text>
-  <text x="95" y="117" text-anchor="middle" class="s">下載、轉文字、SHA-256</text>
+  <text x="95" y="117" text-anchor="middle" class="s">下載、轉成文字</text>
 
   <rect x="195" y="70" width="140" height="62" rx="10" class="hum"/>
   <text x="265" y="97" text-anchor="middle" class="t">② 討論重點</text>
@@ -40,12 +40,12 @@
 
   <rect x="545" y="66" width="140" height="70" rx="35" class="chk"/>
   <text x="615" y="96" text-anchor="middle" class="t">④ 單頁檢查</text>
-  <text x="615" y="116" text-anchor="middle" class="s">證據逐字、數字、連結</text>
+  <text x="615" y="116" text-anchor="middle" class="s">證據、數字、連結</text>
   <rect x="575" y="48" width="80" height="18" rx="9" class="new"/><text x="615" y="61" text-anchor="middle" class="newt">v2 前移</text>
 
   <rect x="720" y="66" width="140" height="70" rx="35" class="chk"/>
   <text x="790" y="96" text-anchor="middle" class="t">⑤ Wiki 檢查</text>
-  <text x="790" y="116" text-anchor="middle" class="s">孤兒頁、目錄、覆蓋</text>
+  <text x="790" y="116" text-anchor="middle" class="s">孤兒頁、目錄</text>
 
   <rect x="885" y="76" width="90" height="50" rx="10" class="prog"/>
   <text x="930" y="106" text-anchor="middle" class="t">Wiki</text>
@@ -57,18 +57,17 @@
   <path d="M860 101H885" class="e" marker-end="url(#ah)"/>
 
   <!-- 階段一 回頭箭頭 -->
-  <path d="M615 136 V170 H440 V132" class="back" marker-end="url(#ahr)"/>
-  <text x="455" y="164" class="bl">不通過 → 改這一頁</text>
-  <path d="M600 136 V200 H440" class="back" stroke-opacity="0"/>
+  <path d="M615 136 V170 H410 V132" class="back" marker-end="url(#ahr)"/>
+  <text x="490" y="164" class="bl">不通過 → 改這一頁</text>
   <path d="M640 136 V205 H95 V132" class="back" marker-end="url(#ahr)"/>
   <text x="110" y="198" class="bl">通過 → 下一篇資料（重複 7 次）</text>
-  <path d="M790 136 V235 H440 V205" class="back" marker-end="url(#ahr)"/>
+  <path d="M790 136 V235 H470 V132" class="back" marker-end="url(#ahr)"/>
   <text x="600" y="229" class="bl">結構問題 → 補連結、補目錄</text>
 
   <!-- 階段二 節點 -->
   <rect x="30" y="340" width="120" height="62" rx="10" class="ai"/>
   <text x="90" y="367" text-anchor="middle" class="t">⑥ 查詢 Wiki</text>
-  <text x="90" y="387" text-anchor="middle" class="s">目錄→總覽→概念頁</text>
+  <text x="90" y="387" text-anchor="middle" class="s">讀目錄與概念頁</text>
 
   <rect x="175" y="340" width="120" height="62" rx="10" class="ai"/>
   <text x="235" y="367" text-anchor="middle" class="t">⑦ 整理大綱</text>
@@ -76,7 +75,7 @@
 
   <rect x="320" y="336" width="130" height="70" rx="35" class="chk"/>
   <text x="385" y="366" text-anchor="middle" class="t">⑧ 大綱檢查</text>
-  <text x="385" y="386" text-anchor="middle" class="s">出處、數字、名詞、份量</text>
+  <text x="385" y="386" text-anchor="middle" class="s">出處、數字、名詞</text>
   <rect x="345" y="318" width="80" height="18" rx="9" class="new"/><text x="385" y="331" text-anchor="middle" class="newt">v2 前移</text>
 
   <rect x="475" y="340" width="120" height="62" rx="10" class="prog"/>
@@ -100,16 +99,16 @@
   <path d="M595 371H620" class="e" marker-end="url(#ah)"/>
   <path d="M740 371H765" class="e" marker-end="url(#ah)"/>
   <path d="M885 371H905" class="e" marker-end="url(#ah)"/>
-  <path d="M930 126 V300 H90 V340" class="e" marker-end="url(#ah)"/>
+  <path d="M930 126 V270 H90 V340" class="e" marker-end="url(#ah)"/>
 
   <!-- 階段二 回頭箭頭 -->
-  <path d="M385 406 V440 H235 V402" class="back" marker-end="url(#ahr)"/>
-  <text x="250" y="434" class="bl">改大綱</text>
+  <path d="M385 406 V440 H250 V402" class="back" marker-end="url(#ahr)"/>
+  <text x="265" y="434" class="bl">改大綱</text>
   <path d="M680 406 V470 H535 V402" class="back" marker-end="url(#ahr)"/>
   <text x="550" y="464" class="bl">版面問題 → 改版型</text>
-  <path d="M825 406 V500 H220 V402" class="back" marker-end="url(#ahr)"/>
+  <path d="M825 406 V500 H200 V402" class="back" marker-end="url(#ahr)"/>
   <text x="420" y="494" class="bl">事實或教學問題 → 改大綱</text>
-  <path d="M845 406 V530 H25 V250 H420 V205" class="back" marker-end="url(#ahr)"/>
+  <path d="M845 406 V530 H22 V250 H440 V132" class="back" marker-end="url(#ahr)"/>
   <text x="440" y="524" class="bl">Wiki 本身有錯 → 回到 ③ 改 Wiki，再重跑檢查</text>
 
   <!-- 圖例 -->

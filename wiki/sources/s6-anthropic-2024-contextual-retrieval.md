@@ -21,7 +21,7 @@ updated: 2026-11-23
 
 > 證據（A primer on RAG）：「Store these embeddings in a vector database that allows for searching by semantic similarity.」
 
-白話說明：token 是模型讀文字的基本單位，大約是一個英文單字的一部分或一兩個中文字。見 [切塊](../concepts/chunking.md)、[向量嵌入](../concepts/embedding.md)。
+白話說明：token 是模型切分文字的單位，長度依模型而定；常見的英文字大致是一個 token。見 [切塊](../concepts/chunking.md)、[向量嵌入](../concepts/embedding.md)。
 
 ### S6-c2｜向量檢索可能漏掉精確比對，例如錯誤代碼「TS-999」；BM25 能補上 {#s6-c2}
 
@@ -33,11 +33,11 @@ updated: 2026-11-23
 
 ### S6-c3｜切塊會丟掉上下文：「營收成長 3%」這一塊本身沒寫是哪家公司、哪一季 {#s6-c3}
 
-> 證據（The context conundrum）：「A relevant chunk might contain the text: "The company's revenue grew by 3% over the previous quarter." However, this chunk on its own doesn't specify which company it's referring to or the relevant time period」
+> 證據（The context conundrum）：「A relevant chunk might contain the text: "The company's revenue grew by 3% over the previous quarter." However, this chunk on its own doesn't specify which company it's referring to or the relevant time period, making it difficult to retrieve the right information or use the information effectively」
 
 白話說明：一段話被切出來之後，原本靠前文才看得懂的「這家公司」就失去指涉對象，檢索時也就對不上問題。
 
-### S6-c4｜情境化檢索：在每塊前面補一段 50 到 100 token 的說明，再建向量與 BM25 索引 {#s6-c4}
+### S6-c4｜情境化檢索：在每塊前面補一段說明（通常 50 到 100 token），再建向量與 BM25 索引 {#s6-c4}
 
 > 證據（Implementing Contextual Retrieval）：「To implement Contextual Retrieval, we turn to Claude.」
 
@@ -45,9 +45,11 @@ updated: 2026-11-23
 
 > 證據（Introducing Contextual Retrieval）：「This chunk is from an SEC filing on ACME corp's performance in Q2 2023」
 
-白話說明：說明文字由 LLM 讀整份文件後自動寫，例如「這段出自 ACME 公司 2023 年第二季的財報」。
+> 證據（Implementing Contextual Retrieval）：「Here is the chunk we want to situate within the whole document」
 
-### S6-c5｜效果：找不到資料的比例下降 35%、49%，加上重排後下降 67% {#s6-c5}
+白話說明：說明文字由 Claude 自動產生；提示詞裡同時放入整份文件和這一塊，例如「這段出自 ACME 公司 2023 年第二季的財報」。
+
+### S6-c5｜效果：前 20 塊找不到資料的比例，只用情境化向量降 35%、再加情境化 BM25 降 49%、再加重排降 67% {#s6-c5}
 
 > 證據（Performance improvements）：「Contextual Embeddings reduced the top-20-chunk retrieval failure rate by 35% (5.7% → 3.7%).」
 
@@ -69,11 +71,17 @@ updated: 2026-11-23
 
 > 證據（A note on simply using a longer prompt）：「If your knowledge base is smaller than 200,000 tokens (about 500 pages of material), you can just include the entire knowledge base in the prompt that you give the model, with no need for RAG or similar methods.」
 
-白話說明：RAG 是為了「資料太多、放不進去」而存在。資料少的時候，最簡單的做法就是全部給模型看。這個門檻取決於模型能讀多長，文中指的是 Claude 當時的上限。
+白話說明：資料多到放不進提示詞時，才需要靠檢索挑資料；資料少的時候，最簡單的做法就是全部給模型看。
 
 ### S6-c8｜混合檢索：BM25 與向量檢索各找一批，再合併、去掉重複 {#s6-c8}
 
+> 證據（A primer on RAG）：「Use BM25 to find top chunks based on exact matches;」
+
+> 證據（A primer on RAG）：「Use embeddings to find top chunks based on semantic similarity;」
+
 > 證據（A primer on RAG）：「Combine and deduplicate results from (3) and (4) using rank fusion techniques;」
+
+> 證據（A primer on RAG）：「Add the top-K chunks to the prompt to generate the response.」
 
 > 證據（A primer on RAG）：「By leveraging both BM25 and embedding models, traditional RAG systems can provide more comprehensive and accurate results」
 

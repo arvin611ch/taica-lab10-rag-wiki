@@ -23,7 +23,7 @@ updated: 2026-11-23
 - RAG 由檢索器與生成器組成，檢索器回傳前 K 段。[S1-c3](../sources/s1-lewis-2020-rag.md#s1-c3)
 - 傳統檢索用 TF-IDF 或 BM25 比對關鍵字。[S2-c1](../sources/s2-karpukhin-2020-dpr.md#s2-c1)
 - DPR 用兩個編碼器把問題和段落轉成向量，比較向量的接近程度。[S2-c3](../sources/s2-karpukhin-2020-dpr.md#s2-c3)
-- 在前 20 筆的檢索準確率上，DPR 比 BM25 高 9 到 19 個百分點。[S2-c4](../sources/s2-karpukhin-2020-dpr.md#s2-c4)
+- 在多數問答資料集的前 20 筆檢索準確率上，DPR 比 BM25 高 9 到 19 個百分點（SQuAD 例外）。[S2-c4](../sources/s2-karpukhin-2020-dpr.md#s2-c4)
 - 但兩者各有所長，可以合併使用。[S2-c5](../sources/s2-karpukhin-2020-dpr.md#s2-c5)
 
 ## 相關頁面

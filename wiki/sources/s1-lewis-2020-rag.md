@@ -21,9 +21,9 @@ updated: 2026-11-23
 
 白話說明：語言模型把訓練時讀到的知識「壓」進模型的參數裡。這種記憶不容易直接改、很難看出模型為什麼這樣回答，還可能一本正經地編造內容。見 [參數記憶與幻覺](../concepts/parametric-memory.md)。
 
-### S1-c2｜加上可檢索的外部記憶後，知識可以直接修改，也能拿出來檢查 {#s1-c2}
+### S1-c2｜結合可檢索的外部記憶，可以解決其中部分問題：知識可以直接修改，也能拿出來檢查 {#s1-c2}
 
-> 證據（§1 Introduction）：「knowledge can be directly revised and expanded, and accessed knowledge can be inspected and interpreted」
+> 證據（§1 Introduction）：「Hybrid models that combine parametric memory with non-parametric (i.e., retrieval-based) memories [20, 26, 48] can address some of these issues because knowledge can be directly revised and expanded, and accessed knowledge can be inspected and interpreted」
 
 白話說明：外部記憶就是一個可以查的文件庫。要更新知識，改文件庫就好；模型用了哪幾段資料，也可以直接攤開來看。
 
@@ -31,7 +31,7 @@ updated: 2026-11-23
 
 > 證據（§2 Methods）：「a retriever pη (z|x) with parameters η that returns (top-K truncated) distributions over text passages given a query x」
 
-> 證據（§1 Introduction）：「the seq2seq model (BART [32]) then conditions on these latent documents together with the input to generate the output」
+> 證據（§1 Introduction）：「retriever (Dense Passage Retriever [26], henceforth DPR) provides latent documents conditioned on the input, and the seq2seq model (BART [32]) then conditions on these latent documents together with the input to generate the output」
 
 白話說明：論文中的檢索器是 [DPR](s2-karpukhin-2020-dpr.md)，生成器是 BART 模型。檢索器回傳前 K 份最相關的段落，生成器把問題和這些段落一起讀進去再寫答案。見 [檢索器](../concepts/retriever.md)。
 
@@ -41,27 +41,29 @@ updated: 2026-11-23
 
 白話說明：這就是「切塊」：把長文章切成固定長度的小段，才能一段一段比對。見 [切塊](../concepts/chunking.md)。
 
-### S1-c5｜換掉文件庫，答案就跟著新資料改變；只靠參數的模型則需要再訓練（2016／2018 年版實驗） {#s1-c5}
+### S1-c5｜換掉文件庫就能更新 RAG 的知識；只靠參數的模型則需要再訓練（2016／2018 年版實驗） {#s1-c5}
 
 > 證據（§4.5 Index hot-swapping）：「Parametric-only models like T5 or BART need further training to update their behavior as the world changes.」
 
 > 證據（§4.5 Index hot-swapping）：「We prepare a list of 82 world leaders who had changed」
 
+> 證據（§4.5 Index hot-swapping）：「between these dates and use a template “Who is {position}?”」
+
 > 證據（§4.5 Index hot-swapping）：「RAG answers 70% correctly using the 2016 index for 2016 world leaders and 68% using the 2018 index for 2018 world leaders.」
 
 > 證據（§4.5 Index hot-swapping）：「Accuracy with mismatched indices is low (12% with the 2018 index and 2016 leaders, 4% with the 2016 index and 2018 leaders).」
 
-白話說明：作者準備了 82 位在 2016 到 2018 年間換人的各國領袖，問「某職位現在是誰？」。用 2016 年的維基百科當文件庫，就答對 2016 年的領袖 70%；換成 2018 年的文件庫，就答對 2018 年的領袖 68%。文件庫和題目年份對不上時，正確率掉到 12% 和 4%。模型本身從頭到尾沒有重新訓練。
+白話說明：作者準備了 82 位在 2016 到 2018 年間換人的各國領袖，用「某職位是誰？」的句型提問。用 2016 年的維基百科當文件庫，就答對 2016 年的領袖 70%；換成 2018 年的文件庫，就答對 2018 年的領袖 68%。文件庫和題目年份對不上時，正確率掉到 12% 和 4%。模型本身從頭到尾沒有重新訓練。
 
 > 證據（§4.5 Index hot-swapping）：「This shows we can update RAG’s world knowledge by simply replacing its non-parametric memory.」
 
-### S1-c6｜人工評比時，RAG 產生的題目比純生成模型更符合事實 {#s1-c6}
+### S1-c6｜在出題任務的人工評比中，評審較常認為 RAG（RAG-Token）比純生成模型 BART 更符合事實 {#s1-c6}
 
 > 證據（§4.3）：「human evaluation results, over 452 pairs of generations from BART and RAG-Token」
 
 > 證據（§4.3）：「Evaluators indicated that BART was more factual than RAG in only 7.1% of cases, while RAG was more factual in 42.7% of cases」
 
-白話說明：評審比較 452 組由 BART（沒有檢索）和 RAG 產生的益智題目。認為 RAG 比較符合事實的有 42.7%，認為 BART 比較符合事實的只有 7.1%。這是單一任務的結果，不代表 RAG 永遠不會出錯。
+白話說明：論文 §4.3 是「Jeopardy 出題」任務。評審比較 452 組由 BART（沒有檢索）和 RAG-Token 產生的題目。認為 RAG 比較符合事實的有 42.7%，認為 BART 比較符合事實的只有 7.1%。這是單一任務的結果，不代表 RAG 永遠不會出錯。
 
 ## 這篇沒有強調的部分
 

@@ -25,19 +25,29 @@ updated: 2026-11-23
 
 > 證據（§1 Introduction）：「a dense retrieval system would be able to better match “bad guy” with “villain” and fetch the correct context」
 
-白話說明：問「魔戒裡的壞人是誰？」，答案段落寫的是「反派索倫」。兩句沒有共同的關鍵字，關鍵字檢索很難找到；向量檢索看的是意思，比較有機會找到。見 [向量嵌入](../concepts/embedding.md)。
+> 證據（§1 Introduction）：「“Who is the bad guy in lord of the rings?”, which can be answered from the context “Sala Baker is best known for portraying the villain Sauron in the Lord of the Rings trilogy.”」
+
+白話說明：問題說「壞人（bad guy）」，答案段落說「反派（villain）」。兩句都提到魔戒，但關鍵的這兩個詞字面不同，只比對字詞容易漏掉；向量檢索看的是意思，比較有機會找到。見 [向量嵌入](../concepts/embedding.md)。
 
 ### S2-c3｜DPR 用兩個編碼器，分別把問題和段落轉成向量，再用內積找最接近的段落 {#s2-c3}
+
+> 證據（§3.1 Overview）：「uses a dense encoder EP (·) which maps any text passage to a ddimensional real-valued vectors」
+
+> 證據（§3.1 Overview）：「At run-time, DPR applies a different encoder EQ (·) that maps the input question to a d-dimensional vector, and retrieves k passages of which vectors are the closest to the question vector.」
 
 > 證據（§1 Introduction）：「the embedding is optimized for maximizing inner products of the question and relevant passage vectors」
 
 白話說明：「雙編碼器」就是兩個轉換器：一個專門轉問題、一個專門轉段落。訓練目標是讓「問題」和「能回答它的段落」的向量越接近越好。見 [檢索器](../concepts/retriever.md)。
 
-### S2-c4｜在前 20 筆的檢索準確率上，DPR 比 BM25 高 9 到 19 個百分點 {#s2-c4}
+### S2-c4｜在多個開放領域問答資料集上，DPR 的前 20 筆檢索準確率比 BM25 高 9 到 19 個百分點（SQuAD 例外） {#s2-c4}
 
 > 證據（Abstract）：「our dense retriever outperforms a strong LuceneBM25 system greatly by 9%-19% absolute in terms of top-20 passage retrieval accuracy」
 
-白話說明：「前 20 筆準確率」是指檢索器找回的前 20 段裡，至少有一段含有答案的比例。差距隨資料集不同，在 9 到 19 個百分點之間。
+> 證據（Table 2 說明）：「measured as the percentage of top 20/100 retrieved passages that contain the answer」
+
+> 證據（§5.1 Main Results）：「With the exception of SQuAD, DPR performs consistently better than BM25 on all datasets.」
+
+白話說明：「前 20 筆準確率」是指檢索器找回的前 20 段裡含有答案的比例。在 SQuAD 這個資料集上，問題是看著段落寫的、字面重疊多，BM25 反而比較好。
 
 ### S2-c5｜兩種方法各有所長：BM25 擅長罕見關鍵字，DPR 擅長同義改寫 {#s2-c5}
 

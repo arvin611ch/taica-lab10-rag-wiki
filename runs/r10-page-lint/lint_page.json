@@ -1,0 +1,42 @@
+{
+  "node": "lint_page（單頁檢查）",
+  "ok": true,
+  "checks": [
+    {
+      "code": "W1",
+      "name": "frontmatter 欄位",
+      "checked": 1,
+      "problems": []
+    },
+    {
+      "code": "W2",
+      "name": "證據逐字出自原文",
+      "checked": 8,
+      "problems": []
+    },
+    {
+      "code": "W3",
+      "name": "主張格式",
+      "checked": 5,
+      "problems": []
+    },
+    {
+      "code": "W4",
+      "name": "數字有證據支撐",
+      "checked": 5,
+      "problems": []
+    },
+    {
+      "code": "W5",
+      "name": "引用的主張存在且連對",
+      "checked": 0,
+      "problems": []
+    },
+    {
+      "code": "W6",
+      "name": "站內連結與錨點",
+      "checked": 5,
+      "problems": []
+    }
+  ]
+}

@@ -26,7 +26,7 @@ updated: 2026-11-23
 - 實務上通常切成不超過數百 token 的小塊。[S6-c1](../sources/s6-anthropic-2024-contextual-retrieval.md#s6-c1)
 - 大塊上下文多但雜訊多，小塊雜訊少但可能資訊不完整。[S3-c6](../sources/s3-gao-2023-rag-survey.md#s3-c6)
 - 切塊會丟掉上下文。[S6-c3](../sources/s6-anthropic-2024-contextual-retrieval.md#s6-c3)
-- 情境化檢索在每塊前補 50 到 100 token 的說明。[S6-c4](../sources/s6-anthropic-2024-contextual-retrieval.md#s6-c4)
+- 情境化檢索在每塊前補一段說明，通常 50 到 100 token。[S6-c4](../sources/s6-anthropic-2024-contextual-retrieval.md#s6-c4)
 
 ## 相關頁面
 

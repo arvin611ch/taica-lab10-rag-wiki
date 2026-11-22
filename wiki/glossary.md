@@ -21,7 +21,7 @@ updated: 2026-11-23
 | 重排 | reranking、rerank | 先粗找一大批，再逐段打分只留最相關的 | [混合檢索與重排](concepts/hybrid-search.md) |
 | 上下文 | context | 模型一次讀進去的全部文字，包括問題與資料 | [長上下文的位置效應](concepts/lost-in-the-middle.md) |
 | 提示詞 | prompt | 交給模型的輸入文字 | [檢索增強生成](concepts/rag.md) |
-| token | | 模型讀文字的基本單位，大約一兩個中文字 | [切塊](concepts/chunking.md) |
+| token | | 模型切分文字的單位，長度依模型而定 | [切塊](concepts/chunking.md) |
 | 忠實度 | faithfulness | 答案的每一句是否都能在資料裡找到依據 | [怎麼評估 RAG](concepts/rag-evaluation.md) |
 | 微調 | fine-tuning | 用新資料再訓練模型、改變模型參數 | [RAG 與微調](concepts/rag-vs-finetuning.md) |
 | LLM Wiki | | 讓 LLM 事先把資料整理成持續維護的 Wiki | [LLM Wiki 與 RAG 的差別](concepts/llm-wiki-vs-rag.md) |

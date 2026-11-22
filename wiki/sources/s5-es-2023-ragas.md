@@ -43,9 +43,11 @@ updated: 2026-11-23
 
 > 證據（Abstract）：「we put forward a suite of metrics which can be used to evaluate these different dimensions without having to rely on ground truth human annotations」
 
-白話說明：不用先請人寫好「正確答案」，就能大致評估 RAG 系統，適合開發時快速反覆測試。
+> 證據（Abstract）：「We posit that such a framework can crucially contribute to faster evaluation cycles of RAG architectures」
 
-### S5-c5｜跟人類判斷比，忠實度最準，資料相關性最難評 {#s5-c5}
+白話說明：不用先請人寫好「正確答案」，就能大致評估 RAG 系統，作者認為這能加快開發時的評估循環。
+
+### S5-c5｜跟人類判斷比，忠實度的自動評分大致很準，資料相關性最難評 {#s5-c5}
 
 > 證據（§5 Experiments）：「For faithfulness, the Ragas prediction are in general highly accurate.」
 

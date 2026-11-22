@@ -13,11 +13,13 @@ updated: 2026-11-23
 
 ## 重點
 
-### S3-c1｜大型語言模型會幻覺、知識會過時、推理過程無法追溯；RAG 用外部資料庫來補 {#s3-c1}
+### S3-c1｜大型語言模型有幻覺、知識過時、推理無法追溯的問題；引入外部資料庫知識的 RAG 被視為有希望的解法 {#s3-c1}
 
 > 證據（Abstract）：「Large Language Models (LLMs) showcase impressive capabilities but encounter challenges like hallucination, outdated knowledge, and non-transparent, untraceable reasoning processes.」
 
-白話說明：跟 [S1-c1](s1-lewis-2020-rag.md#s1-c1) 說的是同一組問題，只是對象換成 ChatGPT 這類大型語言模型。見 [參數記憶與幻覺](../concepts/parametric-memory.md)。
+> 證據（Abstract）：「Retrieval-Augmented Generation (RAG) has emerged as a promising solution by incorporating knowledge from external databases.」
+
+白話說明：跟 [S1-c1](s1-lewis-2020-rag.md#s1-c1) 說的是同一組問題，只是對象換成大型語言模型。見 [參數記憶與幻覺](../concepts/parametric-memory.md)。
 
 ### S3-c2｜基本 RAG 有三步：建索引、檢索、生成 {#s3-c2}
 
@@ -27,13 +29,13 @@ updated: 2026-11-23
 
 白話說明：建索引是事前準備（切塊、轉向量、存起來）；使用者發問時才做檢索與生成。見 [檢索增強生成](../concepts/rag.md)。
 
-### S3-c3｜檢索時，問題要用跟建索引時同一個模型轉成向量 {#s3-c3}
+### S3-c3｜基本 RAG 檢索時，用建索引時的同一個編碼模型把問題轉成向量 {#s3-c3}
 
 > 證據（§II-A Naive RAG）：「the RAG system employs the same encoding model utilized during the indexing phase to transform the query into a vector representation」
 
-白話說明：問題和文件要放在同一個「向量空間」裡才能比遠近，所以必須用同一個嵌入模型。見 [向量嵌入](../concepts/embedding.md)。
+白話說明：問題和文件的向量要能放在一起比遠近。最簡單的做法是用同一個模型；[DPR](s2-karpukhin-2020-dpr.md#s2-c3) 則是用兩個一起訓練的編碼器。見 [向量嵌入](../concepts/embedding.md)。
 
-### S3-c4｜基本 RAG 常見的毛病：找錯或漏找資料，以及寫出資料裡沒有的內容 {#s3-c4}
+### S3-c4｜基本 RAG 的毛病：檢索常找錯或漏找資料，生成時也可能寫出資料裡沒有的內容 {#s3-c4}
 
 > 證據（§II-A Naive RAG）：「The retrieval phase often struggles with precision and recall, leading to the selection of misaligned or irrelevant chunks, and the missing of crucial information.」
 
@@ -49,7 +51,9 @@ updated: 2026-11-23
 
 > 證據（§II-C Modular RAG）：「Modular RAG offers remarkable adaptability by allowing module substitution or reconfiguration to address specific challenges.」
 
-白話說明：Advanced RAG 在檢索前改寫問題、檢索後重排與精簡資料；Modular RAG 把流程拆成可以替換、重組的模組，例如多次檢索、視情況決定要不要檢索。見 [RAG 的三個階段](../concepts/rag-paradigms.md)。
+白話說明：Advanced RAG 在檢索前後各加一道處理；Modular RAG 把流程拆成可以替換、重組的模組。
+
+例子：綜述舉的做法包括檢索前改寫問題、檢索後重排與精簡資料、多次檢索、視情況決定要不要檢索。見 [RAG 的三個階段](../concepts/rag-paradigms.md)。
 
 ### S3-c6｜切塊大小是取捨：大塊上下文多但雜訊多，小塊雜訊少但可能資訊不完整 {#s3-c6}
 

@@ -14,18 +14,23 @@
 <blockquote>
 <p>證據（§1 Introduction）：「synonyms or paraphrases that consist of completely different tokens may still be mapped to vectors close to each other」</p>
 <p>證據（§1 Introduction）：「a dense retrieval system would be able to better match “bad guy” with “villain” and fetch the correct context」</p>
+<p>證據（§1 Introduction）：「“Who is the bad guy in lord of the rings?”, which can be answered from the context “Sala Baker is best known for portraying the villain Sauron in the Lord of the Rings trilogy.”」</p>
 </blockquote>
-<p>白話說明：問「魔戒裡的壞人是誰？」，答案段落寫的是「反派索倫」。兩句沒有共同的關鍵字，關鍵字檢索很難找到；向量檢索看的是意思，比較有機會找到。見 <a href="../concepts/embedding.html">向量嵌入</a>。</p>
+<p>白話說明：問題說「壞人（bad guy）」，答案段落說「反派（villain）」。兩句都提到魔戒，但關鍵的這兩個詞字面不同，只比對字詞容易漏掉；向量檢索看的是意思，比較有機會找到。見 <a href="../concepts/embedding.html">向量嵌入</a>。</p>
 <h3 id="s2-c3">S2-c3｜DPR 用兩個編碼器，分別把問題和段落轉成向量，再用內積找最接近的段落</h3>
 <blockquote>
+<p>證據（§3.1 Overview）：「uses a dense encoder EP (·) which maps any text passage to a ddimensional real-valued vectors」</p>
+<p>證據（§3.1 Overview）：「At run-time, DPR applies a different encoder EQ (·) that maps the input question to a d-dimensional vector, and retrieves k passages of which vectors are the closest to the question vector.」</p>
 <p>證據（§1 Introduction）：「the embedding is optimized for maximizing inner products of the question and relevant passage vectors」</p>
 </blockquote>
 <p>白話說明：「雙編碼器」就是兩個轉換器：一個專門轉問題、一個專門轉段落。訓練目標是讓「問題」和「能回答它的段落」的向量越接近越好。見 <a href="../concepts/retriever.html">檢索器</a>。</p>
-<h3 id="s2-c4">S2-c4｜在前 20 筆的檢索準確率上，DPR 比 BM25 高 9 到 19 個百分點</h3>
+<h3 id="s2-c4">S2-c4｜在多個開放領域問答資料集上，DPR 的前 20 筆檢索準確率比 BM25 高 9 到 19 個百分點（SQuAD 例外）</h3>
 <blockquote>
 <p>證據（Abstract）：「our dense retriever outperforms a strong LuceneBM25 system greatly by 9%-19% absolute in terms of top-20 passage retrieval accuracy」</p>
+<p>證據（Table 2 說明）：「measured as the percentage of top 20/100 retrieved passages that contain the answer」</p>
+<p>證據（§5.1 Main Results）：「With the exception of SQuAD, DPR performs consistently better than BM25 on all datasets.」</p>
 </blockquote>
-<p>白話說明：「前 20 筆準確率」是指檢索器找回的前 20 段裡，至少有一段含有答案的比例。差距隨資料集不同，在 9 到 19 個百分點之間。</p>
+<p>白話說明：「前 20 筆準確率」是指檢索器找回的前 20 段裡含有答案的比例。在 SQuAD 這個資料集上，問題是看著段落寫的、字面重疊多，BM25 反而比較好。</p>
 <h3 id="s2-c5">S2-c5｜兩種方法各有所長：BM25 擅長罕見關鍵字，DPR 擅長同義改寫</h3>
 <blockquote>
 <p>證據（§5.3 Qualitative Analysis）：「Term-matching methods like BM25 are sensitive to highly selective keywords and phrases, while DPR captures lexical variations or semantic relationships better.」</p>
@@ -38,6 +43,6 @@
 <h2>這篇沒有強調的部分</h2>
 <p>訓練細節（同一批次內互為負例的訓練方式、只用 1,000 筆訓練資料就贏過 BM25）與端到端問答成績，入門簡報不使用。</p>
 <h2>用到這篇的頁面</h2>
-<p><a href="../concepts/retriever.html">檢索器</a>、<a href="../concepts/embedding.html">向量嵌入</a>、<a href="../concepts/bm25.html">關鍵字檢索 BM25</a>、<a href="../concepts/hybrid-search.html">混合檢索與重排</a></p><div class="backlinks"><b>連到這頁的頁面（9）</b><a href="../concepts/bm25.html">關鍵字檢索 BM25</a>、<a href="../concepts/embedding.html">向量嵌入</a>、<a href="../concepts/hybrid-search.html">混合檢索與重排</a>、<a href="../concepts/retriever.html">檢索器</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>、<a href="../sources/s1-lewis-2020-rag.html">S1｜Lewis et al. 2020：RAG 原始論文</a>、<a href="../sources/s6-anthropic-2024-contextual-retrieval.html">S6｜Anthropic 2024：Contextual Retrieval</a></div></main>
+<p><a href="../concepts/retriever.html">檢索器</a>、<a href="../concepts/embedding.html">向量嵌入</a>、<a href="../concepts/bm25.html">關鍵字檢索 BM25</a>、<a href="../concepts/hybrid-search.html">混合檢索與重排</a></p><div class="backlinks"><b>連到這頁的頁面（10）</b><a href="../concepts/bm25.html">關鍵字檢索 BM25</a>、<a href="../concepts/embedding.html">向量嵌入</a>、<a href="../concepts/hybrid-search.html">混合檢索與重排</a>、<a href="../concepts/retriever.html">檢索器</a>、<a href="../index.html">RAG 入門 LLM Wiki：目錄</a>、<a href="../overview.html">總覽：RAG 是什麼、為什麼需要、會在哪裡出錯</a>、<a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>、<a href="../sources/s1-lewis-2020-rag.html">S1｜Lewis et al. 2020：RAG 原始論文</a>、<a href="../sources/s3-gao-2023-rag-survey.html">S3｜Gao et al. 2023：大型語言模型的 RAG 綜述</a>、<a href="../sources/s6-anthropic-2024-contextual-retrieval.html">S6｜Anthropic 2024：Contextual Retrieval</a></div></main>
 <footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
 </body></html>

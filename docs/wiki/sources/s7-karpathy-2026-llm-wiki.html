@@ -7,22 +7,30 @@
 <h2>重點</h2>
 <h3 id="s7-c1">S7-c1｜一般 RAG 每次提問都從頭找資料，知識沒有累積</h3>
 <blockquote>
+<p>證據（The core idea）：「Most people's experience with LLMs and documents looks like RAG: you upload a collection of files, the LLM retrieves relevant chunks at query time, and generates an answer.」</p>
 <p>證據（The core idea）：「the LLM is rediscovering knowledge from scratch on every question. There's no accumulation.」</p>
 </blockquote>
 <p>白話說明：見 <a href="../concepts/llm-wiki-vs-rag.html">LLM Wiki 與 RAG 的差別</a>。</p>
 <h3 id="s7-c2">S7-c2｜LLM Wiki 讓 LLM 逐步建立並維護一個持續存在的 Wiki</h3>
 <blockquote>
 <p>證據（The core idea）：「the LLM <strong>incrementally builds and maintains a persistent wiki</strong>」</p>
+<p>證據（The core idea）：「When you add a new source, the LLM doesn't just index it for later retrieval. It reads it, extracts the key information, and integrates it into the existing wiki」</p>
 </blockquote>
 <p>白話說明：新增一篇資料時，LLM 不只是存起來等人查，而是讀完、整理、更新相關頁面，並標出新舊資料的矛盾。</p>
 <h3 id="s7-c3">S7-c3｜三層結構：原始資料（不修改）、Wiki（LLM 寫）、規則檔（規定格式與流程）</h3>
 <blockquote>
 <p>證據（Architecture）：「There are three layers:」</p>
+<p>證據（Architecture）：「<strong>Raw sources</strong> — your curated collection of source documents.」</p>
 <p>證據（Architecture）：「These are immutable — the LLM reads from them but never modifies them.」</p>
+<p>證據（Architecture）：「<strong>The wiki</strong> — a directory of LLM-generated markdown files.」</p>
+<p>證據（Architecture）：「<strong>The schema</strong> — a document (e.g. CLAUDE.md for Claude Code or AGENTS.md for Codex) that tells the LLM how the wiki is structured, what the conventions are, and what workflows to follow」</p>
 </blockquote>
 <p>白話說明：本專案的對應是 <code>raw/</code>、<code>wiki/</code> 與 <code>AGENTS.md</code>。</p>
 <h3 id="s7-c4">S7-c4｜三種操作：Ingest（加入資料）、Query（提問）、Lint（健康檢查）</h3>
 <blockquote>
+<p>證據（Operations）：「<strong>Ingest.</strong> You drop a new source into the raw collection and tell the LLM to process it.」</p>
+<p>證據（Operations）：「<strong>Query.</strong> You ask questions against the wiki.」</p>
+<p>證據（Operations）：「<strong>Lint.</strong> Periodically, ask the LLM to health-check the wiki.」</p>
 <p>證據（Operations）：「Look for: contradictions between pages, stale claims that newer sources have superseded, orphan pages with no inbound links, important concepts mentioned but lacking their own page, missing cross-references, data gaps that could be filled with a web search.」</p>
 </blockquote>
 <p>白話說明：上面這段是 Lint 要找的問題清單。本專案的 <code>pipeline/lint_wiki.py</code> 實作了其中可以用程式判斷的部分（孤兒頁、壞連結、缺頁），並加上「證據必須逐字出自原文」的檢查。</p>

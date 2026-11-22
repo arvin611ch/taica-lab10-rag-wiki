@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>執行與檢查紀錄｜RAG 入門 LLM Wiki</title><link rel="stylesheet" href="../assets/site.css"></head>
+<body><header class="top"><div class="in"><b>RAG 入門 LLM Wiki</b><a href="../index.html">首頁</a><a href="../wiki/index.html">Wiki 目錄</a><a href="../wiki/overview.html">總覽</a><a href="../wiki/glossary.html">名詞表</a><a href="../slides/index.html">教學簡報</a><a href="../workflow.html">流程與反思</a><a href="../runs/index.html">執行紀錄</a></div></header>
+<main><h1>執行與檢查紀錄</h1>
+<p>2026-11-23 從頭到尾跑一次的所有檢查。報告由檢查程式自動產生；AI 審查保留審查者的回覆原文。流程說明與反思見 <a href="../workflow.html">流程設計與反思</a>。</p>
+<table>
+<thead>
+<tr>
+<th>回合</th>
+<th>流程</th>
+<th>節點</th>
+<th>結果</th>
+<th>報告</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r1</td>
+<td>v1</td>
+<td>⑤ Wiki 檢查</td>
+<td>未通過：26 個問題</td>
+<td><a href="r1-wiki-lint/lint_wiki.html">lint_wiki</a></td>
+</tr>
+<tr>
+<td>r2</td>
+<td>v1</td>
+<td>⑤ Wiki 檢查</td>
+<td>通過</td>
+<td><a href="r2-wiki-lint/lint_wiki.html">lint_wiki</a></td>
+</tr>
+<tr>
+<td>r3</td>
+<td>v1</td>
+<td>⑩ 簡報檢查</td>
+<td>第一次執行時在測驗頁當掉（簡報 bug＋檢查程式 bug，修好後重跑）；未通過：4 個問題</td>
+<td><a href="r3-deck/check_deck.html">check_deck</a></td>
+</tr>
+<tr>
+<td>r4</td>
+<td>v1</td>
+<td>⑩ 簡報檢查</td>
+<td>未通過：1 個問題</td>
+<td><a href="r4-deck/check_deck.html">check_deck</a></td>
+</tr>
+<tr>
+<td>r5</td>
+<td>v1</td>
+<td>⑩ 簡報檢查＋⑪ AI 審查</td>
+<td>程式檢查通過；AI 審查找出新手卡住 10 處、事實查核部分支持 17、不支持 2</td>
+<td><a href="r5-deck/check_deck.html">check_deck</a>、<a href="r5-deck/ai_review_novice.html">新手審查</a>、<a href="r5-deck/ai_review_factcheck.html">事實查核</a>、<a href="r5-deck/review_packet.html">審查材料</a></td>
+</tr>
+<tr>
+<td>r6</td>
+<td>v1</td>
+<td>⑤ Wiki 檢查</td>
+<td>通過（接回簡報大綱頁的連結）</td>
+<td><a href="r6-wiki-lint/lint_wiki.html">lint_wiki</a></td>
+</tr>
+<tr>
+<td>r7</td>
+<td>v2</td>
+<td>④ 單頁檢查＋⑤ Wiki 檢查</td>
+<td>通過</td>
+<td><a href="r7-page-lint/lint_page.html">lint_page</a>、<a href="r7-wiki-lint/lint_wiki.html">lint_wiki</a></td>
+</tr>
+<tr>
+<td>r8</td>
+<td>v2</td>
+<td>④ AI 主張審查</td>
+<td>42 條主張：支持 19、部分支持 23、不支持 0</td>
+<td><a href="r8-claims/ai_claims_audit.html">主張審查</a>、<a href="r8-claims/claims_packet.html">審查材料</a></td>
+</tr>
+<tr>
+<td>r9</td>
+<td>v2</td>
+<td>⑧ 大綱檢查＋⑩ 簡報檢查</td>
+<td>通過</td>
+<td><a href="r9-deck/check_outline.html">check_outline</a>、<a href="r9-deck/check_deck.html">check_deck</a></td>
+</tr>
+<tr>
+<td>r10</td>
+<td>v2</td>
+<td>④ 單頁＋⑤＋⑧＋⑩＋⑪ 第二輪 AI 審查</td>
+<td>單頁檢查先攔下 1 個問題，修正後全部通過；第二輪 AI 審查：事實查核支持 35、部分支持 10、不支持 0；新手 4/5、測驗全對</td>
+<td><a href="r10-page-lint/lint_page.html">lint_page</a>、<a href="r10-wiki-lint/lint_wiki.html">lint_wiki</a>、<a href="r10-deck/check_outline.html">check_outline</a>、<a href="r10-deck/check_deck.html">check_deck</a>、<a href="r10-deck/ai_review_novice.html">新手審查</a>、<a href="r10-deck/ai_review_factcheck.html">事實查核</a></td>
+</tr>
+<tr>
+<td>r11</td>
+<td>v2</td>
+<td>⑧＋⑩ 最後一次修正後的檢查</td>
+<td>全部通過（大綱檢查先攔下 2 次超字數）；依停止條件不再送 AI 審查</td>
+<td><a href="r11-deck/check_outline.html">check_outline</a>、<a href="r11-deck/check_deck.html">check_deck</a>、<a href="r11-wiki-lint/lint_wiki.html">lint_wiki</a></td>
+</tr>
+</tbody>
+</table>
+<p>說明：</p>
+<ul>
+<li>⑧ 大綱檢查在產生簡報前攔下超字數的 3 次（v2 第一次修大綱時 1 次、r11 之前 2 次），執行時沒有加 <code>--out</code>，所以沒有留下報告檔；r9–r11 的 check_outline 是之後通過的那一次。過程記在 <a href="../wiki/log.html">Wiki 時間紀錄</a>。</li>
+<li>r7 的單頁檢查報告只保留最後一次（每次執行會覆蓋同一個檔案）；當時逐頁執行的結果都是通過。</li>
+<li>簡報截圖存在本機的 <code>runs/*/shots/</code>，因為檔案多，沒有放進 repo。</li>
+</ul></main>
+<footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
+</body></html>

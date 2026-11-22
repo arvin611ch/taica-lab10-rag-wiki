@@ -23,7 +23,7 @@ RAG 分成「事前準備」與「每次提問」兩段：
 
 - 這個名稱來自 2020 年的論文：檢索器負責找文件，生成器根據文件與問題寫答案。[S1-c3](../sources/s1-lewis-2020-rag.md#s1-c3)
 - 綜述論文把基本流程整理成建索引、檢索、生成三步。[S3-c2](../sources/s3-gao-2023-rag-survey.md#s3-c2)
-- 它要解決的是模型只靠參數記憶的問題：難更新、說不出依據、會幻覺。[S1-c1](../sources/s1-lewis-2020-rag.md#s1-c1)、[S3-c1](../sources/s3-gao-2023-rag-survey.md#s3-c1)
+- 它要解決的是模型只靠參數記憶的問題：不易更新、難說明依據、可能幻覺。[S1-c1](../sources/s1-lewis-2020-rag.md#s1-c1)、[S3-c1](../sources/s3-gao-2023-rag-survey.md#s3-c1)
 - 好處之一是換掉文件庫就能更新知識，不必重新訓練模型。[S1-c5](../sources/s1-lewis-2020-rag.md#s1-c5)
 - 資料量小到能整份放進提示詞時，不一定需要 RAG。[S6-c7](../sources/s6-anthropic-2024-contextual-retrieval.md#s6-c7)
 
