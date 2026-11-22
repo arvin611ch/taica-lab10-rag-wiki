@@ -1,0 +1,103 @@
+{
+  "note": "原始資料清單。全文檔（raw/files、raw/text）只留在本機、不放進公開 repo；這份清單記錄網址、取得時間與 SHA-256，任何人都能照網址重新下載並比對。",
+  "sources": [
+    {
+      "id": "S1",
+      "slug": "s1-lewis-2020-rag",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "authors": "Patrick Lewis et al.",
+      "year": 2020,
+      "venue": "NeurIPS 2020",
+      "url": "https://arxiv.org/abs/2005.11401",
+      "fetch_url": "https://arxiv.org/pdf/2005.11401v4",
+      "kind": "pdf",
+      "retrieved_at": "2026-11-23T00:46:57+08:00",
+      "sha256": "23e3249e9a1e75418d82efecab0ea8c4d033b89c93742f63208d47ce01f21233",
+      "text_chars": 69469
+    },
+    {
+      "id": "S2",
+      "slug": "s2-karpukhin-2020-dpr",
+      "title": "Dense Passage Retrieval for Open-Domain Question Answering",
+      "authors": "Vladimir Karpukhin et al.",
+      "year": 2020,
+      "venue": "EMNLP 2020",
+      "url": "https://arxiv.org/abs/2004.04906",
+      "fetch_url": "https://arxiv.org/pdf/2004.04906v3",
+      "kind": "pdf",
+      "retrieved_at": "2026-11-23T00:46:57+08:00",
+      "sha256": "3e67fc1a9977715acf722d85f0b7d124b03715e975f6310a4d6c12094190912f",
+      "text_chars": 55974
+    },
+    {
+      "id": "S3",
+      "slug": "s3-gao-2023-rag-survey",
+      "title": "Retrieval-Augmented Generation for Large Language Models: A Survey",
+      "authors": "Yunfan Gao et al.",
+      "year": 2023,
+      "venue": "arXiv",
+      "url": "https://arxiv.org/abs/2312.10997",
+      "fetch_url": "https://arxiv.org/pdf/2312.10997v5",
+      "kind": "pdf",
+      "retrieved_at": "2026-11-23T00:46:58+08:00",
+      "sha256": "396a0fadeb4cd40f5c8ccc36b73a0815f6cb4d7f6bfa53b6c48c1f9aba7c7e02",
+      "text_chars": 109539
+    },
+    {
+      "id": "S4",
+      "slug": "s4-liu-2023-lost-in-the-middle",
+      "title": "Lost in the Middle: How Language Models Use Long Contexts",
+      "authors": "Nelson F. Liu et al.",
+      "year": 2023,
+      "venue": "TACL 2024",
+      "url": "https://arxiv.org/abs/2307.03172",
+      "fetch_url": "https://arxiv.org/pdf/2307.03172v3",
+      "kind": "pdf",
+      "retrieved_at": "2026-11-23T00:46:58+08:00",
+      "sha256": "653b29619eae2ae4b361d7bdcdc06db4bedcb1b0eabe31814036beca8c1af0b1",
+      "text_chars": 65289
+    },
+    {
+      "id": "S5",
+      "slug": "s5-es-2023-ragas",
+      "title": "RAGAS: Automated Evaluation of Retrieval Augmented Generation",
+      "authors": "Shahul Es et al.",
+      "year": 2023,
+      "venue": "EACL 2024 (demo)",
+      "url": "https://arxiv.org/abs/2309.15217",
+      "fetch_url": "https://arxiv.org/pdf/2309.15217v2",
+      "kind": "pdf",
+      "retrieved_at": "2026-11-23T00:46:58+08:00",
+      "sha256": "6c24762a3f277fd120ed1adf34b01420ecf92f18ff6d1b5435fa0a09cb804ecb",
+      "text_chars": 31787
+    },
+    {
+      "id": "S6",
+      "slug": "s6-anthropic-2024-contextual-retrieval",
+      "title": "Introducing Contextual Retrieval",
+      "authors": "Anthropic",
+      "year": 2024,
+      "venue": "Anthropic 技術文章",
+      "url": "https://www.anthropic.com/engineering/contextual-retrieval",
+      "fetch_url": "https://www.anthropic.com/engineering/contextual-retrieval",
+      "kind": "html",
+      "retrieved_at": "2026-11-23T00:46:59+08:00",
+      "sha256": "d48ec555bc890c5e89ad94e6b73d1934e3f028a4b24191c6c5115dc4c19798fa",
+      "text_chars": 15308
+    },
+    {
+      "id": "S7",
+      "slug": "s7-karpathy-2026-llm-wiki",
+      "title": "LLM Wiki",
+      "authors": "Andrej Karpathy",
+      "year": 2026,
+      "venue": "GitHub Gist",
+      "url": "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f",
+      "fetch_url": "https://gist.githubusercontent.com/karpathy/442a6bf555914893e9891c11519de94f/raw/llm-wiki.md",
+      "kind": "md",
+      "retrieved_at": "2026-11-23T00:46:59+08:00",
+      "sha256": "dc3efe98ae62f23dd08acad13aba2e95287beb20b6bec2f4af0423557fe37401",
+      "text_chars": 11923
+    }
+  ]
+}

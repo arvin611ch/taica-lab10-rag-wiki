@@ -1,0 +1,54 @@
+---
+id: S2
+title: S2｜Karpukhin et al. 2020：DPR 稠密段落檢索
+type: source
+url: https://arxiv.org/abs/2004.04906
+updated: 2026-11-23
+---
+# S2｜Karpukhin et al. 2020：DPR 稠密段落檢索
+
+**原文：** Vladimir Karpukhin et al., *Dense Passage Retrieval for Open-Domain Question Answering*, EMNLP 2020. <https://arxiv.org/abs/2004.04906>
+
+**一句話摘要：** 把問題和段落都轉成向量，用「意思相近」而不是「字面相同」來找資料；在多個問答資料集上贏過傳統關鍵字檢索 BM25。S1 的 RAG 用的檢索器就是 DPR。
+
+## 重點
+
+### S2-c1｜傳統的關鍵字檢索（TF-IDF、BM25）是比對字詞，像查索引 {#s2-c1}
+
+> 證據（§1 Introduction）：「Retrieval in open-domain QA is usually implemented using TF-IDF or BM25 (Robertson and Zaragoza, 2009), which matches keywords efficiently with an inverted index」
+
+白話說明：關鍵字檢索看的是問題裡的詞有沒有出現在文件裡。見 [關鍵字檢索 BM25](../concepts/bm25.md)。
+
+### S2-c2｜用向量表示意思，換句話說也找得到：「bad guy」可以對到「villain」 {#s2-c2}
+
+> 證據（§1 Introduction）：「synonyms or paraphrases that consist of completely different tokens may still be mapped to vectors close to each other」
+
+> 證據（§1 Introduction）：「a dense retrieval system would be able to better match “bad guy” with “villain” and fetch the correct context」
+
+白話說明：問「魔戒裡的壞人是誰？」，答案段落寫的是「反派索倫」。兩句沒有共同的關鍵字，關鍵字檢索很難找到；向量檢索看的是意思，所以找得到。見 [向量嵌入](../concepts/embedding.md)。
+
+### S2-c3｜DPR 用兩個編碼器，分別把問題和段落轉成向量，再用內積找最接近的段落 {#s2-c3}
+
+> 證據（§1 Introduction）：「the embedding is optimized for maximizing inner products of the question and relevant passage vectors」
+
+白話說明：「雙編碼器」就是兩個轉換器：一個專門轉問題、一個專門轉段落。訓練目標是讓「問題」和「能回答它的段落」的向量越接近越好。見 [檢索器](../concepts/retriever.md)。
+
+### S2-c4｜在前 20 筆的檢索準確率上，DPR 比 BM25 高 9 到 19 個百分點 {#s2-c4}
+
+> 證據（Abstract）：「our dense retriever outperforms a strong LuceneBM25 system greatly by 9%-19% absolute in terms of top-20 passage retrieval accuracy」
+
+白話說明：「前 20 筆準確率」是指檢索器找回的前 20 段裡，至少有一段含有答案的比例。差距隨資料集不同，在 9 到 19 個百分點之間。
+
+### S2-c5｜兩種方法各有所長：BM25 擅長罕見關鍵字，DPR 擅長同義改寫 {#s2-c5}
+
+> 證據（§5.3 Qualitative Analysis）：「Term-matching methods like BM25 are sensitive to highly selective keywords and phrases, while DPR captures lexical variations or semantic relationships better.」
+
+白話說明：遇到專有名詞、編號、少見人名，字面比對反而準；遇到換句話說，向量比對比較好。論文也發現把兩者分數合併，有些情況下結果更好。這是 [混合檢索](../concepts/hybrid-search.md) 的理由。
+
+## 這篇沒有強調的部分
+
+訓練細節（同一批次內互為負例的訓練方式、只用 1,000 筆訓練資料就贏過 BM25）與端到端問答成績，入門簡報不使用。
+
+## 用到這篇的頁面
+
+[檢索器](../concepts/retriever.md)、[向量嵌入](../concepts/embedding.md)、[關鍵字檢索 BM25](../concepts/bm25.md)、[混合檢索與重排](../concepts/hybrid-search.md)
