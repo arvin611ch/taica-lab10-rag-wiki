@@ -8,7 +8,7 @@
 <ul>
 <li>證據：Large pre-trained language models have been shown to store factual knowledge in their parameters</li>
 <li>證據：They cannot easily expand or revise their memory, can’t straightforwardly provide insight into their predictions, and may produce “hallucinations”</li>
-<li>說明：白話說明：語言模型把訓練時讀到的知識「壓」進模型的參數裡。這種記憶不容易直接改、很難看出模型為什麼這樣回答，還可能一本正經地編造內容。見 <a href="../concepts/parametric-memory.html">參數記憶與幻覺</a>。</li>
+<li>說明：白話說明：語言模型把訓練時讀到的知識「壓」進模型的參數裡。這種記憶不容易直接改、很難看出模型為什麼這樣回答，還可能一本正經地編造內容。見 <a href="../../wiki/concepts/parametric-memory.html">參數記憶與幻覺</a>。</li>
 </ul>
 <h3>S1-c2｜加上可檢索的外部記憶後，知識可以直接修改，也能拿出來檢查</h3>
 <ul>
@@ -19,12 +19,12 @@
 <ul>
 <li>證據：a retriever pη (z|x) with parameters η that returns (top-K truncated) distributions over text passages given a query x</li>
 <li>證據：the seq2seq model (BART [32]) then conditions on these latent documents together with the input to generate the output</li>
-<li>說明：白話說明：論文中的檢索器是 <a href="s2-karpukhin-2020-dpr.html">DPR</a>，生成器是 BART 模型。檢索器回傳前 K 份最相關的段落，生成器把問題和這些段落一起讀進去再寫答案。見 <a href="../concepts/retriever.html">檢索器</a>。</li>
+<li>說明：白話說明：論文中的檢索器是 <a href="../../wiki/sources/s2-karpukhin-2020-dpr.html">DPR</a>，生成器是 BART 模型。檢索器回傳前 K 份最相關的段落，生成器把問題和這些段落一起讀進去再寫答案。見 <a href="../../wiki/concepts/retriever.html">檢索器</a>。</li>
 </ul>
 <h3>S1-c4｜論文的外部資料庫是維基百科，每 100 個英文詞（word）切成一段，共 2,100 萬段</h3>
 <ul>
 <li>證據：Each Wikipedia article is split into disjoint 100-word chunks, to make a total of 21M documents.</li>
-<li>說明：白話說明：這就是「切塊」：把長文章切成固定長度的小段，才能一段一段比對。見 <a href="../concepts/chunking.html">切塊</a>。</li>
+<li>說明：白話說明：這就是「切塊」：把長文章切成固定長度的小段，才能一段一段比對。見 <a href="../../wiki/concepts/chunking.html">切塊</a>。</li>
 </ul>
 <h3>S1-c5｜換掉文件庫，答案就跟著新資料改變；只靠參數的模型則需要再訓練（2016／2018 年版實驗）</h3>
 <ul>
@@ -45,18 +45,18 @@
 <h3>S2-c1｜傳統的關鍵字檢索（TF-IDF、BM25）是比對字詞，像查索引</h3>
 <ul>
 <li>證據：Retrieval in open-domain QA is usually implemented using TF-IDF or BM25 (Robertson and Zaragoza, 2009), which matches keywords efficiently with an inverted index</li>
-<li>說明：白話說明：關鍵字檢索看的是問題裡的詞有沒有出現在文件裡。見 <a href="../concepts/bm25.html">關鍵字檢索 BM25</a>。</li>
+<li>說明：白話說明：關鍵字檢索看的是問題裡的詞有沒有出現在文件裡。見 <a href="../../wiki/concepts/bm25.html">關鍵字檢索 BM25</a>。</li>
 </ul>
 <h3>S2-c2｜用向量表示意思，換句話說也比較容易找到：「bad guy」比較能對到「villain」</h3>
 <ul>
 <li>證據：synonyms or paraphrases that consist of completely different tokens may still be mapped to vectors close to each other</li>
 <li>證據：a dense retrieval system would be able to better match “bad guy” with “villain” and fetch the correct context</li>
-<li>說明：白話說明：問「魔戒裡的壞人是誰？」，答案段落寫的是「反派索倫」。兩句沒有共同的關鍵字，關鍵字檢索很難找到；向量檢索看的是意思，比較有機會找到。見 <a href="../concepts/embedding.html">向量嵌入</a>。</li>
+<li>說明：白話說明：問「魔戒裡的壞人是誰？」，答案段落寫的是「反派索倫」。兩句沒有共同的關鍵字，關鍵字檢索很難找到；向量檢索看的是意思，比較有機會找到。見 <a href="../../wiki/concepts/embedding.html">向量嵌入</a>。</li>
 </ul>
 <h3>S2-c3｜DPR 用兩個編碼器，分別把問題和段落轉成向量，再用內積找最接近的段落</h3>
 <ul>
 <li>證據：the embedding is optimized for maximizing inner products of the question and relevant passage vectors</li>
-<li>說明：白話說明：「雙編碼器」就是兩個轉換器：一個專門轉問題、一個專門轉段落。訓練目標是讓「問題」和「能回答它的段落」的向量越接近越好。見 <a href="../concepts/retriever.html">檢索器</a>。</li>
+<li>說明：白話說明：「雙編碼器」就是兩個轉換器：一個專門轉問題、一個專門轉段落。訓練目標是讓「問題」和「能回答它的段落」的向量越接近越好。見 <a href="../../wiki/concepts/retriever.html">檢索器</a>。</li>
 </ul>
 <h3>S2-c4｜在前 20 筆的檢索準確率上，DPR 比 BM25 高 9 到 19 個百分點</h3>
 <ul>
@@ -68,60 +68,60 @@
 <li>證據：Term-matching methods like BM25 are sensitive to highly selective keywords and phrases, while DPR captures lexical variations or semantic relationships better.</li>
 <li>證據：Results can be improved further in some cases by combining DPR with BM25 in both single- and multi-dataset settings.</li>
 <li>說明：白話說明：遇到專有名詞、編號、少見人名，字面比對反而準；遇到換句話說，向量比對比較好。論文也發現把兩者分數合併，有些情況下結果更好。</li>
-<li>說明：這是 <a href="../concepts/hybrid-search.html">混合檢索</a> 的理由。</li>
+<li>說明：這是 <a href="../../wiki/concepts/hybrid-search.html">混合檢索</a> 的理由。</li>
 </ul>
 <h2>S3｜Gao et al. 2023：大型語言模型的 RAG 綜述</h2>
 <h3>S3-c1｜大型語言模型會幻覺、知識會過時、推理過程無法追溯；RAG 用外部資料庫來補</h3>
 <ul>
 <li>證據：Large Language Models (LLMs) showcase impressive capabilities but encounter challenges like hallucination, outdated knowledge, and non-transparent, untraceable reasoning processes.</li>
-<li>說明：白話說明：跟 <a href="s1-lewis-2020-rag.html#s1-c1">S1-c1</a> 說的是同一組問題，只是對象換成 ChatGPT 這類大型語言模型。見 <a href="../concepts/parametric-memory.html">參數記憶與幻覺</a>。</li>
+<li>說明：白話說明：跟 <a href="../../wiki/sources/s1-lewis-2020-rag.html#s1-c1">S1-c1</a> 說的是同一組問題，只是對象換成 ChatGPT 這類大型語言模型。見 <a href="../../wiki/concepts/parametric-memory.html">參數記憶與幻覺</a>。</li>
 </ul>
 <h3>S3-c2｜基本 RAG 有三步：建索引、檢索、生成</h3>
 <ul>
 <li>證據：It mainly consists of 3 steps. 1) Indexing. Documents are split into chunks, encoded into vectors, and stored in a vector database.</li>
 <li>證據：2) Retrieval. Retrieve the Top k chunks most relevant to the question based on semantic similarity. 3) Generation. Input the original question and the retrieved chunks together into LLM to generate the final answer.</li>
-<li>說明：白話說明：建索引是事前準備（切塊、轉向量、存起來）；使用者發問時才做檢索與生成。見 <a href="../concepts/rag.html">檢索增強生成</a>。</li>
+<li>說明：白話說明：建索引是事前準備（切塊、轉向量、存起來）；使用者發問時才做檢索與生成。見 <a href="../../wiki/concepts/rag.html">檢索增強生成</a>。</li>
 </ul>
 <h3>S3-c3｜檢索時，問題要用跟建索引時同一個模型轉成向量</h3>
 <ul>
 <li>證據：the RAG system employs the same encoding model utilized during the indexing phase to transform the query into a vector representation</li>
-<li>說明：白話說明：問題和文件要放在同一個「向量空間」裡才能比遠近，所以必須用同一個嵌入模型。見 <a href="../concepts/embedding.html">向量嵌入</a>。</li>
+<li>說明：白話說明：問題和文件要放在同一個「向量空間」裡才能比遠近，所以必須用同一個嵌入模型。見 <a href="../../wiki/concepts/embedding.html">向量嵌入</a>。</li>
 </ul>
 <h3>S3-c4｜基本 RAG 常見的毛病：找錯或漏找資料，以及寫出資料裡沒有的內容</h3>
 <ul>
 <li>證據：The retrieval phase often struggles with precision and recall, leading to the selection of misaligned or irrelevant chunks, and the missing of crucial information.</li>
 <li>證據：the model may face the issue of hallucination, where it produces content not supported by the retrieved context</li>
-<li>說明：白話說明：RAG 不會讓幻覺消失。檢索可能找錯，模型也可能沒照著資料寫。見 <a href="../concepts/rag-failures.html">RAG 的常見失敗</a>。</li>
+<li>說明：白話說明：RAG 不會讓幻覺消失。檢索可能找錯，模型也可能沒照著資料寫。見 <a href="../../wiki/concepts/rag-failures.html">RAG 的常見失敗</a>。</li>
 </ul>
 <h3>S3-c5｜RAG 的演進分成 Naive、Advanced、Modular 三個階段</h3>
 <ul>
 <li>證據：we categorize it into three stages: Naive RAG, Advanced RAG, and Modular RAG</li>
 <li>證據：Focusing on enhancing retrieval quality, it employs pre-retrieval and post-retrieval strategies.</li>
 <li>證據：Modular RAG offers remarkable adaptability by allowing module substitution or reconfiguration to address specific challenges.</li>
-<li>說明：白話說明：Advanced RAG 在檢索前改寫問題、檢索後重排與精簡資料；Modular RAG 把流程拆成可以替換、重組的模組，例如多次檢索、視情況決定要不要檢索。見 <a href="../concepts/rag-paradigms.html">RAG 的三個階段</a>。</li>
+<li>說明：白話說明：Advanced RAG 在檢索前改寫問題、檢索後重排與精簡資料；Modular RAG 把流程拆成可以替換、重組的模組，例如多次檢索、視情況決定要不要檢索。見 <a href="../../wiki/concepts/rag-paradigms.html">RAG 的三個階段</a>。</li>
 </ul>
 <h3>S3-c6｜切塊大小是取捨：大塊上下文多但雜訊多，小塊雜訊少但可能資訊不完整</h3>
 <ul>
 <li>證據：Larger chunks can capture more context, but they also generate more noise, requiring longer processing time and higher costs. While smaller chunks may not fully convey the necessary context, they do have less noise.</li>
-<li>說明：白話說明：見 <a href="../concepts/chunking.html">切塊</a>。</li>
+<li>說明：白話說明：見 <a href="../../wiki/concepts/chunking.html">切塊</a>。</li>
 </ul>
 <h3>S3-c7｜RAG 像給模型一本專用課本；微調像學生把知識內化，適合學格式與風格</h3>
 <ul>
 <li>證據：RAG can be likened to providing a model with a tailored textbook for information retrieval, ideal for precise information retrieval tasks. In contrast, FT is comparable to a student internalizing knowledge over time, suitable for scenarios requiring replication of specific structures, styles, or formats.</li>
 <li>證據：RAG and FT are not mutually exclusive and can complement each other</li>
-<li>說明：白話說明：「微調」（fine-tuning）是拿新資料再訓練模型、改變模型參數。RAG 不改模型，只在回答時給資料。兩者可以並用。見 <a href="../concepts/rag-vs-finetuning.html">RAG 與微調</a>。</li>
+<li>說明：白話說明：「微調」（fine-tuning）是拿新資料再訓練模型、改變模型參數。RAG 不改模型，只在回答時給資料。兩者可以並用。見 <a href="../../wiki/concepts/rag-vs-finetuning.html">RAG 與微調</a>。</li>
 </ul>
 <h3>S3-c8｜評估 RAG 有三個品質分數：資料相關性、答案忠實度、答案切題度</h3>
 <ul>
 <li>證據：Quality scores include context relevance, answer faithfulness, and answer relevance.</li>
-<li>說明：白話說明：見 <a href="../concepts/rag-evaluation.html">怎麼評估 RAG</a>。</li>
+<li>說明：白話說明：見 <a href="../../wiki/concepts/rag-evaluation.html">怎麼評估 RAG</a>。</li>
 </ul>
 <h2>S4｜Liu et al. 2023：Lost in the Middle</h2>
 <h3>S4-c1｜模型的表現常呈 U 型：相關資料在開頭或結尾時通常最好，在長篇內容的中間時明顯變差</h3>
 <ul>
 <li>證據：performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts</li>
 <li>證據：k documents (e.g., passages from Wikipedia), where exactly one of the documents contains the answer</li>
-<li>說明：白話說明：實驗一次給模型好幾篇文件，其中只有一篇含有答案，再移動那篇的位置。正確率畫出來像字母 U。見 <a href="../concepts/lost-in-the-middle.html">長上下文的位置效應</a>。</li>
+<li>說明：白話說明：實驗一次給模型好幾篇文件，其中只有一篇含有答案，再移動那篇的位置。正確率畫出來像字母 U。見 <a href="../../wiki/concepts/lost-in-the-middle.html">長上下文的位置效應</a>。</li>
 </ul>
 <h3>S4-c2｜答案放在中間時，GPT-3.5-Turbo 甚至比完全不給文件時還差</h3>
 <ul>
@@ -143,13 +143,13 @@
 <h3>S4-c5｜建議的對策：重排，把相關資料移到前面；或在適當時候少放幾篇</h3>
 <ul>
 <li>證據：effective reranking of retrieved documents (pushing relevant information closer to the start of the input context) or ranked list truncation (retrieving fewer documents when appropriate; Arampatzis et al., 2009) may be promising directions</li>
-<li>說明：白話說明：這是作者提出的方向，不是已驗證的保證。見 <a href="../concepts/hybrid-search.html">混合檢索與重排</a>。</li>
+<li>說明：白話說明：這是作者提出的方向，不是已驗證的保證。見 <a href="../../wiki/concepts/hybrid-search.html">混合檢索與重排</a>。</li>
 </ul>
 <h2>S5｜Es et al. 2023：RAGAS 自動評估</h2>
 <h3>S5-c1｜忠實度：答案應該建立在找回來的資料上</h3>
 <ul>
 <li>證據：Faithfulness refers to the idea that the answer should be grounded in the given context.</li>
-<li>說明：白話說明：答案裡的每一句話，都應該能從找回來的資料推得出來。見 <a href="../concepts/rag-evaluation.html">怎麼評估 RAG</a>。</li>
+<li>說明：白話說明：答案裡的每一句話，都應該能從找回來的資料推得出來。見 <a href="../../wiki/concepts/rag-evaluation.html">怎麼評估 RAG</a>。</li>
 </ul>
 <h3>S5-c2｜答案切題度與資料相關性：答案要回應問題，找回的資料要精簡</h3>
 <ul>
@@ -182,13 +182,13 @@
 <li>證據：Break down the knowledge base (the “corpus” of documents) into smaller chunks of text, usually no more than a few hundred tokens;</li>
 <li>證據：Use an embedding model to convert these chunks into vector embeddings that encode meaning;</li>
 <li>證據：Store these embeddings in a vector database that allows for searching by semantic similarity.</li>
-<li>說明：白話說明：token 是模型讀文字的基本單位，大約是一個英文單字的一部分或一兩個中文字。見 <a href="../concepts/chunking.html">切塊</a>、<a href="../concepts/embedding.html">向量嵌入</a>。</li>
+<li>說明：白話說明：token 是模型讀文字的基本單位，大約是一個英文單字的一部分或一兩個中文字。見 <a href="../../wiki/concepts/chunking.html">切塊</a>、<a href="../../wiki/concepts/embedding.html">向量嵌入</a>。</li>
 </ul>
 <h3>S6-c2｜向量檢索可能漏掉精確比對，例如錯誤代碼「TS-999」；BM25 能補上</h3>
 <ul>
 <li>證據：While embedding models excel at capturing semantic relationships, they can miss crucial exact matches.</li>
 <li>證據：An embedding model might find content about error codes in general, but could miss the exact "TS-999" match. BM25 looks for this specific text string to identify the relevant documentation.</li>
-<li>說明：白話說明：跟 <a href="s2-karpukhin-2020-dpr.html#s2-c5">S2-c5</a> 的結論一致。見 <a href="../concepts/bm25.html">關鍵字檢索 BM25</a>、<a href="../concepts/hybrid-search.html">混合檢索與重排</a>。</li>
+<li>說明：白話說明：跟 <a href="../../wiki/sources/s2-karpukhin-2020-dpr.html#s2-c5">S2-c5</a> 的結論一致。見 <a href="../../wiki/concepts/bm25.html">關鍵字檢索 BM25</a>、<a href="../../wiki/concepts/hybrid-search.html">混合檢索與重排</a>。</li>
 </ul>
 <h3>S6-c3｜切塊會丟掉上下文：「營收成長 3%」這一塊本身沒寫是哪家公司、哪一季</h3>
 <ul>
@@ -213,7 +213,7 @@
 <ul>
 <li>證據：Perform initial retrieval to get the top potentially relevant chunks (we used the top 150);</li>
 <li>證據：Using a reranking model, give each chunk a score based on its relevance and importance to the prompt, then select the top-K chunks (we used the top 20);</li>
-<li>說明：白話說明：見 <a href="../concepts/hybrid-search.html">混合檢索與重排</a>。</li>
+<li>說明：白話說明：見 <a href="../../wiki/concepts/hybrid-search.html">混合檢索與重排</a>。</li>
 </ul>
 <h3>S6-c7｜知識庫不到 20 萬 token（約 500 頁）時，可以整份放進提示詞，不一定需要 RAG</h3>
 <ul>
@@ -224,13 +224,13 @@
 <ul>
 <li>證據：Combine and deduplicate results from (3) and (4) using rank fusion techniques;</li>
 <li>證據：By leveraging both BM25 and embedding models, traditional RAG systems can provide more comprehensive and accurate results</li>
-<li>說明：白話說明：(3) 是用 BM25 找字面相符的塊，(4) 是用向量找意思相近的塊。兩份名單合併、去掉重複後，取前幾名放進提示詞。見 <a href="../concepts/hybrid-search.html">混合檢索與重排</a>。</li>
+<li>說明：白話說明：(3) 是用 BM25 找字面相符的塊，(4) 是用向量找意思相近的塊。兩份名單合併、去掉重複後，取前幾名放進提示詞。見 <a href="../../wiki/concepts/hybrid-search.html">混合檢索與重排</a>。</li>
 </ul>
 <h2>S7｜Karpathy 2026：LLM Wiki</h2>
 <h3>S7-c1｜一般 RAG 每次提問都從頭找資料，知識沒有累積</h3>
 <ul>
 <li>證據：the LLM is rediscovering knowledge from scratch on every question. There's no accumulation.</li>
-<li>說明：白話說明：見 <a href="../concepts/llm-wiki-vs-rag.html">LLM Wiki 與 RAG 的差別</a>。</li>
+<li>說明：白話說明：見 <a href="../../wiki/concepts/llm-wiki-vs-rag.html">LLM Wiki 與 RAG 的差別</a>。</li>
 </ul>
 <h3>S7-c2｜LLM Wiki 讓 LLM 逐步建立並維護一個持續存在的 Wiki</h3>
 <ul>
@@ -252,7 +252,7 @@
 <ul>
 <li>證據：<strong>good answers can be filed back into the wiki as new pages.</strong></li>
 <li>證據：Answers can take different forms depending on the question — a markdown page, a comparison table, a slide deck (Marp), a chart (matplotlib), a canvas.</li>
-<li>說明：白話說明：本專案的簡報大綱存在 <a href="../queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>。</li>
+<li>說明：白話說明：本專案的簡報大綱存在 <a href="../../wiki/queries/deck-outline.html">查詢紀錄：教學簡報大綱</a>。</li>
 </ul></main>
 <footer class="site">TAICA Lab 10｜陽明交大 113611097 江晟維｜Wiki 由 Claude Code 依 <a href="https://github.com/arvin611ch/taica-lab10-rag-wiki/blob/main/AGENTS.md">AGENTS.md</a> 維護；原始資料版權屬原作者，本站只引用短句並附連結。</footer>
 </body></html>

@@ -10,6 +10,7 @@ runs/**/*.md   → docs/runs/**/*.html（每次執行的檢查紀錄）
 
 from __future__ import annotations
 
+import os
 import re
 import sys
 from html import escape
@@ -121,6 +122,20 @@ def build_report() -> int:
     return n
 
 
+def wiki_link_fix(m: re.Match, f: Path) -> str:
+    """審查材料（例如 claims_packet.md）原樣抄了 Wiki 來源頁的內容，連結是相對於 wiki/sources/ 寫的。
+    在紀錄的位置找不到檔案、但從 wiki/sources/ 找得到時，改成指向 Wiki 那一頁。紀錄原檔不動。"""
+    text, target = m.group(1), m.group(2)
+    path, _, anchor = target.partition("#")
+    if re.match(r"^[a-z]+:", target) or not path.endswith(".md") or (f.parent / path).exists():
+        return m.group(0)
+    src = (WIKI / "sources" / path).resolve()
+    if not src.exists():
+        return m.group(0)
+    new = os.path.relpath(src, f.parent).replace(os.sep, "/") + (f"#{anchor}" if anchor else "")
+    return f"[{text}]({new})"
+
+
 def build_runs() -> int:
     n = 0
     for f in sorted(RUNS.rglob("*.md")):
@@ -128,6 +143,7 @@ def build_runs() -> int:
         out = DOCS / "runs" / rel.with_suffix(".html")
         out.parent.mkdir(parents=True, exist_ok=True)
         meta, body = parse_frontmatter(f.read_text(encoding="utf-8"))
+        body = MD_LINK.sub(lambda m: wiki_link_fix(m, f), body)
         title = meta.get("title") or (body.splitlines()[0].lstrip("# ") if body else rel.stem)
         out.write_text(page(title, md_to_html(body), len(rel.parts)), encoding="utf-8")
         n += 1
